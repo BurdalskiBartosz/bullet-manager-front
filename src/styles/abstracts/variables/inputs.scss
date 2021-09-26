@@ -1,0 +1,14 @@
+$font-size-base: 1.6rem;
+$placeholder-size: $font-size-base;
+$input-padding: 15px 0 15px 15px;
+
+$input-color: $primary;
+$input-error-color: $danger-600;
+$input-background: $white;
+$input-disabled-background: $gray-400;
+$input-disabled-color: $gray-800;
+
+$input-width: 100%;
+$input-height: 45px;
+$input-line-height: 1;
+$input-border: 1px solid $input-error-color;
