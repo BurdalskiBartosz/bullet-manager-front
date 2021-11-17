@@ -2,8 +2,11 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import CenterBox from 'src/components/molecules/boxes/CenterBox/CenterBox';
 import Input from 'src/components/molecules/inputs/Input/Input';
+import { useAuth } from 'src/hooks/useAuth';
+import service from 'src/services/Service';
 
 const LoginPage = () => {
+	const auth = useAuth();
 	const {
 		register,
 		handleSubmit,
@@ -12,7 +15,7 @@ const LoginPage = () => {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		console.log(data);
+		auth.signIn(data);
 	};
 
 	return (
@@ -20,10 +23,10 @@ const LoginPage = () => {
 			<div>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Input
-						id="login"
+						id="email"
 						type="text"
-						label="Login"
-						register={register('login', { required: true })}
+						label="Email"
+						register={register('email', { required: true })}
 						error={errors.login}
 					/>
 					<Input
@@ -36,6 +39,7 @@ const LoginPage = () => {
 					<button>Zaloguj się</button>
 				</form>
 				<Link href="/register">Zarejestruj się</Link>
+				<button onClick={() => auth.signOut()}>TEST LOGOUT</button>
 			</div>
 		</CenterBox>
 	);
