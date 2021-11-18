@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
     "@hookform/resolvers": "^2.8.2",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@svgr/webpack": "^5.5.0",
-    "antd": "^4.16.13",
     "axios": "^0.21.1",
+    "babel-plugin-styled-components": "^1.13.3",
     "next": "11.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.1",
@@ -23,6 +27,7 @@
     "react-hook-form": "^7.14.2",
     "react-redux": "^7.2.4",
     "sass": "^1.38.2",
+    "styled-components": "^5.3.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {
