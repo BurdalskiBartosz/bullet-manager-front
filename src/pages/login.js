@@ -1,47 +1,68 @@
+import { Button, TextField } from '@mui/material';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import CenterBox from 'src/components/molecules/boxes/CenterBox/CenterBox';
+import { useForm, Controller } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import { useAuth } from 'src/hooks/useAuth';
-import service from 'src/services/Service';
+import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
 
 const LoginPage = () => {
 	const auth = useAuth();
 	const {
 		register,
 		handleSubmit,
-		watch,
+		control,
 		formState: { errors }
 	} = useForm();
 
 	const onSubmit = (data) => {
+		console.log('test');
 		auth.signIn(data);
 	};
 
 	return (
-		<CenterBox>
+		<AuthTemplate>
 			<div>
+				{auth.isLoggedUser && <div>ZALGOWANO</div>}
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<Input
-						id="email"
-						type="text"
-						label="Email"
-						register={register('email', { required: true })}
-						error={errors.login}
-					/>
-					<Input
-						id="password"
-						type="password"
-						label="Hasło"
-						register={register('password', { required: true })}
-						error={errors.test}
-					/>
-					<button>Zaloguj się</button>
+					<div>
+						<Controller
+							name="email"
+							control={control}
+							rules={{ required: true }}
+							render={({ field }) => (
+								<TextField
+									label="Email"
+									variant="outlined"
+									{...field}
+								/>
+							)}
+						/>
+						<div>{errors.email && <span>ERROR</span>}</div>
+					</div>
+					<div>
+						<Controller
+							name="password"
+							control={control}
+							rules={{ required: true }}
+							render={({ field }) => (
+								<TextField
+									label="Hasło"
+									type="password"
+									variant="outlined"
+									{...field}
+								/>
+							)}
+						/>
+						<div>{errors.password && <span>ERROR</span>}</div>
+					</div>
+					<Button type="submit" variant="contained">
+						Zaloguj się
+					</Button>
 				</form>
 				<Link href="/register">Zarejestruj się</Link>
-				<button onClick={() => auth.signOut()}>TEST LOGOUT</button>
+				<Button onClick={() => auth.signOut()}>TEST LOGOUT</Button>
 			</div>
-		</CenterBox>
+		</AuthTemplate>
 	);
 };
 

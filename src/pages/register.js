@@ -1,21 +1,13 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import CenterBox from 'src/components/molecules/boxes/CenterBox/CenterBox';
 import Input from 'src/components/molecules/inputs/Input/Input';
-import service from 'src/services/Service';
+import { useAuth } from 'src/hooks/useAuth';
+import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
+import { resolver } from 'src/utils/registerValidation';
 
 const RegisterPage = () => {
-	const validationSchema = Yup.object().shape({
-		password: Yup.string()
-			.required('Password is required')
-			.min(6, 'Password must be at least 6 characters'),
-		confirmPassword: Yup.string()
-			.required('Confirm Password is required')
-			.oneOf([Yup.ref('password')], 'Passwords must match')
-	});
-	const formOptions = { resolver: yupResolver(validationSchema) };
+	const auth = useAuth();
+	const formOptions = { resolver };
 	const {
 		register,
 		handleSubmit,
@@ -23,15 +15,11 @@ const RegisterPage = () => {
 	} = useForm(formOptions);
 
 	const onSubmit = (data) => {
-		console.log(data);
-		const response = service.register({
-			email: data.email,
-			password: data.password
-		});
+		auth.signUp(data);
 	};
 
 	return (
-		<CenterBox>
+		<AuthTemplate>
 			<div>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Input
@@ -67,18 +55,8 @@ const RegisterPage = () => {
 				</form>
 				<Link href="/login">Zaloguj się</Link>
 			</div>
-		</CenterBox>
+		</AuthTemplate>
 	);
 };
 
 export default RegisterPage;
-
-export async function getServerSideProps({ req }) {
-	console.log(req.headers);
-
-	return {
-		props: {
-			test: 5
-		}
-	};
-}

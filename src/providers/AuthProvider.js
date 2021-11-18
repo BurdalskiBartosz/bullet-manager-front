@@ -1,46 +1,40 @@
 import React, { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import service from 'src/services/Service';
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext({
+	isLoggedUser: false,
+	signIn: () => {},
+	signOut: () => {},
+	signUp: () => {}
+});
 
 export const AuthProvider = ({ children }) => {
 	const [isLoggedUser, setIsLoggedUser] = useState(false);
-	// const { dispatchError } = useError();
 
-	// useEffect(() => {
-	// 	const token = localStorage.getItem('token');
-	// 	if (token) {
-	// 		(async () => {
-	// 			try {
-	// 				const response = await axios.get('/me', {
-	// 					headers: {
-	// 						authorization: `Bearer ${token}`
-	// 					}
-	// 				});
-	// 				setUser(response.data);
-	// 			} catch (e) {
-	// 				console.log(e);
-	// 			}
-	// 		})();
-	// 	}
-	// }, []);
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		if (!token) signOut();
+		else setIsLoggedUser(true);
+	}, []);
 
 	const signIn = async (data) => {
 		const response = await service.login(data);
-		if (response.error) return;
 		setIsLoggedUser(true);
 		localStorage.setItem('token', response.refreshToken);
 	};
 
+	const signUp = async (data) => {
+		await service.register(data);
+	};
+
 	const signOut = async () => {
 		const response = await service.logout();
-		setIsLoggedUser(false);
-		console.log(response);
+		localStorage.removeItem('token');
+		if (response) setIsLoggedUser(false);
 	};
 
 	return (
-		<AuthContext.Provider value={{ isLoggedUser, signIn, signOut }}>
+		<AuthContext.Provider value={{ isLoggedUser, signIn, signOut, signUp }}>
 			{children}
 		</AuthContext.Provider>
 	);
