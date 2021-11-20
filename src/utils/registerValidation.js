@@ -2,12 +2,11 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const validationSchema = Yup.object().shape({
-	password: Yup.string()
-		.required('Password is required')
-		.min(6, 'Password must be at least 6 characters'),
+	email: Yup.string().required(),
+	password: Yup.string().required().min(6),
 	confirmPassword: Yup.string()
-		.required('Confirm Password is required')
-		.oneOf([Yup.ref('password')], 'Passwords must match')
+		.required()
+		.oneOf([Yup.ref('password')])
 });
 
 export const resolver = yupResolver(validationSchema);

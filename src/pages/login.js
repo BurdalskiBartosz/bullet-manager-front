@@ -1,6 +1,6 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import { useAuth } from 'src/hooks/useAuth';
 import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
@@ -8,61 +8,58 @@ import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
 const LoginPage = () => {
 	const auth = useAuth();
 	const {
-		register,
 		handleSubmit,
 		control,
 		formState: { errors }
 	} = useForm();
 
 	const onSubmit = (data) => {
-		console.log('test');
+		console.log(data);
 		auth.signIn(data);
 	};
 
 	return (
-		<AuthTemplate>
-			<div>
-				{auth.isLoggedUser && <div>ZALGOWANO</div>}
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div>
-						<Controller
+		<AuthTemplate
+			content={
+				<>
+					<Typography variant="h1">Zaloguj się</Typography>
+					{auth.isLoggedUser && <div>ZALGOWANO</div>}
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Input
 							name="email"
+							label="Email"
+							error={{
+								isError: errors.email,
+								message: 'Podaj poprawny email'
+							}}
 							control={control}
-							rules={{ required: true }}
-							render={({ field }) => (
-								<TextField
-									label="Email"
-									variant="outlined"
-									{...field}
-								/>
-							)}
 						/>
-						<div>{errors.email && <span>ERROR</span>}</div>
-					</div>
-					<div>
-						<Controller
+						<Input
 							name="password"
+							label="Hasło"
+							type="password"
+							error={{
+								isError: errors.password,
+								message: 'Hasło jest wymagane'
+							}}
 							control={control}
-							rules={{ required: true }}
-							render={({ field }) => (
-								<TextField
-									label="Hasło"
-									type="password"
-									variant="outlined"
-									{...field}
-								/>
-							)}
 						/>
-						<div>{errors.password && <span>ERROR</span>}</div>
-					</div>
-					<Button type="submit" variant="contained">
-						Zaloguj się
-					</Button>
-				</form>
-				<Link href="/register">Zarejestruj się</Link>
-				<Button onClick={() => auth.signOut()}>TEST LOGOUT</Button>
-			</div>
-		</AuthTemplate>
+						<Button type="submit" variant="contained">
+							Zaloguj się
+						</Button>
+					</form>
+				</>
+			}
+			actions={
+				<>
+					<Link href="/register" passHref>
+						<Button variant="outline">Zarejestruj się</Button>
+					</Link>
+
+					<Button onClick={() => auth.signOut()}>TEST LOGOUT</Button>
+				</>
+			}
+		/>
 	);
 };
 

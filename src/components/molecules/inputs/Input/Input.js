@@ -1,37 +1,55 @@
-import styles from './Input.module.scss';
 import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import { Controller } from 'react-hook-form';
 
-const Input = ({ register, type, label, id, error }) => {
+const Input = ({
+	name,
+	label,
+	control,
+	variant = 'outlined',
+	rules = { required: true },
+	type = 'text',
+	error = undefined
+}) => {
 	return (
-		<div className={styles.wrapper}>
-			<input
-				type={type}
-				placeholder={label}
-				className={styles.input}
-				{...register}
-				id={id}
+		<Box sx={{ mb: 2 }}>
+			<Controller
+				name={name}
+				control={control}
+				rules={rules}
+				defaultValue=""
+				render={({ field }) => (
+					<TextField
+						sx={{ width: '330px' }}
+						label={label}
+						type={type}
+						variant={variant}
+						{...field}
+					/>
+				)}
 			/>
-			<label className={styles.label} htmlFor={id}>
-				{label}
-			</label>
-			{error && <span>ERROR</span>}
-		</div>
+			<Box
+				sx={{
+					position: 'absolute',
+					fontSize: 12,
+					color: 'primary.danger'
+				}}
+			>
+				{error.isError && <span>{error.message}</span>}
+			</Box>
+		</Box>
 	);
 };
 
 Input.propTypes = {
-	register: PropTypes.object,
-	type: PropTypes.string,
+	name: PropTypes.string,
 	label: PropTypes.string,
-	id: PropTypes.string,
+	control: PropTypes.object,
+	variant: PropTypes.string,
+	rules: PropTypes.object,
+	type: PropTypes.string,
 	error: PropTypes.object
-};
-Input.defaultProps = {
-	register: undefined,
-	type: 'text',
-	label: 'Input',
-	id: 'idValue',
-	error: undefined
 };
 
 export default Input;

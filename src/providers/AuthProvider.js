@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
 
 	const signIn = async (data) => {
 		const response = await service.login(data);
+		if (response.error) return;
 		setIsLoggedUser(true);
 		localStorage.setItem('token', response.refreshToken);
 	};

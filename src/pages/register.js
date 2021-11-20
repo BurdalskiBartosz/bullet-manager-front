@@ -1,3 +1,4 @@
+import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
@@ -8,9 +9,10 @@ import { resolver } from 'src/utils/registerValidation';
 const RegisterPage = () => {
 	const auth = useAuth();
 	const formOptions = { resolver };
+
 	const {
-		register,
 		handleSubmit,
+		control,
 		formState: { errors }
 	} = useForm(formOptions);
 
@@ -19,43 +21,54 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<AuthTemplate>
-			<div>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<Input
-						id="email"
-						type="email"
-						label="E-mail"
-						register={register('email', { required: true })}
-						error={errors.email}
-					/>
-					<Input
-						id="password"
-						type="password"
-						label="Hasło"
-						register={register('password', { required: true })}
-						error={errors.test}
-					/>
-					<div className="invalid-feedback">
-						{errors.password?.message}
-					</div>
-					<Input
-						id="confirmPassword"
-						type="password"
-						label="Powtórz hasło"
-						register={register('confirmPassword', {
-							required: true
-						})}
-						error={errors.test}
-					/>
-					<div className="invalid-feedback">
-						{errors.confirmPassword?.message}
-					</div>
-					<button>Zarejestruj się</button>
-				</form>
-				<Link href="/login">Zaloguj się</Link>
-			</div>
-		</AuthTemplate>
+		<AuthTemplate
+			content={
+				<>
+					<Typography variant="h1">Zarejestruj się</Typography>
+					{auth.isLoggedUser && <div>ZALGOWANO</div>}
+
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Input
+							name="email"
+							label="Email"
+							error={{
+								isError: errors.email,
+								message: 'Podaj poprawny email'
+							}}
+							control={control}
+						/>
+						<Input
+							name="password"
+							label="Hasło"
+							type="password"
+							error={{
+								isError: errors.password,
+								message: 'Hasło jest wymagane'
+							}}
+							control={control}
+						/>
+						<Input
+							name="confirmPassword"
+							label="Powtórz hasło"
+							type="password"
+							error={{
+								isError: errors.confirmPassword,
+								message: 'Hasło musi się zgadzać'
+							}}
+							control={control}
+						/>
+						<Button type="submit" variant="contained">
+							Zarejestruj się
+						</Button>
+					</form>
+				</>
+			}
+			actions={
+				<Link href="/login" passHref>
+					<Button variant="outline">Zaloguj się</Button>
+				</Link>
+			}
+		/>
 	);
 };
 
