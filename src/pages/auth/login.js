@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Alert, Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
@@ -14,7 +14,6 @@ const LoginPage = () => {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		console.log(data);
 		auth.signIn(data);
 	};
 
@@ -23,6 +22,11 @@ const LoginPage = () => {
 			content={
 				<>
 					<Typography variant="h1">Zaloguj się</Typography>
+					{auth.error && (
+						<Alert sx={{ mb: 2 }} severity="error">
+							{auth.error}
+						</Alert>
+					)}
 					{auth.isLoggedUser && <div>ZALGOWANO</div>}
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<Input
@@ -52,10 +56,9 @@ const LoginPage = () => {
 			}
 			actions={
 				<>
-					<Link href="/register" passHref>
+					<Link href="/auth/register" passHref>
 						<Button variant="outline">Zarejestruj się</Button>
 					</Link>
-
 					<Button onClick={() => auth.signOut()}>TEST LOGOUT</Button>
 				</>
 			}
