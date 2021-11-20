@@ -13,7 +13,7 @@ const Input = ({
 	error = undefined
 }) => {
 	return (
-		<Box sx={{ mb: 2 }}>
+		<Box sx={{ mb: 2.5 }}>
 			<Controller
 				name={name}
 				control={control}
@@ -23,6 +23,7 @@ const Input = ({
 					<TextField
 						sx={{ width: '330px' }}
 						label={label}
+						error={error.isError ? true : false}
 						type={type}
 						variant={variant}
 						{...field}
