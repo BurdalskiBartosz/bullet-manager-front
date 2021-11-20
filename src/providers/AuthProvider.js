@@ -3,6 +3,7 @@ import service from 'src/services/Service';
 
 export const AuthContext = createContext({
 	isLoggedUser: false,
+	error: '',
 	signIn: () => {},
 	signOut: () => {},
 	signUp: () => {}
@@ -10,6 +11,7 @@ export const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
 	const [isLoggedUser, setIsLoggedUser] = useState(false);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -19,13 +21,16 @@ export const AuthProvider = ({ children }) => {
 
 	const signIn = async (data) => {
 		const response = await service.login(data);
-		if (response.error) return;
+		if (response.error) return setError(response.message);
 		setIsLoggedUser(true);
+		setError('');
 		localStorage.setItem('token', response.refreshToken);
 	};
 
 	const signUp = async (data) => {
-		await service.register(data);
+		const response = await service.register(data);
+		if (response.error) return setError(response.message);
+		await signIn(data);
 	};
 
 	const signOut = async () => {
@@ -35,7 +40,9 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ isLoggedUser, signIn, signOut, signUp }}>
+		<AuthContext.Provider
+			value={{ isLoggedUser, error, signIn, signOut, signUp }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
