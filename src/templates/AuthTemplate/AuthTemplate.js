@@ -1,21 +1,14 @@
-import { InnerWrapper, LogoWrapper, Wrapper } from './AuthTemplate.styles';
-import Image from 'next/image';
+import { Card, CardActions, CardContent } from '@mui/material';
+import { Box } from '@mui/system';
 
-const AuthTemplate = ({ children }) => {
+const AuthTemplate = ({ content, actions }) => {
 	return (
-		<Wrapper>
-			<InnerWrapper>
-				<LogoWrapper>
-					<Image
-						src="/logo.png"
-						layout="fill"
-						objectFit="contain"
-						alt="Logo"
-					/>
-				</LogoWrapper>
-				{children}
-			</InnerWrapper>
-		</Wrapper>
+		<Box sx={{ display: 'flex', minHeight: '100vh' }}>
+			<Card sx={{ p: 4, m: 'auto', width: 'auto' }}>
+				<CardContent>{content}</CardContent>
+				<CardActions>{actions}</CardActions>
+			</Card>
+		</Box>
 	);
 };
 
