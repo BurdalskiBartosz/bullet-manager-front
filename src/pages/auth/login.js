@@ -1,4 +1,5 @@
 import { Alert, Button, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
@@ -13,10 +14,6 @@ const LoginPage = () => {
 		formState: { errors }
 	} = useForm();
 
-	const onSubmit = (data) => {
-		auth.signIn(data);
-	};
-
 	return (
 		<AuthTemplate
 			content={
@@ -28,7 +25,7 @@ const LoginPage = () => {
 						</Alert>
 					)}
 					{auth.isLoggedUser && <div>ZALGOWANO</div>}
-					<form onSubmit={handleSubmit(onSubmit)}>
+					<Box component="form" onSubmit={handleSubmit(auth.signIn)}>
 						<Input
 							name="email"
 							label="Email"
@@ -51,7 +48,7 @@ const LoginPage = () => {
 						<Button type="submit" variant="contained">
 							Zaloguj się
 						</Button>
-					</form>
+					</Box>
 				</>
 			}
 			actions={

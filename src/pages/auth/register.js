@@ -16,10 +16,6 @@ const RegisterPage = () => {
 		formState: { errors }
 	} = useForm(formOptions);
 
-	const onSubmit = (data) => {
-		auth.signUp(data);
-	};
-
 	return (
 		<AuthTemplate
 			content={
@@ -31,7 +27,7 @@ const RegisterPage = () => {
 						</Alert>
 					)}
 					{auth.isLoggedUser && <div>ZALGOWANO</div>}
-					<form onSubmit={handleSubmit(onSubmit)}>
+					<form onSubmit={handleSubmit(auth.signUp)}>
 						<Input
 							name="email"
 							label="Email"
