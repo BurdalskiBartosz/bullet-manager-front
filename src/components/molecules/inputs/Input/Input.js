@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { TextField } from '@mui/material';
+import { TextField, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { Controller } from 'react-hook-form';
 
@@ -12,6 +12,7 @@ const Input = ({
 	type = 'text',
 	error = undefined
 }) => {
+	const theme = useTheme();
 	return (
 		<Box sx={{ mb: 2.5 }}>
 			<Controller
@@ -26,6 +27,11 @@ const Input = ({
 						error={error.isError ? true : false}
 						type={type}
 						variant={variant}
+						inputProps={{
+							style: {
+								boxShadow: `0 0 0 1000px ${theme.palette.primary.dark} inset`
+							}
+						}}
 						{...field}
 					/>
 				)}

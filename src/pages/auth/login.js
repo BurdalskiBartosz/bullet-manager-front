@@ -1,18 +1,25 @@
 import { Alert, Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import { useAuth } from 'src/hooks/useAuth';
 import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
 
 const LoginPage = () => {
+	const router = useRouter();
 	const auth = useAuth();
 	const {
 		handleSubmit,
 		control,
 		formState: { errors }
 	} = useForm();
+
+	useEffect(() => {
+		router.prefetch('/dashboard');
+	}, []);
 
 	return (
 		<AuthTemplate
@@ -24,7 +31,6 @@ const LoginPage = () => {
 							{auth.error}
 						</Alert>
 					)}
-					{auth.isLoggedUser && <div>ZALGOWANO</div>}
 					<Box component="form" onSubmit={handleSubmit(auth.signIn)}>
 						<Input
 							name="email"
