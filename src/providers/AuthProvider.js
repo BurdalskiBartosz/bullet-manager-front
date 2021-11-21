@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { createContext, useEffect, useState } from 'react';
 import service from 'src/services/Service';
 
@@ -10,6 +11,7 @@ export const AuthContext = createContext({
 });
 
 export const AuthProvider = ({ children }) => {
+	const router = useRouter();
 	const [isLoggedUser, setIsLoggedUser] = useState(false);
 	const [error, setError] = useState('');
 
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 		setIsLoggedUser(true);
 		setError('');
 		localStorage.setItem('token', response.refreshToken);
+		router.push('/dashboard');
 	};
 
 	const signUp = async (data) => {
