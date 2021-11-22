@@ -1,4 +1,4 @@
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
 import { Box } from '@mui/system';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import { useAuth } from 'src/hooks/useAuth';
 import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
+import Button from 'src/components/atoms/Button';
 
 const LoginPage = () => {
 	const router = useRouter();
@@ -23,9 +24,9 @@ const LoginPage = () => {
 
 	return (
 		<AuthTemplate
+			title="Zaloguj się"
 			content={
 				<>
-					<Typography variant="h1">Zaloguj się</Typography>
 					{auth.error && (
 						<Alert sx={{ mb: 2 }} severity="error">
 							{auth.error}
@@ -62,7 +63,6 @@ const LoginPage = () => {
 					<Link href="/auth/register" passHref>
 						<Button variant="outline">Zarejestruj się</Button>
 					</Link>
-					<Button onClick={() => auth.signOut()}>TEST LOGOUT</Button>
 				</>
 			}
 		/>
