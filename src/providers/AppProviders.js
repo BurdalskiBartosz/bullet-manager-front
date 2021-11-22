@@ -1,24 +1,15 @@
 import React from 'react';
-// import { GlobalStyle } from '@/styles/base/GlobalStyle';
-// import { defaultTheme } from '@/styles/theme/defaultTheme';
-import { Provider } from 'react-redux';
 import store from 'src/store/store';
-// import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
 import { AuthProvider } from './AuthProvider';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-const darkTheme = createTheme({
-	palette: {
-		mode: 'dark'
-	}
-});
+import Theme from './ThemeProvider';
 
 const AppProviders = ({ children }) => {
 	return (
 		<Provider store={store}>
-			<ThemeProvider theme={darkTheme}>
+			<Theme>
 				<AuthProvider>{children}</AuthProvider>
-			</ThemeProvider>
+			</Theme>
 		</Provider>
 	);
 };

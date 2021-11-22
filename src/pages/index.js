@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Home = () => {
 	return (
 		<div>
-			<Link href="/register">Zarejestruj się</Link>
+			<Link href="/auth/register">Zarejestruj się</Link>
 		</div>
 	);
 };

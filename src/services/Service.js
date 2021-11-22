@@ -17,8 +17,7 @@ class Service {
 			email,
 			password
 		});
-		console.log(data);
-		if (data.message) return { error: true };
+		if (data.message) return { error: true, message: data.message };
 		return data;
 	}
 
@@ -27,7 +26,7 @@ class Service {
 			email,
 			password
 		});
-		if (data.message) return { error: true };
+		if (data.message) return { error: true, message: data.message };
 		return data;
 	}
 
