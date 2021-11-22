@@ -7,10 +7,12 @@ const ProtectedRoutes = ({ children, router }) => {
 
 	useEffect(() => setIsBrowser(true));
 
-	const unprotectedRoutes = ['/auth/login', '/auth/register'];
+	const unprotectedRoutes = ['/', '/auth/login', '/auth/register'];
 	let isPathProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
-	if (isBrowser && !auth.isLoggedUser && isPathProtected)
+	if (isBrowser && auth.isLoggedUser && !isPathProtected)
+		router.push('/dashboard');
+	else if (isBrowser && !auth.isLoggedUser && isPathProtected)
 		router.push('/auth/login');
 
 	return children;

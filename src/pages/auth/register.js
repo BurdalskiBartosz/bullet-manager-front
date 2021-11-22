@@ -1,6 +1,8 @@
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import Button from 'src/components/atoms/Button';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import { useAuth } from 'src/hooks/useAuth';
 import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
@@ -18,16 +20,15 @@ const RegisterPage = () => {
 
 	return (
 		<AuthTemplate
+			title="Zarejestruj się"
 			content={
 				<>
-					<Typography variant="h1">Zarejestruj się</Typography>
 					{auth.error && (
 						<Alert sx={{ mb: 2 }} severity="error">
 							{auth.error}
 						</Alert>
 					)}
-					{auth.isLoggedUser && <div>ZALGOWANO</div>}
-					<form onSubmit={handleSubmit(auth.signUp)}>
+					<Box component="form" onSubmit={handleSubmit(auth.signUp)}>
 						<Input
 							name="email"
 							label="Email"
@@ -60,13 +61,16 @@ const RegisterPage = () => {
 						<Button type="submit" variant="contained">
 							Zarejestruj się
 						</Button>
-					</form>
+					</Box>
 				</>
 			}
 			actions={
-				<Link href="/auth/login" passHref>
-					<Button variant="outline">Zaloguj się</Button>
-				</Link>
+				<>
+					<Typography>Masz już konto ? </Typography>
+					<Link href="/auth/login" passHref>
+						<Button variant="outline">Zaloguj się</Button>
+					</Link>
+				</>
 			}
 		/>
 	);

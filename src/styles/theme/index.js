@@ -9,7 +9,7 @@ const darkTheme = createTheme({
 			danger: '#8F0900'
 		},
 		secondary: {
-			main: '#C1D2D6'
+			main: '#3A3A3A'
 		}
 	},
 	typography: {
