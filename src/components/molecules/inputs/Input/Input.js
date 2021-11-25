@@ -10,21 +10,24 @@ const Input = ({
 	variant = 'outlined',
 	rules = { required: true },
 	type = 'text',
-	error = undefined
+	error = undefined,
+	defaultValue = '',
+	...rest
 }) => {
 	const theme = useTheme();
+
 	return (
 		<Box sx={{ mb: 2.5 }}>
 			<Controller
 				name={name}
 				control={control}
 				rules={rules}
-				defaultValue=""
+				defaultValue={defaultValue}
 				render={({ field }) => (
 					<TextField
-						sx={{ width: '330px' }}
+						sx={{ width: '100%', maxWidth: '330px' }}
 						label={label}
-						error={error.isError ? true : false}
+						error={error?.isError ? true : false}
 						type={type}
 						variant={variant}
 						inputProps={{
@@ -33,6 +36,7 @@ const Input = ({
 							}
 						}}
 						{...field}
+						{...rest}
 					/>
 				)}
 			/>
@@ -43,7 +47,7 @@ const Input = ({
 					color: 'primary.danger'
 				}}
 			>
-				{error.isError && <span>{error.message}</span>}
+				{error?.isError && <span>{error.message}</span>}
 			</Box>
 		</Box>
 	);
