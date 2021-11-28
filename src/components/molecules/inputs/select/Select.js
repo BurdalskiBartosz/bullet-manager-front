@@ -2,10 +2,10 @@ import {
 	Select as MuiSelect,
 	FormControl,
 	MenuItem,
-	InputLabel,
-	Box
+	InputLabel
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import InputWrapper from '../InputWrapper/InputWrapper';
 
 const Select = ({
 	name,
@@ -13,16 +13,16 @@ const Select = ({
 	control,
 	rules = { required: true },
 	error = undefined,
-	defaultValue,
+	options,
 	...rest
 }) => {
 	return (
-		<Box sx={{ mb: 2.5 }}>
+		<InputWrapper error={error}>
 			<Controller
 				name={name}
 				control={control}
 				rules={rules}
-				defaultValue="DAILY"
+				defaultValue={options[0].key}
 				render={({ field }) => (
 					<FormControl fullWidth>
 						<InputLabel id="demo-simple-select-label">
@@ -30,55 +30,24 @@ const Select = ({
 						</InputLabel>
 						<MuiSelect
 							labelId="demo-simple-select-label"
-							id="demo-simple-select"
+							id={name}
 							label={label}
-							value="DAILY"
+							value={options[0].key}
 							error={error?.isError ? true : false}
 							{...field}
 							{...rest}
 						>
-							<MenuItem value={'DAILY'}>Dzienne</MenuItem>
-							<MenuItem value={'WEEKLY'}>Tygodniowe</MenuItem>
-							<MenuItem value={'MONTHLY'}>Miesięczne</MenuItem>
+							{options.map((option) => (
+								<MenuItem key={option.key} value={option.key}>
+									{option.value}
+								</MenuItem>
+							))}
 						</MuiSelect>
 					</FormControl>
 				)}
 			/>
-			<Box
-				sx={{
-					position: 'absolute',
-					fontSize: 12,
-					color: 'primary.danger'
-				}}
-			>
-				{error?.isError && <span>{error.message}</span>}
-			</Box>
-		</Box>
+		</InputWrapper>
 	);
 };
 
 export default Select;
-
-// const [type, setType] = useState('DAILY');
-// const handleChange = (event) => {
-// 	setType(event.target.value);
-// };
-// return (
-// 	<Box sx={{ mb: 2.5, width: '100%', maxWidth: '330px' }}>
-// <FormControl fullWidth>
-// 	<InputLabel id="demo-simple-select-label">
-// 		Typ zadania
-// 	</InputLabel>
-// 	<MuiSelect
-// 		labelId="demo-simple-select-label"
-// 		id="demo-simple-select"
-// 		label="Typ zadania"
-// 		// value={type}
-// 		// onChange={handleChange}
-// 	>
-// 		<MenuItem value={'DAILY'}>Dzienne</MenuItem>
-// 		<MenuItem value={'WEEKLY'}>Tygodniowe</MenuItem>
-// 		<MenuItem value={'MONTHLY'}>Miesięczne</MenuItem>
-// 	</MuiSelect>
-// 		</FormControl>
-// 	</Box>
