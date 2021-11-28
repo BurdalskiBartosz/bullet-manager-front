@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { TextField, useTheme } from '@mui/material';
-import { Box } from '@mui/system';
 import { Controller } from 'react-hook-form';
+import InputWrapper from '../InputWrapper/InputWrapper';
 
 const Input = ({
 	name,
@@ -15,9 +15,8 @@ const Input = ({
 	...rest
 }) => {
 	const theme = useTheme();
-
 	return (
-		<Box sx={{ mb: 2.5 }}>
+		<InputWrapper error={error}>
 			<Controller
 				name={name}
 				control={control}
@@ -40,16 +39,7 @@ const Input = ({
 					/>
 				)}
 			/>
-			<Box
-				sx={{
-					position: 'absolute',
-					fontSize: 12,
-					color: 'primary.danger'
-				}}
-			>
-				{error?.isError && <span>{error.message}</span>}
-			</Box>
-		</Box>
+		</InputWrapper>
 	);
 };
 
