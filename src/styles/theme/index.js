@@ -27,6 +27,9 @@ const darkTheme = createTheme({
 		h3: {
 			fontSize: '2rem',
 			marginBottom: '2.5rem'
+		},
+		p: {
+			fontSize: '.8rem'
 		}
 	}
 });

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useEffect, useState } from 'react';
-import service from 'src/services/Service';
+import authService from 'src/services/AuthService';
 
 export const AuthContext = createContext({
 	isLoggedUser: false,
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 	}, []);
 
 	const signIn = async (data) => {
-		const response = await service.login(data);
+		const response = await authService.login(data);
 		if (response.error) return setError(response.message);
 		setIsLoggedUser(true);
 		setError('');
@@ -31,13 +31,13 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const signUp = async (data) => {
-		const response = await service.register(data);
+		const response = await authService.register(data);
 		if (response.error) return setError(response.message);
 		await signIn(data);
 	};
 
 	const signOut = async () => {
-		const response = await service.logout();
+		const response = await authService.logout();
 		localStorage.removeItem('token');
 		if (response) setIsLoggedUser(false);
 	};
