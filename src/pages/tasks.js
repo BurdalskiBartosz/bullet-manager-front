@@ -1,14 +1,15 @@
-import { Stack, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Grid, Stack, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from 'src/components/atoms/Button';
-import Input from 'src/components/molecules/inputs/Input/Input';
-import Select from 'src/components/molecules/inputs/Select/Select';
+import TaskCard from 'src/components/molecules/cards/TaskCard/TaskCard';
+import TaskForm from 'src/components/organisms/forms/TaskForm/TaskForm';
 import Modal from 'src/components/organisms/Modal';
 import useModal from 'src/hooks/useModal';
+import taskService from 'src/services/TaskService';
 import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTemplate';
 
-const Tasks = () => {
+const Tasks = ({ tasks }) => {
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const {
 		handleSubmit,
@@ -18,10 +19,22 @@ const Tasks = () => {
 
 	const addTask = (data) => {
 		console.log(data);
+		handleCloseModal();
+		taskService.createTask(data);
+		taskService.getTasks();
 	};
-
+	useEffect(() => {
+		console.log(tasks);
+	});
 	return (
 		<LoggedUserTemplate>
+			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
+				<TaskForm
+					handleSubmit={() => handleSubmit(addTask)}
+					errors={errors}
+					control={control}
+				/>
+			</Modal>
 			<Stack
 				direction="row"
 				alignItems="flex-start"
@@ -31,53 +44,28 @@ const Tasks = () => {
 				<Button onClick={() => handleOpenModal()} variant="outlined">
 					Dodaj zadanie
 				</Button>
-				<Modal isOpen={isOpen} handleClose={handleCloseModal}>
-					<>
-						<Typography variant="h3">Dodaj nowe zadanie</Typography>
-						<Box component="form" onSubmit={handleSubmit(addTask)}>
-							<Input
-								name="name"
-								label="Tytuł zadania"
-								error={{
-									isError: errors.name,
-									message: 'Musisz podać nazwę zadania'
-								}}
-								control={control}
-							/>
-							<Input
-								name="content"
-								label="Treść zadania"
-								error={{
-									isError: errors.content,
-									message: 'Musisz podać treść zadania'
-								}}
-								control={control}
-								multiline
-								rows={4}
-							/>
-							<Select
-								name="type"
-								label="Typ zadania"
-								control={control}
-							/>
-							<Input
-								name="dateToEnd"
-								label="Deadline"
-								type="datetime-local"
-								control={control}
-								defaultValue={new Date()
-									.toISOString()
-									.slice(0, -8)}
-							/>
-							<Button type="submit" variant="contained">
-								Dodaj zadanie
-							</Button>
-						</Box>
-					</>
-				</Modal>
 			</Stack>
+
+			<Grid container spacing={3}>
+				{tasks.length &&
+					tasks.map((task) => (
+						<Grid item key={task.id}>
+							<TaskCard task={task} />
+						</Grid>
+					))}
+			</Grid>
 		</LoggedUserTemplate>
 	);
 };
 
 export default Tasks;
+
+export async function getServerSideProps({ req, res }) {
+	const cookie = req.headers.cookie;
+	const tasks = await taskService.getTasks(cookie);
+	return {
+		props: {
+			tasks
+		}
+	};
+}
