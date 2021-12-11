@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 import { dateFormat } from 'src/utils/dateFormat';
 
 export const slice = createSlice({
@@ -9,6 +10,14 @@ export const slice = createSlice({
 	reducers: {
 		changeDate: (state, action) => {
 			state.value = action.payload;
+		}
+	},
+	extraReducers: {
+		[HYDRATE]: (state, action) => {
+			return {
+				...state,
+				...action.payload.date
+			};
 		}
 	}
 });
