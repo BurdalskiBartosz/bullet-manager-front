@@ -21,10 +21,12 @@ const darkTheme = createTheme({
 			color: '#D6D5C1'
 		},
 		h2: {
-			fontSize: '3rem'
+			fontSize: '3rem',
+			marginBottom: '3rem'
 		},
 		h3: {
-			fontSize: '2rem'
+			fontSize: '2rem',
+			marginBottom: '2.5rem'
 		}
 	}
 });
