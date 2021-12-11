@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { TextField, useTheme } from '@mui/material';
-import { Box } from '@mui/system';
 import { Controller } from 'react-hook-form';
+import InputWrapper from '../InputWrapper/InputWrapper';
 
 const Input = ({
 	name,
@@ -10,21 +10,23 @@ const Input = ({
 	variant = 'outlined',
 	rules = { required: true },
 	type = 'text',
-	error = undefined
+	error = undefined,
+	defaultValue = '',
+	...rest
 }) => {
 	const theme = useTheme();
 	return (
-		<Box sx={{ mb: 2.5 }}>
+		<InputWrapper error={error}>
 			<Controller
 				name={name}
 				control={control}
 				rules={rules}
-				defaultValue=""
+				defaultValue={defaultValue}
 				render={({ field }) => (
 					<TextField
-						sx={{ width: '330px' }}
+						sx={{ width: '100%', maxWidth: '330px' }}
 						label={label}
-						error={error.isError ? true : false}
+						error={error?.isError ? true : false}
 						type={type}
 						variant={variant}
 						inputProps={{
@@ -33,19 +35,11 @@ const Input = ({
 							}
 						}}
 						{...field}
+						{...rest}
 					/>
 				)}
 			/>
-			<Box
-				sx={{
-					position: 'absolute',
-					fontSize: 12,
-					color: 'primary.danger'
-				}}
-			>
-				{error.isError && <span>{error.message}</span>}
-			</Box>
-		</Box>
+		</InputWrapper>
 	);
 };
 

@@ -29,7 +29,7 @@ const Sidebar = () => {
 				<nav aria-label="main mailbox folders">
 					<List>
 						<ListItem
-							href="/auth/register"
+							href="/tasks"
 							name="Zadania"
 							icon={<TaskIcon />}
 						/>
