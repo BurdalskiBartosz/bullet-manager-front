@@ -9,7 +9,23 @@ const darkTheme = createTheme({
 			danger: '#8F0900'
 		},
 		secondary: {
-			main: '#3A3A3A'
+			main: '#3A3A3A',
+			danger: '#8F0900'
+		},
+		cards: {
+			primary: {
+				main: '#D6D5C1',
+				dark: '#121212',
+				danger: '#8F0900'
+			},
+			secondary: {
+				main: '#3A3A3A',
+				danger: '#8F0900'
+			},
+			tetiary: {
+				main: '#8F0900',
+				dark: '#3A3A3A'
+			}
 		}
 	},
 	typography: {
