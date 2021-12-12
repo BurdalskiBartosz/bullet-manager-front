@@ -34,7 +34,7 @@ const Sidebar = () => {
 							icon={<TaskIcon />}
 						/>
 						<ListItem
-							href="/auth/register"
+							href="/notes"
 							name="Notatki"
 							icon={<NotesIcon />}
 						/>
