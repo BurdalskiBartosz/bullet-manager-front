@@ -1,16 +1,16 @@
 import { Grid, Stack, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Button from 'src/components/atoms/Button';
-import TaskCard from 'src/components/molecules/cards/TaskCard/TaskCard';
-import TaskForm from 'src/components/organisms/forms/TaskForm/TaskForm';
+import NotesForm from 'src/components/organisms/forms/NotesForm/NotesForm';
 import Modal from 'src/components/organisms/Modal';
 import useModal from 'src/hooks/useModal';
 import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTemplate';
-import { useGetTasksQuery, useAddTaskMutation } from 'src/store/api/tasks';
+import { useGetNotesQuery, useAddNoteMutation } from 'src/store/api/notes';
+import NoteCard from 'src/components/molecules/cards/NoteCard/NoteCard';
 
-const Tasks = ({ selectedDate }) => {
-	const tasks = useGetTasksQuery({ where: { date: selectedDate } });
-	const [addTask] = useAddTaskMutation();
+const Notes = ({ selectedDate }) => {
+	const notes = useGetNotesQuery();
+	const [addNote] = useAddNoteMutation();
 
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const {
@@ -20,15 +20,15 @@ const Tasks = ({ selectedDate }) => {
 	} = useForm();
 
 	const handleAddTask = (data) => {
-		const taskData = { ...data, date: selectedDate };
+		const noteData = { ...data, date: selectedDate };
 		handleCloseModal();
-		addTask(taskData);
+		addNote(noteData);
 	};
 
 	return (
 		<LoggedUserTemplate>
 			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
-				<TaskForm
+				<NotesForm
 					handleSubmit={() => handleSubmit(handleAddTask)}
 					errors={errors}
 					control={control}
@@ -39,16 +39,16 @@ const Tasks = ({ selectedDate }) => {
 				alignItems="flex-start"
 				justifyContent="space-between"
 			>
-				<Typography variant="h1">Zadania</Typography>
+				<Typography variant="h1">Notatki</Typography>
 				<Button onClick={() => handleOpenModal()} variant="outlined">
-					Dodaj zadanie
+					Dodaj notatkę
 				</Button>
 			</Stack>
 			<Grid container spacing={3}>
-				{tasks.data &&
-					tasks.data.map((task) => (
-						<Grid item key={task.id}>
-							<TaskCard task={task} />
+				{notes.data &&
+					notes.data.map((note) => (
+						<Grid item key={note.id}>
+							<NoteCard note={note} />
 						</Grid>
 					))}
 			</Grid>
@@ -56,4 +56,4 @@ const Tasks = ({ selectedDate }) => {
 	);
 };
 
-export default Tasks;
+export default Notes;
