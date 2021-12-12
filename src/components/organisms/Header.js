@@ -1,19 +1,12 @@
-import { AppBar, Button, IconButton, TextField, Toolbar } from '@mui/material';
+import { AppBar, Button, IconButton, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from 'src/hooks/useAuth';
-import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
-import DateAdapter from '@mui/lab/AdapterDateFns';
-import { useState } from 'react';
+import DatePicker from './date/DatePicker/DatePicker';
 
 const Header = () => {
 	const auth = useAuth();
 
-	const [value, setValue] = useState(new Date());
-
-	const handleChange = (newValue) => {
-		setValue(newValue);
-	};
 	return (
 		<AppBar
 			sx={{
@@ -34,16 +27,7 @@ const Header = () => {
 				>
 					<MenuIcon />
 				</IconButton>
-
-				<LocalizationProvider dateAdapter={DateAdapter}>
-					<DesktopDatePicker
-						label="Wybrana data"
-						inputFormat="MM/dd/yyyy"
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
-				</LocalizationProvider>
+				<DatePicker />
 				<Box sx={{ ml: 'auto' }}>
 					<Button onClick={() => auth.signOut()} color="inherit">
 						Wyloguj się

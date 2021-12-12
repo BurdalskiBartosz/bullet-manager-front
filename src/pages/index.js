@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useAuth } from 'src/hooks/useAuth';
 import AuthTemplate from 'src/templates/AuthTemplate/AuthTemplate';
 import Button from 'src/components/atoms/Button';
 import { Grid, Typography } from '@mui/material';

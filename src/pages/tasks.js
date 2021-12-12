@@ -1,15 +1,20 @@
 import { Grid, Stack, Typography } from '@mui/material';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Button from 'src/components/atoms/Button';
 import TaskCard from 'src/components/molecules/cards/TaskCard/TaskCard';
 import TaskForm from 'src/components/organisms/forms/TaskForm/TaskForm';
 import Modal from 'src/components/organisms/Modal';
 import useModal from 'src/hooks/useModal';
-import taskService from 'src/services/TaskService';
+import { selectDate } from 'src/store/date/dateSlice';
 import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTemplate';
+import { useGetTasksQuery, useAddTaskMutation } from 'src/store/api/tasks';
 
-const Tasks = ({ tasks }) => {
+const Tasks = () => {
+	const selectedDate = useSelector(selectDate);
+	const tasks = useGetTasksQuery({ where: { date: selectedDate } });
+	const [addTask] = useAddTaskMutation();
+
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const {
 		handleSubmit,
@@ -17,20 +22,17 @@ const Tasks = ({ tasks }) => {
 		formState: { errors }
 	} = useForm();
 
-	const addTask = (data) => {
-		console.log(data);
+	const handleAddTask = (data) => {
+		const taskData = { ...data, date: selectedDate };
 		handleCloseModal();
-		taskService.createTask(data);
-		taskService.getTasks();
+		addTask(taskData);
 	};
-	useEffect(() => {
-		console.log(tasks);
-	});
+
 	return (
 		<LoggedUserTemplate>
 			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
 				<TaskForm
-					handleSubmit={() => handleSubmit(addTask)}
+					handleSubmit={() => handleSubmit(handleAddTask)}
 					errors={errors}
 					control={control}
 				/>
@@ -47,8 +49,8 @@ const Tasks = ({ tasks }) => {
 			</Stack>
 
 			<Grid container spacing={3}>
-				{tasks.length &&
-					tasks.map((task) => (
+				{tasks.data &&
+					tasks.data.map((task) => (
 						<Grid item key={task.id}>
 							<TaskCard task={task} />
 						</Grid>
@@ -59,13 +61,3 @@ const Tasks = ({ tasks }) => {
 };
 
 export default Tasks;
-
-export async function getServerSideProps({ req, res }) {
-	const cookie = req.headers.cookie;
-	const tasks = await taskService.getTasks(cookie);
-	return {
-		props: {
-			tasks
-		}
-	};
-}

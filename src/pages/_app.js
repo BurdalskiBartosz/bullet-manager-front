@@ -1,5 +1,6 @@
 import ProtectedRoutes from 'src/helper/ProtectedRoutes/ProtectedRoutes';
 import AppProviders from 'src/providers/AppProviders';
+import { wrapper } from 'src/store/store';
 
 const MyApp = ({ Component, pageProps, router }) => {
 	return (
@@ -11,4 +12,4 @@ const MyApp = ({ Component, pageProps, router }) => {
 	);
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
