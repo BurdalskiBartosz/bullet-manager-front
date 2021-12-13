@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { config } from 'src/config/config';
+import { createApi } from '@reduxjs/toolkit/dist/query/react';
 import { getQuery } from 'src/utils/getQuery';
+import { createApiDefaultConfig } from '../config/config';
 
 export const notesApi = createApi({
 	reducerPath: 'notesApi',
-	baseQuery: fetchBaseQuery({
-		baseUrl: `${config.baseUrl}`,
-		credentials: 'include'
-	}),
+	baseQuery: createApiDefaultConfig(),
 	tagTypes: ['Notes'],
 	endpoints: (builder) => ({
 		getNotes: builder.query({
