@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useWatch } from 'react-hook-form';
 import Button from 'src/components/atoms/Button';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
@@ -34,14 +35,24 @@ const bookMark = [
 	{
 		key: '4',
 		value: '4'
+	},
+	{
+		key: '5',
+		value: '5'
 	}
 ];
 
 const BookForm = ({ handleSubmit, errors, control }) => {
+	const state = useWatch({
+		control,
+		name: 'state',
+		defaultValue: 'to_read'
+	});
 	return (
 		<>
 			<Typography variant="h3">Dodaj książkę</Typography>
 			<Box component="form" onSubmit={handleSubmit()}>
+				POLE NA ZDJECIE
 				<Input
 					name="title"
 					label="Tytuł książki"
@@ -52,12 +63,17 @@ const BookForm = ({ handleSubmit, errors, control }) => {
 					control={control}
 				/>
 				<Input
-					name="content"
-					label="Treść zadania"
+					name="author"
+					label="Autor książki"
 					error={{
-						isError: errors.content,
-						message: 'Musisz podać treść zadania'
+						isError: errors.author,
+						message: 'Musisz podać autora książki'
 					}}
+					control={control}
+				/>
+				<Input
+					name="opinion"
+					label="Opinia na temat książki"
 					control={control}
 					multiline
 					rows={4}
@@ -68,13 +84,14 @@ const BookForm = ({ handleSubmit, errors, control }) => {
 					control={control}
 					options={bookState}
 				/>
-				<Select
-					name="mark"
-					label="Ocena"
-					control={control}
-					options={bookMark}
-				/>
-
+				{state !== 'to_read' && (
+					<Select
+						name="mark"
+						label="Ocena"
+						control={control}
+						options={bookMark}
+					/>
+				)}
 				<Button type="submit" variant="contained">
 					Dodaj książkę
 				</Button>

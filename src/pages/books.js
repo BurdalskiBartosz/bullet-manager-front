@@ -18,7 +18,7 @@ const Books = ({ selectedDate }) => {
 		control,
 		formState: { errors }
 	} = useForm();
-	console.log(control);
+
 	const handleAddTask = (data) => {
 		const noteData = { ...data, date: selectedDate };
 		handleCloseModal();
