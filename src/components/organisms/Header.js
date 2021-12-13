@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from 'src/hooks/useAuth';
 import DatePicker from './date/DatePicker/DatePicker';
+import { dateFormat } from 'src/utils/dateFormat';
 
 const Header = () => {
 	const auth = useAuth();
@@ -28,6 +29,9 @@ const Header = () => {
 					<MenuIcon />
 				</IconButton>
 				<DatePicker />
+				<Box sx={{ ml: 2 }}>
+					Dzisiejsza data : {dateFormat(new Date())}
+				</Box>
 				<Box sx={{ ml: 'auto' }}>
 					<Button onClick={() => auth.signOut()} color="inherit">
 						Wyloguj się
