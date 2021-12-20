@@ -14,6 +14,7 @@ const Select = ({
 	rules = { required: true },
 	error = undefined,
 	options,
+	defaultValue,
 	...rest
 }) => {
 	return (
@@ -22,7 +23,7 @@ const Select = ({
 				name={name}
 				control={control}
 				rules={rules}
-				defaultValue={options[0].key}
+				defaultValue={defaultValue ? defaultValue : options[0].key}
 				render={({ field }) => (
 					<FormControl fullWidth>
 						<InputLabel id="demo-simple-select-label">
@@ -32,7 +33,7 @@ const Select = ({
 							labelId="demo-simple-select-label"
 							id={name}
 							label={label}
-							value={options[0].key}
+							value={defaultValue ? defaultValue : options[0].key}
 							error={error?.isError ? true : false}
 							{...field}
 							{...rest}

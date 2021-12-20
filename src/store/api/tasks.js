@@ -14,6 +14,10 @@ export const tasksApi = createApi({
 			},
 			providesTags: ['Tasks']
 		}),
+		getOneTasks: builder.query({
+			query: (id) => `task/${id}`,
+			providesTags: ['Tasks']
+		}),
 		addTask: builder.mutation({
 			query: (body) => ({
 				url: 'task',
@@ -22,9 +26,17 @@ export const tasksApi = createApi({
 			}),
 			invalidatesTags: ['Tasks']
 		}),
+		updateTask: builder.mutation({
+			query: (body) => ({
+				url: `task/${body.id}`,
+				method: 'PUT',
+				body
+			}),
+			invalidatesTags: ['Tasks']
+		}),
 		removeTask: builder.mutation({
 			query: (body) => ({
-				url: 'tasks',
+				url: `task/${body.id}`,
 				method: 'DELETE',
 				body
 			}),
@@ -33,5 +45,10 @@ export const tasksApi = createApi({
 	})
 });
 
-export const { useGetTasksQuery, useAddTaskMutation, useRemoveTaskMutation } =
-	tasksApi;
+export const {
+	useGetTasksQuery,
+	useGetOneTasksQuery,
+	useAddTaskMutation,
+	useRemoveTaskMutation,
+	useUpdateTaskMutation
+} = tasksApi;

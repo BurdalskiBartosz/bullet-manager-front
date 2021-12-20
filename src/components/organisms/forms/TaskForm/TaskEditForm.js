@@ -5,10 +5,10 @@ import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
 import { prioritySelectValues, typeSelectValues } from './selectData';
 
-const TaskForm = ({ handleSubmit, errors, control }) => {
+const TaskEditForm = ({ handleSubmit, errors, control }) => {
 	return (
 		<>
-			<Typography variant="h3">Dodaj nowe zadanie</Typography>
+			<Typography variant="h3">Edytuj zadanie</Typography>
 			<Box component="form" onSubmit={handleSubmit()}>
 				<Input
 					name="title"
@@ -44,11 +44,11 @@ const TaskForm = ({ handleSubmit, errors, control }) => {
 				/>
 
 				<Button type="submit" variant="contained">
-					Dodaj zadanie
+					Edytuj
 				</Button>
 			</Box>
 		</>
 	);
 };
 
-export default TaskForm;
+export default TaskEditForm;
