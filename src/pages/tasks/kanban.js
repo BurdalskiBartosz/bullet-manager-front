@@ -1,18 +1,34 @@
-import { Grid, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Button from 'src/components/atoms/Button';
-import TaskCard from 'src/components/molecules/cards/TaskCard/TaskCard';
 import TaskForm from 'src/components/organisms/forms/TaskForm/TaskForm';
 import Modal from 'src/components/organisms/Modal';
 import useModal from 'src/hooks/useModal';
 import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTemplate';
 import { useGetTasksQuery, useAddTaskMutation } from 'src/store/api/tasks';
+import KanbanWrapper from 'src/components/organisms/kanban/KanbanWrapper/KanbanWrapper';
+import { dateFormat } from 'src/utils/dateFormat';
+import { v4 as uuid } from 'uuid';
 
-const Tasks = ({ selectedDate }) => {
-	const tasks = useGetTasksQuery({ where: { date: selectedDate } });
+const Kanban = ({ selectedDate }) => {
+	const tasks = useGetTasksQuery({ where: { date: dateFormat(new Date()) } });
 	const [addTask] = useAddTaskMutation();
-
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
+	const columnsFromBackend = {
+		[uuid()]: {
+			name: 'Do zrobienia',
+			items: tasks.data
+		},
+		[uuid()]: {
+			name: 'W trakcie',
+			items: []
+		},
+		[uuid()]: {
+			name: 'Zrobione',
+			items: []
+		}
+	};
+
 	const {
 		handleSubmit,
 		control,
@@ -39,21 +55,27 @@ const Tasks = ({ selectedDate }) => {
 				alignItems="flex-start"
 				justifyContent="space-between"
 			>
-				<Typography variant="h1">Zadania</Typography>
+				<Typography variant="h1">Kanban na dzisiaj</Typography>
 				<Button onClick={() => handleOpenModal()} variant="outlined">
 					Dodaj zadanie
 				</Button>
 			</Stack>
-			<Grid container spacing={3}>
-				{tasks.data &&
-					tasks.data.map((task) => (
-						<Grid item key={task.id}>
-							<TaskCard task={task} />
-						</Grid>
-					))}
-			</Grid>
+
+			{tasks.data?.length && (
+				<KanbanWrapper columnsFromBackend={columnsFromBackend} />
+			)}
 		</LoggedUserTemplate>
 	);
 };
+// export const getServerSideProps = async ({ query }) => {
+// 	const itemsFromBackend = [
+// 		{ id: uuid(), content: 'First task' },
+// 		{ id: uuid(), content: 'Second task' },
+// 		{ id: uuid(), content: 'Third task' },
+// 		{ id: uuid(), content: 'Fourth task' },
+// 		{ id: uuid(), content: 'Fifth task' }
+// 	];
 
-export default Tasks;
+// 	return { props: { columnsFromBackend } };
+// };
+export default Kanban;
