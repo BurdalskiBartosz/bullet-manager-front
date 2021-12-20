@@ -12,7 +12,7 @@ const Sidebar = () => {
 		<Box
 			sx={{
 				height: 'calc(100vh - 84px)',
-				width: 280
+				width: 200
 			}}
 		>
 			<Box
@@ -21,7 +21,7 @@ const Sidebar = () => {
 					top: '84px',
 					left: 0,
 					width: '100%',
-					maxWidth: 280,
+					maxWidth: 200,
 					bgcolor: 'secondary.main',
 					height: '100%'
 				}}

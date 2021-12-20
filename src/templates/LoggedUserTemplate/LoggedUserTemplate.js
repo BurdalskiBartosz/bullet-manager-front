@@ -8,7 +8,7 @@ const LoggedUserTemplate = ({ children }) => {
 			<Header />
 			<Box sx={{ display: 'flex' }}>
 				<Sidebar />
-				<Box sx={{ width: 'calc(100vw - 280px)', p: '8rem 2rem 2rem' }}>
+				<Box sx={{ width: 'calc(100vw - 200px)', p: '8rem 2rem 2rem' }}>
 					{children}
 				</Box>
 			</Box>
