@@ -28,6 +28,8 @@ const Kanban = ({ selectedDate }) => {
 			items: []
 		}
 	};
+	console.log(tasks);
+	console.log(columnsFromBackend);
 
 	const {
 		handleSubmit,

@@ -12,12 +12,16 @@ import useModal from 'src/hooks/useModal';
 import Modal from 'src/components/organisms/Modal';
 import TaskEditForm from 'src/components/organisms/forms/TaskForm/TaskEditForm';
 import { useForm } from 'react-hook-form';
-import { useUpdateTaskMutation } from 'src/store/api/tasks';
+import {
+	useRemoveTaskMutation,
+	useUpdateTaskMutation
+} from 'src/store/api/tasks';
+import { Box } from '@mui/system';
 
 const TaskCard = ({ task }) => {
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const [updateTask] = useUpdateTaskMutation();
-
+	const [deleteTask] = useRemoveTaskMutation();
 	const {
 		handleSubmit,
 		control,
@@ -27,7 +31,8 @@ const TaskCard = ({ task }) => {
 			title: task.title,
 			content: task.content,
 			priority: task.priority,
-			type: task.type
+			type: task.type,
+			date: task.date
 		}
 	});
 
@@ -59,9 +64,14 @@ const TaskCard = ({ task }) => {
 					justifyContent: 'space-between'
 				}}
 			>
-				<Button size="small" onClick={() => handleOpenModal()}>
-					Edytuj
-				</Button>
+				<Box>
+					<Button size="small" onClick={() => handleOpenModal()}>
+						Edytuj
+					</Button>
+					<Button size="small" onClick={() => deleteTask(task.id)}>
+						Usuń
+					</Button>
+				</Box>
 				<FormGroup>
 					<FormControlLabel control={<Checkbox />} label="Wykonane" />
 				</FormGroup>

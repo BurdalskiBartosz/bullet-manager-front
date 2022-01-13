@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd-next';
 import dynamic from 'next/dynamic';
-const DynamicComponent = dynamic(() => import('../Droppable/Droppable'), {
-	ssr: false
-});
+// const DynamicComponent = dynamic(() => import('../Droppable/Droppable'), {
+// 	ssr: false
+// });
+import Droppable from '../Droppable/Droppable';
 
 const onDragEnd = (result, columns, setColumns) => {
 	if (!result.destination) return;
@@ -67,7 +68,7 @@ const KanbanWrapper = ({ columnsFromBackend }) => {
 						>
 							<h2>{column.name}</h2>
 							<div style={{ margin: 8 }}>
-								<DynamicComponent
+								<Droppable
 									column={column}
 									columnId={columnId}
 								/>

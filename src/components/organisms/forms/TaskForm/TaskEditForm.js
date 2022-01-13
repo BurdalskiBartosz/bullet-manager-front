@@ -5,6 +5,12 @@ import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
 import { prioritySelectValues, typeSelectValues } from './selectData';
 
+import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
+import { TextField } from '@mui/material';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import { dateFormat } from 'src/utils/dateFormat';
+import { Controller } from 'react-hook-form';
+
 const TaskEditForm = ({ handleSubmit, errors, control }) => {
 	return (
 		<>
@@ -29,6 +35,34 @@ const TaskEditForm = ({ handleSubmit, errors, control }) => {
 					control={control}
 					multiline
 					rows={4}
+				/>
+
+				<Controller
+					name="date"
+					control={control}
+					render={({ field }) => (
+						<LocalizationProvider dateAdapter={DateAdapter}>
+							<DesktopDatePicker
+								label="Zmień datę"
+								onChange={(date) => {
+									const formattedDate = dateFormat(date);
+									return field.onChange(formattedDate);
+								}}
+								selected={field.value}
+								value={field.value}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										sx={{
+											width: '100%',
+											maxWidth: '330px',
+											mb: 2.5
+										}}
+									/>
+								)}
+							/>
+						</LocalizationProvider>
+					)}
 				/>
 				<Select
 					name="type"
