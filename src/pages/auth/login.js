@@ -33,10 +33,10 @@ const LoginPage = () => {
 					<Box component="form" onSubmit={handleSubmit(auth.signIn)}>
 						<Input
 							name="email"
-							label="Email"
+							label="Email lub login"
 							error={{
 								isError: errors.email,
-								message: 'Podaj poprawny email'
+								message: 'Musisz podać email lub login'
 							}}
 							control={control}
 						/>

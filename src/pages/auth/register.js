@@ -39,6 +39,15 @@ const RegisterPage = () => {
 							control={control}
 						/>
 						<Input
+							name="login"
+							label="Login"
+							error={{
+								isError: errors.login,
+								message: 'Wpisz login'
+							}}
+							control={control}
+						/>
+						<Input
 							name="password"
 							label="Hasło"
 							type="password"
