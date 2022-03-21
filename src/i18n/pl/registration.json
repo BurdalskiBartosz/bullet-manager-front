@@ -1,0 +1,13 @@
+{
+	"Registration page": "Strona Rejestracji",
+	"Register": "Zarejestruj się",
+	"Login input": "Login",
+	"Email input": "E-mail",
+	"Password input": "Hasło",
+	"Login validation message": "Musisz podać login",
+	"Email validation message": "Musisz podać poprawny adres email",
+	"Confirm password input": "Potwierdź hasło",
+	"Password validation message": "Musisz podać hasło",
+	"Confirm password validation message": "Podane hasła muszą się zgadzać",
+	"Go back to homepage": "Powrót na strone główną"
+}
