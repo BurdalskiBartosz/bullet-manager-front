@@ -4,7 +4,7 @@ import BookIcon from '@mui/icons-material/Book';
 import NotesIcon from '@mui/icons-material/Notes';
 import TaskIcon from '@mui/icons-material/Task';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import Dashboard from '@mui/icons-material/Dashboard';
 import ListItem from '../molecules/list/ListItem';
 
 const Sidebar = () => {
@@ -29,6 +29,11 @@ const Sidebar = () => {
 				<nav aria-label="main mailbox folders">
 					<List>
 						<ListItem
+							href="/dashboard"
+							name="Dashboard"
+							icon={<Dashboard />}
+						/>
+						<ListItem
 							href="/tasks"
 							name="Zadania"
 							icon={<TaskIcon />}
@@ -44,14 +49,9 @@ const Sidebar = () => {
 							icon={<BookIcon />}
 						/>
 						<ListItem
-							href="/auth/register"
-							name="Planery"
+							href="/schedules"
+							name="Harmonogramy"
 							icon={<ScheduleIcon />}
-						/>
-						<ListItem
-							href="/auth/register"
-							name="Kalendarz"
-							icon={<CalendarTodayIcon />}
 						/>
 					</List>
 				</nav>

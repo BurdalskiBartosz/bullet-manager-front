@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import { getQuery } from 'src/utils/getQuery';
 import { createApiDefaultConfig } from '../config/config';
 
 export const booksApi = createApi({
@@ -8,24 +7,28 @@ export const booksApi = createApi({
 	tagTypes: ['Books'],
 	endpoints: (builder) => ({
 		getBooks: builder.query({
-			query: ({ where } = {}) => {
-				const query = getQuery({ where });
-				return `books/${query}`;
-			},
+			query: () => `book`,
 			providesTags: ['Books']
 		}),
 		addBook: builder.mutation({
 			query: (body) => ({
-				url: 'books',
+				url: 'book',
 				method: 'POST',
 				body
 			}),
 			invalidatesTags: ['Books']
 		}),
 		removeBook: builder.mutation({
+			query: (id) => ({
+				url: `book/${id}`,
+				method: 'DELETE'
+			}),
+			invalidatesTags: ['Books']
+		}),
+		updateBook: builder.mutation({
 			query: (body) => ({
-				url: 'books',
-				method: 'DELETE',
+				url: `book/${body.id}`,
+				method: 'PUT',
 				body
 			}),
 			invalidatesTags: ['Books']
@@ -33,5 +36,9 @@ export const booksApi = createApi({
 	})
 });
 
-export const { useGetBooksQuery, useAddBookMutation, useRemoveBookMutation } =
-	booksApi;
+export const {
+	useGetBooksQuery,
+	useAddBookMutation,
+	useUpdateBookMutation,
+	useRemoveBookMutation
+} = booksApi;

@@ -1,7 +1,7 @@
 import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
 import { TextField } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { changeDate, selectDate } from 'src/store/date/dateSlice';
+import { changeDate, selectDate } from 'src/store/state/date/dateSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateFormat } from 'src/utils/dateFormat';
 

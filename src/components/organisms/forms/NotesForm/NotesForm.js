@@ -3,21 +3,7 @@ import { Box } from '@mui/system';
 import Button from 'src/components/atoms/Button';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
-
-const typeNoteSelectValues = [
-	{
-		key: 'primary',
-		value: 'Domyślny'
-	},
-	{
-		key: 'secondary',
-		value: 'Inny rodzaj'
-	},
-	{
-		key: 'tetiary',
-		value: 'Trzeci rodzaj'
-	}
-];
+import { typeNoteSelectValues } from './selectData';
 
 const NotesForm = ({ handleSubmit, errors, control }) => {
 	return (

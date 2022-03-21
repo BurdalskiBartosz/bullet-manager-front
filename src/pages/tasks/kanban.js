@@ -11,7 +11,7 @@ import { dateFormat } from 'src/utils/dateFormat';
 import { v4 as uuid } from 'uuid';
 
 const Kanban = ({ selectedDate }) => {
-	const tasks = useGetTasksQuery({ where: { date: dateFormat(new Date()) } });
+	const tasks = useGetTasksQuery({ where: { date: selectedDate } });
 	const [addTask] = useAddTaskMutation();
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const columnsFromBackend = {
@@ -57,7 +57,7 @@ const Kanban = ({ selectedDate }) => {
 				alignItems="flex-start"
 				justifyContent="space-between"
 			>
-				<Typography variant="h1">Kanban na dzisiaj</Typography>
+				<Typography variant="h1">Kanban </Typography>
 				<Button onClick={() => handleOpenModal()} variant="outlined">
 					Dodaj zadanie
 				</Button>

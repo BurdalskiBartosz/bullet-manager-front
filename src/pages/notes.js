@@ -19,7 +19,7 @@ const Notes = ({ selectedDate }) => {
 		formState: { errors }
 	} = useForm();
 
-	const handleAddTask = (data) => {
+	const handleAddNote = (data) => {
 		const noteData = { ...data, date: selectedDate };
 		handleCloseModal();
 		addNote(noteData);
@@ -29,7 +29,7 @@ const Notes = ({ selectedDate }) => {
 		<LoggedUserTemplate>
 			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
 				<NotesForm
-					handleSubmit={() => handleSubmit(handleAddTask)}
+					handleSubmit={() => handleSubmit(handleAddNote)}
 					errors={errors}
 					control={control}
 				/>

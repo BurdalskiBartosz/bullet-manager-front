@@ -5,10 +5,10 @@ import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
 import { marks, states } from './selectData';
 
-const BookForm = ({ handleSubmit, errors, control, watch }) => {
+const BookEditForm = ({ handleSubmit, errors, control, watch }) => {
 	return (
 		<>
-			<Typography variant="h3">Dodaj książkę</Typography>
+			<Typography variant="h3">Edytuj książkę</Typography>
 			<Box component="form" onSubmit={handleSubmit()}>
 				<Input
 					name="title"
@@ -51,12 +51,13 @@ const BookForm = ({ handleSubmit, errors, control, watch }) => {
 					multiline
 					rows={8}
 				/>
+
 				<Button type="submit" variant="contained">
-					Dodaj
+					Edytuj
 				</Button>
 			</Box>
 		</>
 	);
 };
 
-export default BookForm;
+export default BookEditForm;

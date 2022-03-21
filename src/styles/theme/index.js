@@ -14,7 +14,7 @@ const darkTheme = createTheme({
 		},
 		cards: {
 			primary: {
-				main: '#D6D5C1',
+				main: '#ffffff',
 				dark: '#121212',
 				danger: '#8F0900'
 			},
@@ -23,8 +23,8 @@ const darkTheme = createTheme({
 				danger: '#8F0900'
 			},
 			tetiary: {
-				main: '#8F0900',
-				dark: '#3A3A3A'
+				main: '#919074',
+				dark: '#ffffff'
 			}
 		}
 	},

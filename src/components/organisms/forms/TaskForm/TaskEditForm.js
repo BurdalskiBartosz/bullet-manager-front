@@ -65,12 +65,6 @@ const TaskEditForm = ({ handleSubmit, errors, control }) => {
 					)}
 				/>
 				<Select
-					name="type"
-					label="Typ zadania"
-					control={control}
-					options={typeSelectValues}
-				/>
-				<Select
 					name="priority"
 					label="Priorytet"
 					control={control}

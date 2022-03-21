@@ -22,16 +22,27 @@ export const notesApi = createApi({
 			}),
 			invalidatesTags: ['Notes']
 		}),
-		removeNote: builder.mutation({
+		updateNote: builder.mutation({
 			query: (body) => ({
-				url: 'note',
-				method: 'DELETE',
+				url: `note/${body.id}`,
+				method: 'PUT',
 				body
+			}),
+			invalidatesTags: ['Notes']
+		}),
+		removeNote: builder.mutation({
+			query: (id) => ({
+				url: `note/${id}`,
+				method: 'DELETE'
 			}),
 			invalidatesTags: ['Notes']
 		})
 	})
 });
 
-export const { useGetNotesQuery, useAddNoteMutation, useRemoveNoteMutation } =
-	notesApi;
+export const {
+	useGetNotesQuery,
+	useAddNoteMutation,
+	useRemoveNoteMutation,
+	useUpdateNoteMutation
+} = notesApi;

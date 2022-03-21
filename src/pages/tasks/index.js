@@ -1,4 +1,12 @@
-import { Grid, Stack, Typography } from '@mui/material';
+import {
+	FormControl,
+	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
+	Stack,
+	Typography
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Button from 'src/components/atoms/Button';
 import TaskCard from 'src/components/molecules/cards/TaskCard/TaskCard';
@@ -9,9 +17,12 @@ import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTempl
 import { useGetTasksQuery, useAddTaskMutation } from 'src/store/api/tasks';
 import { Box } from '@mui/system';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const Tasks = ({ selectedDate }) => {
-	const tasks = useGetTasksQuery({ where: { date: selectedDate } });
+	const [priority, setPriority] = useState('0');
+
+	const tasks = useGetTasksQuery({ where: { date: selectedDate, priority } });
 	const [addTask] = useAddTaskMutation();
 
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
@@ -27,6 +38,9 @@ const Tasks = ({ selectedDate }) => {
 		addTask(taskData);
 	};
 
+	const handleChange = (event) => {
+		setPriority(event.target.value);
+	};
 	return (
 		<LoggedUserTemplate>
 			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
@@ -42,11 +56,29 @@ const Tasks = ({ selectedDate }) => {
 				justifyContent="space-between"
 			>
 				<Typography variant="h1">Zadania</Typography>
+
 				<Stack
 					direction="row"
 					alignItems="flex-start"
 					justifyContent="space-between"
 				>
+					<FormControl sx={{ width: 200, mr: 2 }}>
+						<InputLabel id="demo-simple-select-label">
+							Priorytet
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={priority}
+							label="priority"
+							onChange={handleChange}
+						>
+							<MenuItem value={'0'}>Pokaż wszystkie</MenuItem>
+							<MenuItem value={'1'}>Priorytet 1</MenuItem>
+							<MenuItem value={'2'}>Priorytet 2</MenuItem>
+							<MenuItem value={'3'}>Priorytet 3</MenuItem>
+						</Select>
+					</FormControl>
 					<Box sx={{ mr: 2 }}>
 						<Link href="/tasks/kanban" passHref>
 							<Button variant="contained">

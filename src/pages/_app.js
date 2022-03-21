@@ -2,7 +2,7 @@ import ProtectedRoutes from 'src/helper/ProtectedRoutes/ProtectedRoutes';
 import AppProviders from 'src/providers/AppProviders';
 import { wrapper } from 'src/store/store';
 import { useSelector } from 'react-redux';
-import { selectDate } from 'src/store/date/dateSlice';
+import { selectDate } from 'src/store/state/date/dateSlice';
 
 const MyApp = ({ Component, pageProps, router }) => {
 	const selectedDate = useSelector(selectDate);

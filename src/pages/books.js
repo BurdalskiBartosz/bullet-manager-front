@@ -5,33 +5,35 @@ import BookForm from 'src/components/organisms/forms/BookForm/BookForm';
 import Modal from 'src/components/organisms/Modal';
 import useModal from 'src/hooks/useModal';
 import LoggedUserTemplate from 'src/templates/LoggedUserTemplate/LoggedUserTemplate';
-import { useGetNotesQuery, useAddNoteMutation } from 'src/store/api/notes';
-import NoteCard from 'src/components/molecules/cards/NoteCard/NoteCard';
+import BookCard from 'src/components/molecules/cards/BookCard/BookCard';
+import { useAddBookMutation, useGetBooksQuery } from 'src/store/api/books';
 
 const Books = ({ selectedDate }) => {
-	const books = useGetNotesQuery();
-	const [addNote] = useAddNoteMutation();
+	const books = useGetBooksQuery();
+	const [addBook] = useAddBookMutation();
 
 	const { isOpen, handleCloseModal, handleOpenModal } = useModal(false);
 	const {
 		handleSubmit,
 		control,
-		formState: { errors }
+		formState: { errors },
+		watch
 	} = useForm();
 
-	const handleAddTask = (data) => {
-		const noteData = { ...data, date: selectedDate };
+	const handleAddBook = (data) => {
+		const bookData = { ...data, date: selectedDate };
 		handleCloseModal();
-		addNote(noteData);
+		addBook(bookData);
 	};
 
 	return (
 		<LoggedUserTemplate>
 			<Modal isOpen={isOpen} handleClose={handleCloseModal}>
 				<BookForm
-					handleSubmit={() => handleSubmit(handleAddTask)}
+					handleSubmit={() => handleSubmit(handleAddBook)}
 					errors={errors}
 					control={control}
+					watch={watch}
 				/>
 			</Modal>
 			<Stack
@@ -46,9 +48,9 @@ const Books = ({ selectedDate }) => {
 			</Stack>
 			<Grid container spacing={3}>
 				{books.data &&
-					books.data.map((note) => (
-						<Grid item key={note.id}>
-							<NoteCard note={note} />
+					books.data.map((book) => (
+						<Grid item key={book.id}>
+							<BookCard book={book} />
 						</Grid>
 					))}
 			</Grid>

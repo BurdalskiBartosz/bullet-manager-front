@@ -18,7 +18,10 @@ const LoginPage = () => {
 		formState: { errors }
 	} = useForm();
 
-	useEffect(() => router.prefetch('/dashboard'), []);
+	useEffect(() => {
+		if (!router) return;
+		router.prefetch('/dashboard');
+	}, []);
 
 	return (
 		<AuthTemplate

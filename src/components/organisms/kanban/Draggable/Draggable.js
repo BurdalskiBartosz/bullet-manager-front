@@ -14,14 +14,15 @@ const MyDraggable = ({ item, index }) => {
 							padding: 16,
 							margin: '0 0 8px 0',
 							minHeight: '50px',
+							border: '2px solid white',
 							backgroundColor: snapshot.isDragging
-								? '#263B4A'
-								: '#456C86',
+								? '#121212'
+								: '#3A3A3A',
 							color: 'white',
 							...provided.draggableProps.style
 						}}
 					>
-						{item.content}
+						{item.title}
 					</div>
 				);
 			}}

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import dateReducer from './date/dateSlice';
+import dateReducer from './state/date/dateSlice';
 import { createWrapper } from 'next-redux-wrapper';
 import { tasksApi } from './api/tasks';
 import { notesApi } from './api/notes';

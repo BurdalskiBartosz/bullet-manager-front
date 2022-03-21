@@ -30,6 +30,7 @@ const Input = ({
 						type={type}
 						variant={variant}
 						inputProps={{
+							'aria-labelledby': name,
 							style: {
 								boxShadow: `0 0 0 1000px ${theme.palette.primary.dark} inset`
 							}

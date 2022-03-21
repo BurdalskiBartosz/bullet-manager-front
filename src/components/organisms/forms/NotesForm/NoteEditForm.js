@@ -3,22 +3,13 @@ import { Box } from '@mui/system';
 import Button from 'src/components/atoms/Button';
 import Input from 'src/components/molecules/inputs/Input/Input';
 import Select from 'src/components/molecules/inputs/Select/Select';
-import { prioritySelectValues } from './selectData';
+import { typeNoteSelectValues } from './selectData';
 
-const TaskForm = ({ handleSubmit, errors, control }) => {
+const NoteEditForm = ({ handleSubmit, errors, control }) => {
 	return (
 		<>
-			<Typography variant="h3">Dodaj nowe zadanie</Typography>
+			<Typography variant="h3">Edytuj notatkę</Typography>
 			<Box component="form" onSubmit={handleSubmit()}>
-				<Input
-					name="title"
-					label="Tytuł zadania"
-					error={{
-						isError: errors.title,
-						message: 'Musisz podać nazwę zadania'
-					}}
-					control={control}
-				/>
 				<Input
 					name="content"
 					label="Treść zadania"
@@ -32,18 +23,18 @@ const TaskForm = ({ handleSubmit, errors, control }) => {
 				/>
 
 				<Select
-					name="priority"
-					label="Priorytet"
+					name="type"
+					label="Typ zadania"
 					control={control}
-					options={prioritySelectValues}
+					options={typeNoteSelectValues}
 				/>
 
 				<Button type="submit" variant="contained">
-					Dodaj zadanie
+					Edytuj
 				</Button>
 			</Box>
 		</>
 	);
 };
 
-export default TaskForm;
+export default NoteEditForm;
