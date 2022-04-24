@@ -47,6 +47,7 @@ export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 	const signOut = () => {
 		setUser(false);
+		navigate('/', { replace: true });
 	};
 
 	return (

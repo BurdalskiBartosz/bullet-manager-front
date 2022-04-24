@@ -1,18 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { AuthProvider } from './providers/AuthProvider';
-import reportWebVitals from './reportWebVitals';
-import { GlobalStyles } from './styles/GlobalStyles';
 import './i18n/index';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './providers/AuthProvider';
+import { GlobalStyles } from './styles/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<AuthProvider>
-				<App />
-			</AuthProvider>
+			<ThemeProvider theme={theme}>
+				<AuthProvider>
+					<App />
+				</AuthProvider>
+			</ThemeProvider>
 		</BrowserRouter>
 		<GlobalStyles />
 	</React.StrictMode>,

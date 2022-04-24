@@ -1,18 +1,11 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { HomeMenu } from '../../components';
 
 const UnauthorizedTemplate = () => {
 	return (
 		<div>
-			UnauthorizedTemplate
-			<nav>
-				<li>
-					<Link to="login">Login</Link>
-				</li>
-				<li>
-					<Link to="registration">Rejestracja</Link>
-				</li>
-			</nav>
+			<HomeMenu />
 			<Outlet />
 		</div>
 	);
