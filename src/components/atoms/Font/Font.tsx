@@ -1,0 +1,54 @@
+import { CSSProperties, FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import { tTags, tVariants, variants } from '../../../styles/typography';
+
+type Props = {
+	children: string;
+	variant?: tVariants;
+	component?: tTags;
+	style?: CSSProperties;
+};
+
+type tTagProps = {
+	$style: string;
+	$overideStyle: string;
+};
+const Tag = styled.p<tTagProps>`
+	${(props) => props.$style};
+	${(props) => props.$overideStyle};
+`;
+
+const Font: FC<Props> = ({ children, variant, component, style }) => {
+	const { t } = useTranslation();
+	let overideStyle;
+	let tag: tTags = 'p';
+	let variantStyles;
+
+	if (variant) {
+		tag = variants[variant].tag;
+		variantStyles = variants[variant].styles;
+	}
+
+	if (style) {
+		overideStyle = Object.entries(style).reduce((acc, [key, value]) => {
+			const correctCSSPropertyName = key
+				.split(/(?=[A-Z])/)
+				.map((el) => el.toLowerCase())
+				.join('-');
+			acc += `${correctCSSPropertyName}: ${value};`;
+			return acc;
+		}, '');
+	}
+	return (
+		<Tag
+			as={component ?? tag}
+			$style={variantStyles ?? ''}
+			$overideStyle={overideStyle ?? ''}
+		>
+			{t(children)}
+		</Tag>
+	);
+};
+
+export default Font;
