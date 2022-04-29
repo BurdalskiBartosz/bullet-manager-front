@@ -1,10 +1,11 @@
-import { createGlobalStyle, css } from 'styled-components';
-import { normalize } from 'styled-normalize';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-	${css`
-		${normalize}
-	`}
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 	html {
 		font-size: 62.5%;
 	}
