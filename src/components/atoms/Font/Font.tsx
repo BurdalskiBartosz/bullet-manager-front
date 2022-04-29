@@ -8,6 +8,7 @@ type Props = {
 	variant?: tVariants;
 	component?: tTags;
 	style?: CSSProperties;
+	[x: string]: any;
 };
 
 type tTagProps = {
@@ -19,7 +20,7 @@ const Tag = styled.p<tTagProps>`
 	${(props) => props.$overideStyle};
 `;
 
-const Font: FC<Props> = ({ children, variant, component, style }) => {
+const Font: FC<Props> = ({ children, variant, component, style, ...rest }) => {
 	const { t } = useTranslation();
 	let overideStyle;
 	let tag: tTags = 'p';
@@ -45,6 +46,7 @@ const Font: FC<Props> = ({ children, variant, component, style }) => {
 			as={component ?? tag}
 			$style={variantStyles ?? ''}
 			$overideStyle={overideStyle ?? ''}
+			{...rest}
 		>
 			{t(children)}
 		</Tag>
