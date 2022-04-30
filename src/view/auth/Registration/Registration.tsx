@@ -5,6 +5,7 @@ import { tRegistrationUserData } from '../../../types/forms/authForm';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Font, Input } from '../../../components';
 
 const validationSchema = yup.object().shape({
 	email: yup.string().required(),
@@ -34,51 +35,50 @@ const Registration = () => {
 	};
 	return (
 		<div>
-			<h1>{t('Registration page')}</h1>
-
+			<Font variant="header" style={{ marginBottom: '7rem' }}>
+				Register
+			</Font>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<div>
-					<label htmlFor="userLogin">
-						<span>{t('Login input')}</span>
-						<input id="userLogin" {...register('login')} />
-						{errors.login && (
-							<div>{t('Login validation message')}</div>
-						)}
-					</label>
-				</div>
-				<div>
-					<label htmlFor="userEmail">
-						<span>{t('Email input')}</span>
-						<input id="userEmail" {...register('email')} />
-						{errors.email && (
-							<div>{t('Email validation message')}</div>
-						)}
-					</label>
-				</div>
-				<div>
-					<label htmlFor="userPassword">
-						<span>{t('Password input')}</span>
-						<input id="userPassword" {...register('password')} />
-						{errors.password && (
-							<div>{t('Password validation message')}</div>
-						)}
-					</label>
-				</div>
-				<div>
-					<label htmlFor="userConfirmPassword">
-						<span>{t('Confirm password input')}</span>
-						<input
-							id="userConfirmPassword"
-							{...register('confirmPassword')}
-						/>
-						{errors.confirmPassword && (
-							<div>
-								{t('Confirm password validation message')}
-							</div>
-						)}
-					</label>
-				</div>
-				<button>{t('Register')}</button>
+				<Input
+					id="login"
+					label="Login input"
+					register={register}
+					error={{
+						isError: !!errors.login,
+						errorMessage: 'Login validation message'
+					}}
+				/>
+				<Input
+					id="email"
+					label="Email input"
+					register={register}
+					error={{
+						isError: !!errors.email,
+						errorMessage: 'Email validation message'
+					}}
+				/>
+				<Input
+					id="password"
+					label="Password input"
+					register={register}
+					type="password"
+					error={{
+						isError: !!errors.password,
+						errorMessage: 'Password validation message'
+					}}
+				/>
+				<Input
+					id="confirmPassword"
+					label="Confirm password input"
+					register={register}
+					type="password"
+					error={{
+						isError: !!errors.confirmPassword,
+						errorMessage: 'Confirm password validation message'
+					}}
+				/>
+
+				<button type="submit">{t('Register')}</button>
 			</form>
 		</div>
 	);

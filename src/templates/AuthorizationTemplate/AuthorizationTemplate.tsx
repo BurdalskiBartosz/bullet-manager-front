@@ -1,19 +1,21 @@
-import { useTranslation } from 'react-i18next';
 import { Link, Outlet } from 'react-router-dom';
 import {
-	InnerWrapper,
-	Wrapper
-} from '../../styles/shared/AuthTemplates.styles';
+	StyledInnerWrapper,
+	StyledLogo,
+	StyledWrapper
+} from './AuthorizationTemplate.styles';
+import logo from '../../assets/images/bullet-manager-logo.png';
 
 const AuthorizationTemplate = () => {
-	const { t } = useTranslation();
 	return (
-		<Wrapper>
-			<InnerWrapper>
-				<Link to="/">LOGO</Link>
+		<StyledWrapper>
+			<StyledInnerWrapper>
+				<Link to="/">
+					<StyledLogo src={logo} alt="" title="" />
+				</Link>
 				<Outlet />
-			</InnerWrapper>
-		</Wrapper>
+			</StyledInnerWrapper>
+		</StyledWrapper>
 	);
 };
 
