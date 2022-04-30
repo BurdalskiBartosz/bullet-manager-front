@@ -15,7 +15,7 @@ type tTagProps = {
 	$style: string;
 	$overideStyle: string;
 };
-const Tag = styled.p<tTagProps>`
+const StyledTag = styled.p<tTagProps>`
 	${(props) => props.$style};
 	${(props) => props.$overideStyle};
 `;
@@ -42,14 +42,14 @@ const Font: FC<Props> = ({ children, variant, component, style, ...rest }) => {
 		}, '');
 	}
 	return (
-		<Tag
+		<StyledTag
 			as={component ?? tag}
 			$style={variantStyles ?? ''}
 			$overideStyle={overideStyle ?? ''}
 			{...rest}
 		>
 			{t(children)}
-		</Tag>
+		</StyledTag>
 	);
 };
 
