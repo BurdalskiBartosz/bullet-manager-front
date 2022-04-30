@@ -1,5 +1,6 @@
 import { tGenericIndexSignature } from '../../types/shared';
 import { media } from '../breakpoints';
+import { colors } from '../variables/colors';
 
 const { sm, lg, xl } = media;
 
@@ -12,9 +13,9 @@ type tTypography<T> = {
 	};
 };
 
-export type tTags = 'h1' | 'h2' | 'h3' | 'p';
+export type tTags = 'h1' | 'h2' | 'h3' | 'p' | 'label';
 
-export type tVariants = 'header';
+export type tVariants = 'header' | 'label' | 'inputError';
 
 export const typography: tTypography<
 	tGenericIndexSignature<string | string[]>
@@ -25,7 +26,28 @@ export const typography: tTypography<
 			'font-size': ['3.5rem', '4rem', '5rem'],
 			'line-height': ['4.7rem', '5.7rem', '6.7rem'],
 			'letter-spacing': '0.00em',
-			'margin-bottom': '3rem'
+			'font-weight': '400'
+		}
+	},
+	label: {
+		tag: 'label',
+		styles: {
+			'font-size': '1.2rem',
+			'line-height': '1.6rem',
+			'letter-spacing': '0.00em',
+			'font-weight': 'bold',
+			'margin-bottom': '1rem',
+			color: colors.primaryFont
+		}
+	},
+	inputError: {
+		tag: 'p',
+		styles: {
+			'font-size': '1rem',
+			'line-height': '1.4rem',
+			'letter-spacing': '0.002em',
+			'font-weight': '400',
+			color: colors.danger
 		}
 	}
 };
@@ -56,4 +78,3 @@ export const variants = Object.entries(typography).reduce(
 	},
 	{} as tTypography<string>
 );
-console.log(variants);

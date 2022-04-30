@@ -1,1 +1,3 @@
-export const sizes = {};
+export const sizes = {
+	borderRadius: '10px'
+};
