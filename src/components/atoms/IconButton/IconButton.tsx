@@ -4,7 +4,6 @@ import { StyledIconButton } from './IconButton.styles';
 
 type Props = {
 	fn?: Function;
-	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	icon: tIconNames;
 	className?: string;
 };

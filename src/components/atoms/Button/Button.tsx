@@ -1,17 +1,14 @@
-import { FC, ReactChild } from 'react';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyledButton } from './Button.styles';
 
 type Props = {
-	children: ReactChild;
+	children: string;
 	fn?: Function;
-	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 };
 
-const Button: FC<Props> = ({ children, fn = () => {}, type = 'button' }) => {
-	return (
-		<StyledButton type={type} onClick={() => fn()}>
-			{children}
-		</StyledButton>
-	);
+const Button: FC<Props> = ({ children, fn = () => {} }) => {
+	const { t } = useTranslation();
+	return <StyledButton onClick={() => fn()}>{t(children)}</StyledButton>;
 };
 export default Button;
