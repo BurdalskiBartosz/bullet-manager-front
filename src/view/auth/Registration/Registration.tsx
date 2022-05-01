@@ -1,11 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../providers/AuthProvider';
 import { tRegistrationUserData } from '../../../types/forms/authForm';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Font, Input } from '../../../components';
+import { Button, Font, Input, Link } from '../../../components';
+import { StyledForm, StyledTextUnderForm } from '../../../styles/shared/auth';
 
 const validationSchema = yup.object().shape({
 	email: yup.string().required(),
@@ -18,7 +18,6 @@ const validationSchema = yup.object().shape({
 });
 
 const Registration = () => {
-	const { t } = useTranslation();
 	const auth = useAuth();
 
 	const {
@@ -35,10 +34,10 @@ const Registration = () => {
 	};
 	return (
 		<div>
-			<Font variant="header" style={{ marginBottom: '7rem' }}>
+			<Font variant="header" style={{ marginBottom: '4rem' }}>
 				Register
 			</Font>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<StyledForm onSubmit={handleSubmit(onSubmit)}>
 				<Input
 					id="login"
 					label="Login input"
@@ -77,9 +76,12 @@ const Registration = () => {
 						errorMessage: 'Confirm password validation message'
 					}}
 				/>
-
-				<button type="submit">{t('Register')}</button>
-			</form>
+				<Button>Register</Button>
+			</StyledForm>
+			<StyledTextUnderForm>
+				<Font>Posiadasz konto ?</Font>
+				<Link link="/login">Login</Link>
+			</StyledTextUnderForm>
 		</div>
 	);
 };

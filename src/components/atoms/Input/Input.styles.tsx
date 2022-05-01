@@ -8,7 +8,6 @@ type WrapperProps = {
 export const StyledWrapper = styled.div<WrapperProps>`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 1rem;
 	${({ isError }) =>
 		isError &&
 		css`
@@ -28,7 +27,10 @@ export const StyledInput = styled.input`
 	padding: 1.2rem 2rem;
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
-	border: 1px solid ${({ theme }) => theme.colors.primaryFont};
+	border: 1px solid ${({ theme }) => theme.colors.lightGray};
+	&:focus {
+		border-color: ${({ theme }) => theme.colors.primaryFont};
+	}
 	&::placeholder {
 		color: ${({ theme }) => theme.colors.gray};
 		font-style: italic;

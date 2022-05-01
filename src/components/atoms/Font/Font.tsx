@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { tTags, tVariants, variants } from '../../../styles/typography';
 
 type Props = {
-	children: string;
+	children: string | string[];
 	variant?: tVariants;
 	component?: tTags;
 	style?: CSSProperties;

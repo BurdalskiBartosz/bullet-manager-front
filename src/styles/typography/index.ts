@@ -37,7 +37,7 @@ export const typography: tTypography<
 			'letter-spacing': '0.00em',
 			'font-weight': 'bold',
 			'margin-bottom': '1rem',
-			color: colors.primaryFont
+			color: colors.gray
 		}
 	},
 	inputError: {
