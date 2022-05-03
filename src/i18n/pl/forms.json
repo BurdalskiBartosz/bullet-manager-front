@@ -1,0 +1,17 @@
+{
+	"Login or email input": "Podaj login albo email",
+	"Login or email input placeholder": "loginUzytkownika/nazwa@firma.pl",
+	"Login or email validation message": "Musisz podać poprawny login albo email",
+	"Email input": "Podaj adres email",
+	"Email input placeholder": "nazwa@firma.pl",
+	"Email validation message": "Musisz podać poprawny adres email",
+	"Login input": "Podaj login",
+	"Login input placeholder": "loginUzytkownika",
+	"Login validation message": "Musisz podać login",
+	"Password input": "Podaj hasło",
+	"Password input placeholder": "admin123",
+	"Password validation message": "Musisz podać hasło",
+	"Confirm password input": "Powtórz hasło",
+	"Confirm password input placeholder": "admin123",
+	"Confirm password validation message": "Podane hasła muszą się zgadzać"
+}
