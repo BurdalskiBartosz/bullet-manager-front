@@ -5,18 +5,14 @@ import { tLoginUserData } from '../../../types/forms/authForm';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Button, Font, Input, Link } from '../../../components';
+import { StyledForm, StyledTextUnderForm } from '../../../styles/shared/auth';
 
 const validationSchema = yup.object().shape({
-	login: yup.string().when('email', {
-		is: (val: string) => !!val.length,
-		then: (schema) => schema.notRequired(),
-		otherwise: (schema) => schema.required()
-	}),
-	email: yup.string().email(),
+	loginOrEmail: yup.string().required(),
 	password: yup.string().required().min(6)
 });
 const Login = () => {
-	const { t } = useTranslation();
 	const auth = useAuth();
 
 	const {
@@ -32,35 +28,38 @@ const Login = () => {
 	};
 	return (
 		<div>
-			<h1>{t('Login page')}</h1>
+			<Font variant="header" style={{ marginBottom: '4rem' }}>
+				Login
+			</Font>
 
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div>
-					<label htmlFor="userLogin">
-						<span>{t('Login input')}</span>
-						<input id="userLogin" {...register('login')} />
-					</label>
-				</div>
-				<div>
-					<label htmlFor="userEmail">
-						<span>{t('Email input')}</span>
-						<input id="userEmail" {...register('email')} />
-					</label>
-				</div>
-				{(errors.email || errors.login) && (
-					<div>{t('Login or email validation message')}</div>
-				)}
-				<div>
-					<label htmlFor="userPassword">
-						<span>{t('Password input')}</span>
-						<input id="userPassword" {...register('password')} />
-						{errors.password && (
-							<div>{t('Password validation message')}</div>
-						)}
-					</label>
-				</div>
-				<button>{t('Login')}</button>
-			</form>
+			<StyledForm onSubmit={handleSubmit(onSubmit)}>
+				<Input
+					id="login"
+					label="Login or email input"
+					register={register}
+					error={{
+						isError: !!errors.loginOrEmail,
+						errorMessage: 'Login or email validation message'
+					}}
+				/>
+
+				<Input
+					id="password"
+					label="Password input"
+					register={register}
+					type="password"
+					error={{
+						isError: !!errors.password,
+						errorMessage: 'Password validation message'
+					}}
+				/>
+
+				<Button>Login</Button>
+			</StyledForm>
+			<StyledTextUnderForm>
+				<Font>Posiadasz konto ?</Font>
+				<Link link="/registration">Register</Link>
+			</StyledTextUnderForm>
 		</div>
 	);
 };

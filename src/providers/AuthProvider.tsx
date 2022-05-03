@@ -35,8 +35,8 @@ export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 	if (location.state) from = location.state.from?.pathname;
 
 	const signIn = (data: tLoginUserData) => {
-		const { login, password } = data;
-		if (login !== 'admin' && password !== 'admin123') return;
+		const { loginOrEmail, password } = data;
+		if (loginOrEmail !== 'admin' && password !== 'admin123') return;
 		setUser(true);
 		navigate(from, { replace: true });
 	};
