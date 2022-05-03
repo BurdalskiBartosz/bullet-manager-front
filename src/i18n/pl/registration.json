@@ -1,0 +1,16 @@
+{
+	"Register": "Zarejestruj się",
+	"Email input": "Podaj adres email",
+	"Login input": "Podaj login",
+	"Password input": "Podaj hasło",
+	"Confirm password input": "Powtórz hasło",
+	"Email input placeholder": "nazwa@firma.pl",
+	"Login input placeholder": "loginUzytkownika",
+	"Password input placeholder": "admin123",
+	"Confirm password input placeholder": "admin123",
+	"Email validation message": "Musisz podać poprawny adres email",
+	"Login validation message": "Musisz podać login",
+	"Password validation message": "Musisz podać hasło",
+	"Confirm password validation message": "Podane hasła muszą się zgadzać",
+	"Go back to homepage": "Powrót na strone główną"
+}
