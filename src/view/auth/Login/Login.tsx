@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../providers/AuthProvider';
 import { tLoginUserData } from '../../../types/forms/authForm';
 
@@ -22,16 +22,13 @@ const Login = () => {
 		resolver: yupResolver(validationSchema)
 	});
 
-	const onSubmit: SubmitHandler<tLoginUserData> = (data) => {
-		auth.signIn(data);
-	};
 	return (
 		<div>
 			<Font variant="header" style={{ marginBottom: '4rem' }}>
 				Login
 			</Font>
 
-			<StyledForm onSubmit={handleSubmit(onSubmit)}>
+			<StyledForm onSubmit={handleSubmit(auth.signIn)}>
 				<Input
 					id="loginOrEmail"
 					label="Login or email input"
