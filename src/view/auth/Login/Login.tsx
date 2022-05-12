@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../providers/AuthProvider';
 import { tLoginUserData } from '../../../types/forms/authForm';
 
@@ -34,7 +33,7 @@ const Login = () => {
 
 			<StyledForm onSubmit={handleSubmit(onSubmit)}>
 				<Input
-					id="login"
+					id="loginOrEmail"
 					label="Login or email input"
 					register={register}
 					error={{
