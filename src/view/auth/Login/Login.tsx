@@ -5,12 +5,17 @@ import { tLoginUserData } from '../../../types/forms/authForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Button, Font, Input, Link } from '../../../components';
-import { StyledForm, StyledTextUnderForm } from '../../../styles/shared/auth';
+import {
+	StyledErrorBar,
+	StyledForm,
+	StyledTextUnderForm
+} from '../../../styles/shared/auth';
 
 const validationSchema = yup.object().shape({
 	loginOrEmail: yup.string().required(),
 	password: yup.string().required().min(6)
 });
+
 const Login = () => {
 	const auth = useAuth();
 
@@ -27,7 +32,11 @@ const Login = () => {
 			<Font variant="header" style={{ marginBottom: '4rem' }}>
 				Login
 			</Font>
-
+			{auth.error && (
+				<StyledErrorBar>
+					<Font>{auth.error}</Font>
+				</StyledErrorBar>
+			)}
 			<StyledForm onSubmit={handleSubmit(auth.signIn)}>
 				<Input
 					id="loginOrEmail"

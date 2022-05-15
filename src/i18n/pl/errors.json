@@ -1,0 +1,5 @@
+{
+	"Not found user with given data": "Nie znaleziono takiego użytkownika",
+	"User with given login already exist": "Użytkownik o takim loginie już istnieje",
+	"User with given email already exist": "Użytkownik o takim emailu już istnieje"
+}
