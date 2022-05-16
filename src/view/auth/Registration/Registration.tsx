@@ -1,11 +1,15 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../providers/AuthProvider';
 import { tRegistrationUserData } from '../../../types/forms/authForm';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Button, Font, Input, Link } from '../../../components';
-import { StyledForm, StyledTextUnderForm } from '../../../styles/shared/auth';
+import {
+	StyledErrorBar,
+	StyledForm,
+	StyledTextUnderForm
+} from '../../../styles/shared/auth';
 
 const validationSchema = yup.object().shape({
 	email: yup.string().required(),
@@ -28,16 +32,17 @@ const Registration = () => {
 		resolver: yupResolver(validationSchema)
 	});
 
-	const onSubmit: SubmitHandler<tRegistrationUserData> = (data) => {
-		auth.signUp(data);
-		console.log(data);
-	};
 	return (
 		<div>
 			<Font variant="header" style={{ marginBottom: '4rem' }}>
 				Register
 			</Font>
-			<StyledForm onSubmit={handleSubmit(onSubmit)}>
+			{auth.error && (
+				<StyledErrorBar>
+					<Font>{auth.error}</Font>
+				</StyledErrorBar>
+			)}
+			<StyledForm onSubmit={handleSubmit(auth.signUp)}>
 				<Input
 					id="login"
 					label="Login input"
