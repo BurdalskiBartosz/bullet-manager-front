@@ -18,16 +18,14 @@ const Router = () => {
 				<Route path="/login" element={<Login />} />
 				<Route path="/registration" element={<Registration />} />
 			</Route>
-			<Route element={<AuthorizedTemplate />}>
-				<Route
-					path="/app/*"
-					element={
-						<PrivateRoute>
-							<AuthorizedApp />
-						</PrivateRoute>
-					}
-				/>
-			</Route>
+			<Route
+				path="/app/*"
+				element={
+					<PrivateRoute>
+						<AuthorizedApp />
+					</PrivateRoute>
+				}
+			/>
 		</Routes>
 	);
 };

@@ -48,7 +48,7 @@ const Font: FC<Props> = ({ children, variant, component, style, ...rest }) => {
 			$overideStyle={overideStyle ?? ''}
 			{...rest}
 		>
-			{t(children)}
+			{typeof children === 'object' ? children : t(children)}
 		</StyledTag>
 	);
 };

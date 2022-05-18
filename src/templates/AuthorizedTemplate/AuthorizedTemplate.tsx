@@ -1,12 +1,17 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { FC } from 'react';
+import { Wrapper } from './AuthorizedTemplate.styles';
+import Circles from './_components/Circles';
 
-const AuthorizedTemplate = () => {
+type Props = {
+	children: React.ReactNode[];
+};
+
+const AuthorizedTemplate: FC<Props> = ({ children }) => {
 	return (
-		<div>
-			AuthorizedTemplate
-			<Outlet />
-		</div>
+		<Wrapper>
+			<Circles />
+			{children}
+		</Wrapper>
 	);
 };
 
