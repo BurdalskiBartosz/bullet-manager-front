@@ -1,16 +1,21 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	FC,
+	ReactNode,
+	useContext,
+	useEffect,
+	useState
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import Authorization from '../services/authorization/authorization';
 import { tLoginUserData, tRegistrationUserData } from '../types/forms/authForm';
 
-type tUser =
-	| {
-			id: number;
-			email: string;
-			login: string;
-	  }
-	| {}
-	| undefined;
+type tUser = {
+	id: number;
+	email: string;
+	login: string;
+} | null;
 
 type tAuthContex = {
 	user: tUser;
@@ -31,19 +36,23 @@ type tLocation = {
 };
 
 const AuthContext = createContext<tAuthContex>({
-	user: {},
+	user: null,
 	error: '',
 	signIn: () => {},
 	signUp: () => {},
 	signOut: () => {}
 });
 
-export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
+export const AuthProvider: FC<ReactNode> = ({ children }) => {
+	const { getItem, setItem, removeItem } = useLocalStorage();
 	const navigate = useNavigate();
 	const location = useLocation() as tLocation;
+	const [error, setError] = useState<string>('');
+	const userLS = getItem('user');
 
-	const [user, setUser] = useState<tUser>({});
-	const [error, setError] = useState('');
+	const [user, setUser] = useState<tUser | null>(
+		typeof userLS === 'object' ? userLS : null
+	);
 
 	const authorizationService = new Authorization();
 	let from: string = '/app';
@@ -51,9 +60,8 @@ export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 	if (location.state) from = location.state.from?.pathname;
 
 	useEffect(() => {
-		const lsUser = localStorage.getItem('user');
-		if (!lsUser) signOut();
-		else setUser(user);
+		if (!userLS) signOut();
+		else setUser(userLS);
 	}, []);
 
 	const signIn = async (data: tLoginUserData) => {
@@ -61,7 +69,7 @@ export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		if (response.error) return setError(response.message);
 		setUser(response.user);
 		setError('');
-		localStorage.setItem('user', JSON.stringify(response.user));
+		setItem('user', response.user);
 		navigate(from, { replace: true });
 	};
 
@@ -72,10 +80,10 @@ export const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 	};
 
 	const signOut = async () => {
-		localStorage.removeItem('user');
+		removeItem('user');
 		await authorizationService.logout();
 		navigate('/', { replace: true });
-		setUser(undefined);
+		setUser(null);
 	};
 
 	return (
