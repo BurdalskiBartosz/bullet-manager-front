@@ -2,7 +2,17 @@
 	"compilerOptions": {
 		"baseUrl": "src",
 		"paths": {
-			"atoms/*": ["components/atoms/*"]
+			"components": ["components"],
+			"templates/*": ["templates/*"],
+			"assets/*": ["assets/*"],
+			"utils/*": ["utils/*"],
+			"types/*": ["types/*"],
+			"store/*": ["store/*"],
+			"providers/*": ["providers/*"],
+			"styles/*": ["styles/*"],
+			"view/*": ["view/*"],
+			"services/*": ["services/*"],
+			"hooks/*": ["hooks/*"]
 		}
 	}
 }

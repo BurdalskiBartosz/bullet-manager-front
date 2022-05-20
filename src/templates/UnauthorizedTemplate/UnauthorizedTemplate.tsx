@@ -1,6 +1,5 @@
-import React from 'react';
+import { HomeMenu } from 'components';
 import { Outlet } from 'react-router-dom';
-import { HomeMenu } from '../../components';
 
 const UnauthorizedTemplate = () => {
 	return (

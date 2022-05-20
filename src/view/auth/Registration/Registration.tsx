@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../../providers/AuthProvider';
-import { tRegistrationUserData } from '../../../types/forms/authForm';
+import { useAuth } from 'providers/AuthProvider';
+import { tRegistrationUserData } from 'types/forms/authForm';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Button, Font, Input, Link } from '../../../components';
+import { Button, Font, Input, Link } from 'components';
 import {
 	StyledErrorBar,
 	StyledForm,
 	StyledTextUnderForm
-} from '../../../styles/shared/auth';
+} from 'styles/shared/auth';
 
 const validationSchema = yup.object().shape({
 	email: yup.string().required(),

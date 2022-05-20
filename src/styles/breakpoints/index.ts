@@ -1,4 +1,4 @@
-import { tIndexSignature } from '../../types/shared';
+import { tIndexSignature } from 'types/shared';
 import { gridBreakpoints } from '../variables/grid';
 
 export const media = Object.entries(gridBreakpoints).reduce(

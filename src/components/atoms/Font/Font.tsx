@@ -1,7 +1,7 @@
 import { CSSProperties, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { tTags, tVariants, variants } from '../../../styles/typography';
+import { tTags, tVariants, variants } from 'styles/typography';
 
 type Props = {
 	children: string | string[];
