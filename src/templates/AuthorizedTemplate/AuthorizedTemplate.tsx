@@ -1,6 +1,5 @@
 import { SideMenu } from 'components';
 import { FC } from 'react';
-import { SideMenu } from '../../components';
 import { Wrapper } from './AuthorizedTemplate.styles';
 import Circles from './_components/Circles';
 
