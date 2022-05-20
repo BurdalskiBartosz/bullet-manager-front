@@ -4,9 +4,11 @@ import {
 	StyledLogo,
 	NavLogoWrapper,
 	StyledList,
-	StyledListItem
+	StyledListItem,
+	BottomSideMenu
 } from './SideMenu.style';
-import logo from '../../../../assets/images/bullet-manager-logo.png';
+import logo from 'assets/images/bullet-manager-logo.png';
+import { Link as MyLink } from 'components';
 import { Link } from 'react-router-dom';
 
 type Props = {};
@@ -31,6 +33,10 @@ const SideMenu: FC<Props> = () => {
 					<StyledListItem>Projekty</StyledListItem>
 				</StyledList>
 			</nav>
+			<BottomSideMenu>
+				<MyLink link="#">Zaproś użytkownika</MyLink>
+				<MyLink link="#">Pomoc</MyLink>
+			</BottomSideMenu>
 		</Wrapper>
 	);
 };

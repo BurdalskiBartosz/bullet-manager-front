@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
 	position: fixed;
 	padding: 2rem;
 	top: 20px;
@@ -27,4 +29,10 @@ export const StyledList = styled.ul`
 `;
 export const StyledListItem = styled.li`
 	margin-bottom: 1rem;
+`;
+
+export const BottomSideMenu = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-top: auto;
 `;
