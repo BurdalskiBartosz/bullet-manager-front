@@ -4,7 +4,7 @@ import {
 	StyledLogo,
 	StyledWrapper
 } from './AuthorizationTemplate.styles';
-import logo from '../../assets/images/bullet-manager-logo.png';
+import logo from 'assets/images/bullet-manager-logo.png';
 
 const AuthorizationTemplate = () => {
 	return (

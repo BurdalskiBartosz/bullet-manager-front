@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import icons from '../../../assets/svgs';
+import icons from 'assets/svgs';
 
 export type tIconNames = 'password' | 'show_password';
 

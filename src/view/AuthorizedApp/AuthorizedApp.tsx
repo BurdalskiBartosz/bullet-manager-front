@@ -1,8 +1,8 @@
+import { Font } from 'components';
 import { Route, Routes } from 'react-router-dom';
-import { Font } from '../../components';
-import { useAuth } from '../../providers/AuthProvider';
-import AuthorizedTemplate from '../../templates/AuthorizedTemplate/AuthorizedTemplate';
-import Dashboard from '../Dashboard/Dashboard';
+import { useAuth } from 'providers/AuthProvider';
+import AuthorizedTemplate from 'templates/AuthorizedTemplate/AuthorizedTemplate';
+import Dashboard from 'view/Dashboard/Dashboard';
 
 const AuthorizedApp = () => {
 	const auth = useAuth();
