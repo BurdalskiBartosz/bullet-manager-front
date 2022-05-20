@@ -7,9 +7,9 @@ import {
 	useState
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import Authorization from '../services/authorization/authorization';
-import { tLoginUserData, tRegistrationUserData } from '../types/forms/authForm';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import Authorization from 'services/authorization/authorization';
+import { tLoginUserData, tRegistrationUserData } from 'types/forms/authForm';
 
 type tUser = {
 	id: number;

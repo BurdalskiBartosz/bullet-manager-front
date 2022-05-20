@@ -1,4 +1,4 @@
-import { tGenericIndexSignature } from '../../types/shared';
+import { tGenericIndexSignature } from 'types/shared';
 import { media } from '../breakpoints';
 import { colors } from '../variables/colors';
 
