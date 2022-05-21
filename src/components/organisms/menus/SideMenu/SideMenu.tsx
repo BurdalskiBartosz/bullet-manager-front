@@ -5,11 +5,12 @@ import {
 	NavLogoWrapper,
 	StyledList,
 	StyledListItem,
-	BottomSideMenu
+	BottomSideMenu,
+	BottomLink
 } from './SideMenu.style';
 import logo from 'assets/images/bullet-manager-logo.png';
-import { Link as MyLink } from 'components';
 import { Link } from 'react-router-dom';
+import Font from 'components/atoms/Font';
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const SideMenu: FC<Props> = () => {
 	return (
 		<Wrapper>
 			<NavLogoWrapper>
-				<Link to="/">
+				<Link to="/app/dashboard">
 					<StyledLogo src={logo} alt="" title="" />
 				</Link>
 			</NavLogoWrapper>
@@ -34,8 +35,12 @@ const SideMenu: FC<Props> = () => {
 				</StyledList>
 			</nav>
 			<BottomSideMenu>
-				<MyLink link="#">Zaproś użytkownika</MyLink>
-				<MyLink link="#">Pomoc</MyLink>
+				<BottomLink to="/app/dashboard">
+					<Font component="span">Zaproś użytkownika</Font>
+				</BottomLink>
+				<BottomLink to="/app/dashboard">
+					<Font component="span">Pomoc</Font>
+				</BottomLink>
 			</BottomSideMenu>
 		</Wrapper>
 	);
