@@ -8,4 +8,5 @@ export { default as Link } from './atoms/Link';
 // molecules
 
 // organism
-export { default as HomeMenu } from './organisms/HomeMenu';
+export { default as HomeMenu } from './organisms/menus/HomeMenu';
+export { default as SideMenu } from './organisms/menus/SideMenu';

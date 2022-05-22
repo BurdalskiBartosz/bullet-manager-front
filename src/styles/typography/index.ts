@@ -13,7 +13,7 @@ type tTypography<T> = {
 	};
 };
 
-export type tTags = 'h1' | 'h2' | 'h3' | 'p' | 'label';
+export type tTags = 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'label';
 
 export type tVariants = 'header' | 'label' | 'inputError';
 

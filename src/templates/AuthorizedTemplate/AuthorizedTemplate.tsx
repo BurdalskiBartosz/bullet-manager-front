@@ -11,6 +11,7 @@ const AuthorizedTemplate: FC<Props> = ({ children }) => {
 	return (
 		<Wrapper>
 			<Circles />
+			<SideMenu />
 			{children}
 		</Wrapper>
 	);
