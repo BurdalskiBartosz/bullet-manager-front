@@ -4,11 +4,9 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	position: fixed;
-	top: 20px;
-	left: 15px;
+	position: relative;
 	width: 240px;
-	min-height: calc(100vh - 40px);
+	height: calc(100vh - 40px);
 	background-color: ${({ theme }) => theme.colors.light};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	box-shadow: ${({ theme }) => theme.shadows.primary};
