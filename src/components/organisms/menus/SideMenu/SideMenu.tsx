@@ -15,7 +15,52 @@ import Font from 'components/atoms/Font';
 
 type Props = {};
 
+const menuItems = [
+	{
+		path: '/dashboard',
+		name: 'Dashboard'
+	},
+	{
+		path: '/tasks',
+		name: 'Tasks'
+	},
+	{
+		path: '/notes',
+		name: 'Notes'
+	},
+	{
+		path: '/lists',
+		name: 'Lists'
+	},
+	{
+		path: '/schedules',
+		name: 'Schedules'
+	},
+	{
+		path: '/goals',
+		name: 'Goals'
+	},
+	{
+		path: '/calendar',
+		name: 'Calendar'
+	},
+	{
+		path: '/projects',
+		name: 'Projects'
+	}
+];
+
 const SideMenu: FC<Props> = () => {
+	const getMenuList = () =>
+		menuItems.map((item) => {
+			return (
+				<StyledListItem key={item.name}>
+					<MenuLink to={`/app${item.path}`}>
+						<Font variant="menu">{item.name}</Font>
+					</MenuLink>
+				</StyledListItem>
+			);
+		});
 	return (
 		<Wrapper>
 			<NavLogoWrapper>
@@ -24,39 +69,14 @@ const SideMenu: FC<Props> = () => {
 				</Link>
 			</NavLogoWrapper>
 			<nav>
-				<StyledList>
-					<StyledListItem>
-						<MenuLink to="/app/dashboard">Dashboard</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/tasks">Zadania</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/notes">Notatki</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/lists">Listy</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/schedules">Harmonogramy</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/goals">Cele</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/calendar">Kalendarz</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/projects">Projekty</MenuLink>
-					</StyledListItem>
-				</StyledList>
+				<StyledList>{getMenuList()}</StyledList>
 			</nav>
 			<BottomSideMenu>
 				<BottomLink to="/app">
-					<Font component="span">Zaproś użytkownika</Font>
+					<Font variant="menu">Invite a user</Font>
 				</BottomLink>
 				<BottomLink to="/app">
-					<Font component="span">Pomoc</Font>
+					<Font variant="menu">Help</Font>
 				</BottomLink>
 			</BottomSideMenu>
 		</Wrapper>
