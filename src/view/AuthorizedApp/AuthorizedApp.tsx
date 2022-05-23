@@ -7,16 +7,11 @@ import Dashboard from 'view/Dashboard/Dashboard';
 const AuthorizedApp = () => {
 	const auth = useAuth();
 
-	const logout = () => {
-		auth.signOut();
-	};
-
 	return (
 		<AuthorizedTemplate>
-			<button onClick={logout}>Wyloguj się </button>
 			<div>
 				<Routes>
-					<Route path="/" element={<Dashboard />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 				</Routes>
 			</div>
 			<Font

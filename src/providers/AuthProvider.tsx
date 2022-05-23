@@ -55,7 +55,7 @@ export const AuthProvider: FC<ReactNode> = ({ children }) => {
 	);
 
 	const authorizationService = new Authorization();
-	let from: string = '/app';
+	let from: string = '/app/dashboard';
 
 	if (location.state) from = location.state.from?.pathname;
 
