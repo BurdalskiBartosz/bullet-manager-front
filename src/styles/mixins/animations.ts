@@ -11,7 +11,7 @@ export const animations = {
 			width: 100%;
 			height: 100%;
 			background-color: ${color};
-			z-index: -1;
+			z-index: 1;
 			opacity: 0;
 			transition: 0.3s linear;
 		}
