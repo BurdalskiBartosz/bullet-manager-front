@@ -1,3 +1,5 @@
+import Font from 'components/atoms/Font';
+import Icon from 'components/atoms/Icon';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BreadLink, Wrapper } from './Breadcrumbs.style';
@@ -23,8 +25,14 @@ const Breadcrumbs: FC<Props> = () => {
 						to={`/app${link}`}
 						style={{ color: 'white' }}
 					>
-						{routeName}
-						{isLast && '>'}
+						<Font style={{ marginRight: '1rem' }}>{routeName}</Font>
+						{isLast && (
+							<Icon
+								fill="#FFF"
+								iconName="arrow_right"
+								height="15"
+							/>
+						)}
 					</BreadLink>
 				);
 			});
