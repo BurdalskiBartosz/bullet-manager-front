@@ -13,3 +13,7 @@ export const Wrapper = styled.div`
 	box-shadow: ${({ theme }) => theme.shadows.secondary};
 	overflow: hidden;
 `;
+
+export const InnerWrapper = styled.div`
+	display: flex;
+`;

@@ -1,7 +1,8 @@
 import Breadcrumbs from 'components/molecules/Breadcrumbs';
+import SearchInput from 'components/molecules/SearchInput';
 import { useAuth } from 'providers/AuthProvider';
 import { FC } from 'react';
-import { Wrapper } from './TopMenu.style';
+import { InnerWrapper, Wrapper } from './TopMenu.style';
 
 type Props = {};
 
@@ -11,7 +12,10 @@ const TopMenu: FC<Props> = () => {
 	return (
 		<Wrapper>
 			<Breadcrumbs />
-			<button onClick={auth.signOut}>Wyloguj się</button>
+			<InnerWrapper>
+				<SearchInput />
+				<button onClick={auth.signOut}>Wyloguj się</button>
+			</InnerWrapper>
 		</Wrapper>
 	);
 };
