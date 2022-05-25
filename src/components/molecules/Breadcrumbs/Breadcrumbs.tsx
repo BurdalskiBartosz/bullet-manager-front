@@ -1,7 +1,7 @@
-import Font from 'components/atoms/Font';
-import Icon from 'components/atoms/Icon';
+import { Font, Icon } from 'components';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
+import { appRootRoute } from 'utils/constants';
 import { BreadLink, Wrapper } from './Breadcrumbs.style';
 
 type Props = {};
@@ -12,7 +12,7 @@ const Breadcrumbs: FC<Props> = () => {
 	const getPaths = () => {
 		const pathnames = mockedPathname
 			.split('/')
-			.filter((el) => el && el !== 'app')
+			.filter((el) => el && el !== appRootRoute)
 			.map((el, i, arr) => {
 				const link = arr
 					.slice(0, i + 1)
@@ -22,7 +22,7 @@ const Breadcrumbs: FC<Props> = () => {
 				return (
 					<BreadLink
 						key={routeName}
-						to={`/app${link}`}
+						to={`/${appRootRoute}${link}`}
 						style={{ color: 'white' }}
 					>
 						<Font style={{ marginRight: '1rem' }}>{routeName}</Font>

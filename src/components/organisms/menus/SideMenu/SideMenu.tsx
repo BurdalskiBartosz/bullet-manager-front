@@ -12,6 +12,7 @@ import {
 import logo from 'assets/images/bullet-manager-logo.png';
 import { Link } from 'react-router-dom';
 import Font from 'components/atoms/Font';
+import { appRootRoute } from 'utils/constants';
 
 type Props = {};
 
@@ -55,7 +56,7 @@ const SideMenu: FC<Props> = () => {
 		menuItems.map((item) => {
 			return (
 				<StyledListItem key={item.name}>
-					<MenuLink to={`/app${item.path}`}>
+					<MenuLink to={`/${appRootRoute}${item.path}`}>
 						<Font variant="menu">{item.name}</Font>
 					</MenuLink>
 				</StyledListItem>
@@ -64,7 +65,7 @@ const SideMenu: FC<Props> = () => {
 	return (
 		<Wrapper>
 			<NavLogoWrapper>
-				<Link to="/app">
+				<Link to={`/${appRootRoute}`}>
 					<StyledLogo src={logo} alt="" title="" />
 				</Link>
 			</NavLogoWrapper>
@@ -72,10 +73,10 @@ const SideMenu: FC<Props> = () => {
 				<StyledList>{getMenuList()}</StyledList>
 			</nav>
 			<BottomSideMenu>
-				<BottomLink to="/app">
+				<BottomLink to={`/${appRootRoute}`}>
 					<Font variant="menu">Invite a user</Font>
 				</BottomLink>
-				<BottomLink to="/app">
+				<BottomLink to={`/${appRootRoute}`}>
 					<Font variant="menu">Help</Font>
 				</BottomLink>
 			</BottomSideMenu>
