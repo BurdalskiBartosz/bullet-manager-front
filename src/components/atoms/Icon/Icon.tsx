@@ -5,7 +5,8 @@ export type tIconNames =
 	| 'password'
 	| 'show_password'
 	| 'magnifier'
-	| 'arrow_right';
+	| 'arrow_right'
+	| 'add';
 
 export type tIcon = {
 	iconName: tIconNames;

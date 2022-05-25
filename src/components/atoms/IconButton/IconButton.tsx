@@ -1,21 +1,31 @@
 import { FC } from 'react';
-import Icon, { tIconNames } from '../Icon/Icon';
+import Icon, { tIcon } from '../Icon/Icon';
 import { StyledIconButton } from './IconButton.styles';
 
 type Props = {
 	fn?: Function;
-	icon: tIconNames;
-	className?: string;
-};
+} & tIcon;
 
-const IconButton: FC<Props> = ({ icon, fn = () => {}, className }) => {
+const IconButton: FC<Props> = ({
+	iconName,
+	fill,
+	fn = () => {},
+	className,
+	width = '20px',
+	height = '20px'
+}) => {
 	return (
 		<StyledIconButton
 			className={className}
 			type="button"
 			onClick={() => fn()}
 		>
-			<Icon iconName={icon} width="20px" height="20px" />
+			<Icon
+				iconName={iconName}
+				fill={fill}
+				width={width}
+				height={height}
+			/>
 		</StyledIconButton>
 	);
 };
