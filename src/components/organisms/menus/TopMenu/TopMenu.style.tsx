@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+type tDropDownTop = {
+	backgroundColor?: string;
+	border?: boolean;
+};
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -11,9 +16,33 @@ export const Wrapper = styled.div`
 	background-color: rgba(255, 255, 255, 15%);
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	box-shadow: ${({ theme }) => theme.shadows.secondary};
-	overflow: hidden;
 `;
 
 export const InnerWrapper = styled.div`
 	display: flex;
+	& > * {
+		margin-left: 2rem;
+	}
+`;
+
+export const DropdownTop = styled.span<tDropDownTop>`
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	${({ border, theme }) =>
+		border &&
+		css`
+			border: 1px solid ${theme.colors.primaryFont};
+		`}
+	${({ backgroundColor, theme }) =>
+		backgroundColor
+			? css`
+					background-color: ${backgroundColor};
+			  `
+			: css`
+					background-color: ${theme.colors.buttonSuccess};
+			  `}
 `;
