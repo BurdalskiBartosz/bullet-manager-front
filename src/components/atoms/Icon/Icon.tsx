@@ -6,7 +6,13 @@ export type tIconNames =
 	| 'show_password'
 	| 'magnifier'
 	| 'arrow_right'
-	| 'add';
+	| 'add'
+	| 'goal'
+	| 'note'
+	| 'project'
+	| 'schedule'
+	| 'list'
+	| 'task';
 
 export type tIcon = {
 	iconName: tIconNames;
@@ -16,7 +22,13 @@ export type tIcon = {
 	className?: string;
 };
 
-const Icon: FC<tIcon> = ({ iconName, fill, width, height, className }) => {
+const Icon: FC<tIcon> = ({
+	iconName,
+	fill,
+	width = '20px',
+	height = '20px',
+	className
+}) => {
 	const IconComponent = icons[iconName];
 
 	if (!IconComponent) return null;
