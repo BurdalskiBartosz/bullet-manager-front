@@ -3,6 +3,11 @@ export const animations = {
 		position: relative;
 		color: ${color};
 		transition: 0.2s linear;
+		svg {
+			position: relative;
+			z-index: 1;
+			transition: 0.2s linear;
+		}
 		&::before {
 			content: '';
 			position: absolute;
@@ -19,6 +24,9 @@ export const animations = {
 			color: ${secondColor};
 			&::before {
 				opacity: .7;
+			}
+			svg {
+				fill: ${secondColor};
 			}
 		}
 	`

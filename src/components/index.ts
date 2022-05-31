@@ -8,6 +8,7 @@ export { default as Link } from './atoms/Link';
 // molecules
 export { default as Breadcrumbs } from './molecules/Breadcrumbs';
 export { default as SearchInput } from './molecules/SearchInput';
+export { default as ListLink } from './molecules/ListLink';
 // organism
 export { default as HomeMenu } from './organisms/menus/HomeMenu';
 export { default as SideMenu } from './organisms/menus/SideMenu';
