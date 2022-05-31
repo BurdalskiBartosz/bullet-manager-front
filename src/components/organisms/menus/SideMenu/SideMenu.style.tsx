@@ -22,27 +22,14 @@ export const NavLogoWrapper = styled.div`
 	padding: 2rem;
 `;
 
-export const StyledNav = styled.nav``;
 export const StyledList = styled.ul`
 	list-style: none;
-`;
-export const StyledListItem = styled.li`
-	cursor: pointer;
 `;
 
 export const BottomSideMenu = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: auto;
-`;
-
-export const MenuLink = styled(Link)`
-	display: block;
-	color: ${({ theme }) => theme.colors.primaryFont};
-	text-decoration: none;
-	padding: 0.5rem 0 0.5rem 2rem;
-	${({ theme: { animations, colors } }) =>
-		animations.menuTransition(colors.primaryFont, colors.light)}
 `;
 
 export const BottomLink = styled(Link)`

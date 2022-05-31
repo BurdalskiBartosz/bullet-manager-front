@@ -4,64 +4,71 @@ import {
 	StyledLogo,
 	NavLogoWrapper,
 	StyledList,
-	StyledListItem,
 	BottomSideMenu,
-	BottomLink,
-	MenuLink
+	BottomLink
 } from './SideMenu.style';
 import logo from 'assets/images/bullet-manager-logo.png';
 import { Link } from 'react-router-dom';
 import Font from 'components/atoms/Font';
 import { appRootRoute } from 'utils/constants';
+import ListLink from 'components/molecules/ListLink';
+import { tIconNames } from 'components/atoms/Icon/Icon';
 
 type Props = {};
 
 const menuItems = [
 	{
 		path: '/dashboard',
-		name: 'Dashboard'
+		name: 'Dashboard',
+		icon: 'dashboard'
 	},
 	{
 		path: '/tasks',
-		name: 'Tasks'
+		name: 'Tasks',
+		icon: 'task'
 	},
 	{
 		path: '/notes',
-		name: 'Notes'
+		name: 'Notes',
+		icon: 'note'
 	},
 	{
 		path: '/lists',
-		name: 'Lists'
+		name: 'Lists',
+		icon: 'list'
 	},
 	{
 		path: '/schedules',
-		name: 'Schedules'
+		name: 'Schedules',
+		icon: 'schedule'
 	},
 	{
 		path: '/goals',
-		name: 'Goals'
+		name: 'Goals',
+		icon: 'goal'
 	},
 	{
 		path: '/calendar',
-		name: 'Calendar'
+		name: 'Calendar',
+		icon: 'calendar'
 	},
 	{
 		path: '/projects',
-		name: 'Projects'
+		name: 'Projects',
+		icon: 'project'
 	}
 ];
 
 const SideMenu: FC<Props> = () => {
 	const getMenuList = () =>
-		menuItems.map((item) => {
-			return (
-				<StyledListItem key={item.name}>
-					<MenuLink to={`/${appRootRoute}${item.path}`}>
-						<Font variant="menu">{item.name}</Font>
-					</MenuLink>
-				</StyledListItem>
-			);
-		});
+		menuItems.map((item) => (
+			<ListLink
+				key={`/${appRootRoute}${item.path}`}
+				link={`/${appRootRoute}${item.path}`}
+				iconName={item.icon as tIconNames}
+				text={item.name}
+			/>
+		));
 	return (
 		<Wrapper>
 			<NavLogoWrapper>
