@@ -17,7 +17,5 @@ export const DropdownBody = styled.div`
 	top: calc(100% + 30px);
 	width: 200px;
 	background-color: ${({ theme }) => theme.colors.light};
-	border: 1px solid ${({ theme }) => theme.colors.primaryFont};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
-	padding: 1rem;
 `;

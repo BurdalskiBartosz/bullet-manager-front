@@ -6,7 +6,12 @@ type Props = {};
 const SearchInput: FC<Props> = () => {
 	return (
 		<Wrapper>
-			<StyledIcon iconName="magnifier" width="18.5" height="18.5" />
+			<StyledIcon
+				iconName="magnifier"
+				width="18.5"
+				height="18.5"
+				viewBox="0 0 18.5 18.5"
+			/>
 			<StyledInput type="text" placeholder="Wyszukaj" />
 		</Wrapper>
 	);
