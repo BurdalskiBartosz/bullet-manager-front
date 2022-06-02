@@ -4,59 +4,87 @@ import {
 	StyledLogo,
 	NavLogoWrapper,
 	StyledList,
-	StyledListItem,
 	BottomSideMenu,
-	BottomLink,
-	MenuLink
+	BottomLink
 } from './SideMenu.style';
 import logo from 'assets/images/bullet-manager-logo.png';
 import { Link } from 'react-router-dom';
 import Font from 'components/atoms/Font';
+import { appRootRoute } from 'utils/constants';
+import ListLink from 'components/molecules/ListLink';
+import { tIconNames } from 'components/atoms/Icon/Icon';
 
 type Props = {};
 
+const menuItems = [
+	{
+		path: '/dashboard',
+		name: 'Dashboard',
+		icon: 'dashboard'
+	},
+	{
+		path: '/tasks',
+		name: 'Tasks',
+		icon: 'task'
+	},
+	{
+		path: '/notes',
+		name: 'Notes',
+		icon: 'note'
+	},
+	{
+		path: '/lists',
+		name: 'Lists',
+		icon: 'list'
+	},
+	{
+		path: '/schedules',
+		name: 'Schedules',
+		icon: 'schedule'
+	},
+	{
+		path: '/goals',
+		name: 'Goals',
+		icon: 'goal'
+	},
+	{
+		path: '/calendar',
+		name: 'Calendar',
+		icon: 'calendar'
+	},
+	{
+		path: '/projects',
+		name: 'Projects',
+		icon: 'project'
+	}
+];
+
 const SideMenu: FC<Props> = () => {
+	const getMenuList = () =>
+		menuItems.map((item) => (
+			<ListLink
+				key={`/${appRootRoute}${item.path}`}
+				link={`/${appRootRoute}${item.path}`}
+				iconName={item.icon as tIconNames}
+				text={item.name}
+			/>
+		));
 	return (
 		<Wrapper>
 			<NavLogoWrapper>
-				<Link to="/app">
+				<Link to={`/${appRootRoute}`}>
 					<StyledLogo src={logo} alt="" title="" />
 				</Link>
 			</NavLogoWrapper>
 			<nav>
-				<StyledList>
-					<StyledListItem>
-						<MenuLink to="/app/dashboard">Dashboard</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/tasks">Zadania</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/notes">Notatki</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/lists">Listy</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/schedules">Harmonogramy</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/goals">Cele</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/calendar">Kalendarz</MenuLink>
-					</StyledListItem>
-					<StyledListItem>
-						<MenuLink to="/app/projects">Projekty</MenuLink>
-					</StyledListItem>
-				</StyledList>
+				<StyledList>{getMenuList()}</StyledList>
 			</nav>
 			<BottomSideMenu>
-				<BottomLink to="/app">
-					<Font component="span">Zaproś użytkownika</Font>
+				<BottomLink to={`/${appRootRoute}`}>
+					<Font variant="menu">Invite a user</Font>
 				</BottomLink>
-				<BottomLink to="/app">
-					<Font component="span">Pomoc</Font>
+				<BottomLink to={`/${appRootRoute}`}>
+					<Font variant="menu">Help</Font>
 				</BottomLink>
 			</BottomSideMenu>
 		</Wrapper>

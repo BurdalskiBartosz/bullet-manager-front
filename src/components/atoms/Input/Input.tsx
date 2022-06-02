@@ -42,7 +42,9 @@ const Input: FC<Props> = ({ id, label, type = 'text', register, error }) => {
 				/>
 				{type === 'password' && (
 					<StyledIconButton
-						icon={isPasswordVisible ? 'show_password' : 'password'}
+						iconName={
+							isPasswordVisible ? 'show_password' : 'password'
+						}
 						fn={showPassword}
 					/>
 				)}

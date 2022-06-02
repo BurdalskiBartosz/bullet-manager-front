@@ -1,6 +1,7 @@
 import { SideMenu } from 'components';
+import TopMenu from 'components/organisms/menus/TopMenu';
 import { FC } from 'react';
-import { Wrapper } from './AuthorizedTemplate.styles';
+import { Main, Wrapper } from './AuthorizedTemplate.styles';
 import Circles from './_components/Circles';
 
 type Props = {
@@ -11,8 +12,13 @@ const AuthorizedTemplate: FC<Props> = ({ children }) => {
 	return (
 		<Wrapper>
 			<Circles />
-			<SideMenu />
-			{children}
+			<Main>
+				<SideMenu />
+				<div>
+					<TopMenu />
+					{children}
+				</div>
+			</Main>
 		</Wrapper>
 	);
 };

@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 import Authorization from 'services/authorization/authorization';
 import { tLoginUserData, tRegistrationUserData } from 'types/forms/authForm';
+import { appRootRoute } from 'utils/constants';
 
 type tUser = {
 	id: number;
@@ -55,7 +56,7 @@ export const AuthProvider: FC<ReactNode> = ({ children }) => {
 	);
 
 	const authorizationService = new Authorization();
-	let from: string = '/app';
+	let from: string = `/${appRootRoute}/dashboard`;
 
 	if (location.state) from = location.state.from?.pathname;
 
