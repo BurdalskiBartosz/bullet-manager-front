@@ -11,6 +11,8 @@ import { ReactComponent as task } from './icons/task.svg';
 import { ReactComponent as list } from './icons/list.svg';
 import { ReactComponent as dashboard } from './icons/dashboard.svg';
 import { ReactComponent as calendar } from './icons/calendar.svg';
+import { ReactComponent as settings } from './icons/settings.svg';
+import { ReactComponent as account } from './icons/account.svg';
 
 const icons = {
 	password,
@@ -25,6 +27,8 @@ const icons = {
 	task,
 	list,
 	dashboard,
-	calendar
+	calendar,
+	settings,
+	account
 };
 export default icons;

@@ -12,6 +12,8 @@ export type tIconNames =
 	| 'project'
 	| 'schedule'
 	| 'list'
+	| 'account'
+	| 'settings'
 	| 'task';
 
 export type tIcon = {
@@ -39,6 +41,7 @@ const Icon: FC<tIcon> = ({
 			fill={fill}
 			width={width}
 			height={height}
+			viewBox="0 0 24 24"
 		/>
 	);
 };
