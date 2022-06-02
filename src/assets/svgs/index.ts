@@ -13,6 +13,7 @@ import { ReactComponent as dashboard } from './icons/dashboard.svg';
 import { ReactComponent as calendar } from './icons/calendar.svg';
 import { ReactComponent as settings } from './icons/settings.svg';
 import { ReactComponent as account } from './icons/account.svg';
+import { ReactComponent as logout } from './icons/logout.svg';
 
 const icons = {
 	password,
@@ -29,6 +30,7 @@ const icons = {
 	dashboard,
 	calendar,
 	settings,
+	logout,
 	account
 };
 export default icons;

@@ -18,6 +18,11 @@ export const Wrapper = styled.div`
 	box-shadow: ${({ theme }) => theme.shadows.secondary};
 `;
 
+export const FormDateWrapper = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
 export const InnerWrapper = styled.div`
 	display: flex;
 	& > * {
@@ -45,4 +50,9 @@ export const DropdownTop = styled.span<tDropDownTop>`
 			: css`
 					background-color: ${theme.colors.buttonSuccess};
 			  `}
+`;
+
+export const StyledUl = styled.ul`
+	list-style: none;
+	padding: 1rem 0;
 `;
