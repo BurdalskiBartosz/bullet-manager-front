@@ -1,21 +1,35 @@
 import { tIconNames } from 'components/atoms/Icon/Icon';
 import { FC } from 'react';
 import Font from 'components/atoms/Font';
-import { StyledIcon, StyledLi, StyledLink } from './ListLink.style';
+import {
+	StyledIcon,
+	StyledLi,
+	StyledLink,
+	StyledLinkWithFn
+} from './ListLink.style';
 
 type Props = {
 	iconName: tIconNames;
-	link: string;
 	text: string;
+	link?: string;
+	fn?: Function;
 };
 
-const ListLink: FC<Props> = ({ iconName, link, text }) => {
+const ListLink: FC<Props> = ({ iconName, link, text, fn }) => {
 	return (
 		<StyledLi>
-			<StyledLink to={link}>
-				<StyledIcon iconName={iconName} />
-				<Font variant="menu">{text}</Font>
-			</StyledLink>
+			{link && (
+				<StyledLink to={link}>
+					<StyledIcon iconName={iconName} />
+					<Font variant="menu">{text}</Font>
+				</StyledLink>
+			)}
+			{fn && (
+				<StyledLinkWithFn onClick={() => fn()}>
+					<StyledIcon iconName={iconName} />
+					<Font variant="menu">{text}</Font>
+				</StyledLinkWithFn>
+			)}
 		</StyledLi>
 	);
 };
