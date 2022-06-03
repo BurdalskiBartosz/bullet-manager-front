@@ -41,12 +41,7 @@ const TopMenu: FC<Props> = () => {
 				<Dropdown
 					dropdownTop={
 						<DropdownTop>
-							<Icon
-								iconName="add"
-								width="30"
-								height="30"
-								fill="#FFF"
-							/>
+							<Icon iconName="add" fill="#FFF" />
 						</DropdownTop>
 					}
 					dropdownBody={

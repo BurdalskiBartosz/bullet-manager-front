@@ -23,7 +23,6 @@ export type tIcon = {
 	width?: string;
 	height?: string;
 	className?: string;
-	viewBox?: string;
 };
 
 const Icon: FC<tIcon> = ({
@@ -31,8 +30,7 @@ const Icon: FC<tIcon> = ({
 	fill,
 	width = '20px',
 	height = '20px',
-	className,
-	viewBox = '0 0 24 24'
+	className
 }) => {
 	const IconComponent = icons[iconName];
 
@@ -44,7 +42,6 @@ const Icon: FC<tIcon> = ({
 			fill={fill}
 			width={width}
 			height={height}
-			viewBox={viewBox}
 		/>
 	);
 };
