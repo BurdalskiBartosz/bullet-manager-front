@@ -1,3 +1,3 @@
 export const sizes = {
-	borderRadius: '10px'
+	borderRadius: '15px'
 };

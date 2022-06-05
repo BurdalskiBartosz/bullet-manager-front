@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import AuthorizationTemplate from 'templates/AuthorizationTemplate/AuthorizationTemplate';
 import UnauthorizedTemplate from 'templates/UnauthorizedTemplate/UnauthorizedTemplate';
+import { appRootRoute } from 'utils/constants';
 import Login from 'view/auth/Login/Login';
 import Registration from 'view/auth/Registration/Registration';
 import AuthorizedApp from 'view/AuthorizedApp/AuthorizedApp';
@@ -18,7 +19,7 @@ const Router = () => {
 				<Route path="/registration" element={<Registration />} />
 			</Route>
 			<Route
-				path="/app/*"
+				path={`/${appRootRoute}/*`}
 				element={
 					<PrivateRoute>
 						<AuthorizedApp />

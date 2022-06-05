@@ -6,5 +6,6 @@ export const colors = {
 	lightGray: '#B7B7B7',
 	danger: '#D14D3A',
 	success: '#A7E825',
+	buttonSuccess: '#44DB42',
 	authBackground: '#1C1A1A'
 };
