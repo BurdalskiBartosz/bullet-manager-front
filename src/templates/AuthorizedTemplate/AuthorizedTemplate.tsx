@@ -5,7 +5,7 @@ import { Main, Wrapper } from './AuthorizedTemplate.styles';
 import Circles from './_components/Circles';
 
 type Props = {
-	children: React.ReactNode[];
+	children: React.ReactNode[] | React.ReactNode;
 };
 
 const AuthorizedTemplate: FC<Props> = ({ children }) => {
