@@ -1,6 +1,6 @@
-import { tIconNames } from 'components/atoms/Icon/Icon';
 import { FC } from 'react';
-import Font from 'components/atoms/Font';
+import { tIconNames } from 'components/atoms/Icon/Icon';
+import { Font } from 'components';
 import {
 	StyledIcon,
 	StyledLi,
