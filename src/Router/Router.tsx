@@ -8,6 +8,7 @@ import Home from 'view/webpages/Home/Home';
 import PrivateRoute from 'view/PrivateRoute';
 import AppTemplate from 'templates/AppTemplate/AppTemplate';
 import Dashboard from 'view/apppages/Dashboard/Dashboard';
+import Tasks from 'view/Tasks/Tasks';
 
 const Router = () => {
 	return (
@@ -28,6 +29,7 @@ const Router = () => {
 				}
 			>
 				<Route path="dashboard" element={<Dashboard />} />
+				<Route path="tasks" element={<Tasks />} />
 			</Route>
 		</Routes>
 	);
