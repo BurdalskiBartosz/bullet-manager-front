@@ -1,7 +1,7 @@
-import { Font, Icon } from 'components';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { appRootRoute } from 'utils/constants';
+import { Font, Icon } from 'components';
 import { BreadLink, Wrapper } from './Breadcrumbs.style';
 
 type Props = {};

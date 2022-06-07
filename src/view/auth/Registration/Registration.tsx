@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'providers/AuthProvider';
-import { tRegistrationUserData } from 'types/forms/authForm';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import { useAuth } from 'providers/AuthProvider';
+import { tRegistrationUserData } from 'types/forms/authForm';
 import { Button, Font, Input, Link } from 'components';
 import {
 	StyledErrorBar,

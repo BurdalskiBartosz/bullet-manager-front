@@ -1,4 +1,4 @@
-import Icon from 'components/atoms/Icon';
+import { Icon } from 'components';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`

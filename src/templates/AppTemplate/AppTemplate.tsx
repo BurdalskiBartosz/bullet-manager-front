@@ -1,7 +1,6 @@
-import { SideMenu } from 'components';
-import TopMenu from 'components/organisms/menus/TopMenu';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import { SideMenu, TopMenu } from 'components';
 import { Main, Wrapper } from './AppTemplate.styles';
 import Circles from './_components/Circles';
 
