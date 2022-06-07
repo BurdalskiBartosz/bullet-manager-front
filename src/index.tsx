@@ -20,7 +20,7 @@ ReactDOM.render(
 		</BrowserRouter>
 		<GlobalStyles />
 	</React.StrictMode>,
-	document.getElementById('root')
+	document.getElementById('bullet-manager')
 );
 
 // If you want to start measuring performance in your app, pass a function
