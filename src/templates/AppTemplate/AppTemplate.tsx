@@ -1,14 +1,13 @@
 import { SideMenu } from 'components';
 import TopMenu from 'components/organisms/menus/TopMenu';
 import { FC } from 'react';
-import { Main, Wrapper } from './AuthorizedTemplate.styles';
+import { Outlet } from 'react-router-dom';
+import { Main, Wrapper } from './AppTemplate.styles';
 import Circles from './_components/Circles';
 
-type Props = {
-	children: React.ReactNode[];
-};
+type Props = {};
 
-const AuthorizedTemplate: FC<Props> = ({ children }) => {
+const AppTemplate: FC<Props> = () => {
 	return (
 		<Wrapper>
 			<Circles />
@@ -16,11 +15,11 @@ const AuthorizedTemplate: FC<Props> = ({ children }) => {
 				<SideMenu />
 				<div>
 					<TopMenu />
-					{children}
+					<Outlet />
 				</div>
 			</Main>
 		</Wrapper>
 	);
 };
 
-export default AuthorizedTemplate;
+export default AppTemplate;

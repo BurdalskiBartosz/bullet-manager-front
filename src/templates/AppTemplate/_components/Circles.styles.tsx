@@ -1,5 +1,34 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+	&::before,
+	&:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 600px;
+		height: 600px;
+		border-radius: 50%;
+		background-color: ${({ theme }) => theme.colors.light};
+		box-shadow: ${({ theme }) => theme.shadows.primary};
+	}
+	&::before {
+		top: 0;
+		transform: translate(50%, -50%);
+	}
+	&::after {
+		bottom: 0;
+		transform: translate(50%, 50%);
+	}
+`;
+
 export const Circle = styled.div`
 	position: absolute;
 	transform: translate(-50%, -50%);

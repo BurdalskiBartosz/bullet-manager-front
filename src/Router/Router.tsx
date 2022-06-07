@@ -1,18 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
-import AuthorizationTemplate from 'templates/AuthorizationTemplate/AuthorizationTemplate';
-import UnauthorizedTemplate from 'templates/UnauthorizedTemplate/UnauthorizedTemplate';
 import { appRootRoute } from 'utils/constants';
+import AuthorizationTemplate from 'templates/AuthorizationTemplate/AuthorizationTemplate';
+import WebpageTemplate from 'templates/WebpageTemplate/WebpageTemplate';
 import Login from 'view/auth/Login/Login';
 import Registration from 'view/auth/Registration/Registration';
-import AuthorizedApp from 'view/AuthorizedApp/AuthorizedApp';
+import Home from 'view/webpages/Home/Home';
 import PrivateRoute from 'view/PrivateRoute';
-import UnauthorizedApp from 'view/UnauthorizedApp/UnauthorizedApp';
+import AppTemplate from 'templates/AppTemplate/AppTemplate';
+import Dashboard from 'view/apppages/Dashboard/Dashboard';
 
 const Router = () => {
 	return (
 		<Routes>
-			<Route element={<UnauthorizedTemplate />}>
-				<Route path="/*" element={<UnauthorizedApp />} />
+			<Route element={<WebpageTemplate />}>
+				<Route path="/" element={<Home />} />
 			</Route>
 			<Route element={<AuthorizationTemplate />}>
 				<Route path="/login" element={<Login />} />
@@ -22,10 +23,12 @@ const Router = () => {
 				path={`/${appRootRoute}/*`}
 				element={
 					<PrivateRoute>
-						<AuthorizedApp />
+						<AppTemplate />
 					</PrivateRoute>
 				}
-			/>
+			>
+				<Route path="dashboard" element={<Dashboard />} />
+			</Route>
 		</Routes>
 	);
 };
