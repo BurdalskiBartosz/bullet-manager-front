@@ -1,7 +1,7 @@
 import { HomeMenu } from 'components';
 import { Outlet } from 'react-router-dom';
 
-const UnauthorizedTemplate = () => {
+const WebpageTemplate = () => {
 	return (
 		<div>
 			<HomeMenu />
@@ -10,4 +10,4 @@ const UnauthorizedTemplate = () => {
 	);
 };
 
-export default UnauthorizedTemplate;
+export default WebpageTemplate;
