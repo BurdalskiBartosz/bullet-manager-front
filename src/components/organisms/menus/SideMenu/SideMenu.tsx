@@ -1,4 +1,8 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { appRootRoute } from 'utils/constants';
+import { tIconNames } from 'components/atoms/Icon/Icon';
+import { Font, ListLink } from 'components';
 import {
 	Wrapper,
 	StyledLogo,
@@ -8,11 +12,6 @@ import {
 	BottomLink
 } from './SideMenu.style';
 import logo from 'assets/images/bullet-manager-logo.png';
-import { Link } from 'react-router-dom';
-import Font from 'components/atoms/Font';
-import { appRootRoute } from 'utils/constants';
-import ListLink from 'components/molecules/ListLink';
-import { tIconNames } from 'components/atoms/Icon/Icon';
 
 type Props = {};
 

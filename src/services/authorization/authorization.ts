@@ -1,5 +1,5 @@
-import { tLoginUserData, tRegistrationUserData } from 'types/forms/authForm';
 import { fetchProvider } from 'utils/Axios';
+import { tLoginUserData, tRegistrationUserData } from 'types/forms/authForm';
 
 class Authorization {
 	async login(userLoginData: tLoginUserData) {

@@ -1,4 +1,3 @@
-import useOnClickOutside from 'hooks/useOnClickOutside';
 import {
 	FC,
 	ReactNode,
@@ -7,6 +6,7 @@ import {
 	useRef,
 	useCallback
 } from 'react';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import { DropdownBody, DropdownButton, Wrapper } from './Dropdown.style';
 
 type Props = {

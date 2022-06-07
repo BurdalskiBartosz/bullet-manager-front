@@ -1,16 +1,16 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './i18n/index';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './providers/AuthProvider';
 import { GlobalStyles } from './styles/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import App from './App';
+import './i18n/index';
 
 ReactDOM.render(
-	<React.StrictMode>
+	<StrictMode>
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
 				<AuthProvider>
@@ -19,7 +19,7 @@ ReactDOM.render(
 			</ThemeProvider>
 		</BrowserRouter>
 		<GlobalStyles />
-	</React.StrictMode>,
+	</StrictMode>,
 	document.getElementById('bullet-manager')
 );
 
