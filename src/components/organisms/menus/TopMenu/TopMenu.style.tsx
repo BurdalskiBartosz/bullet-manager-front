@@ -40,7 +40,7 @@ export const DropdownTop = styled.span<tDropDownTop>`
 	${({ border, theme }) =>
 		border &&
 		css`
-			border: 1px solid ${theme.colors.primaryFont};
+			border: 1px solid ${theme.colors.dark};
 		`}
 	${({ backgroundColor, theme }) =>
 		backgroundColor
@@ -48,7 +48,7 @@ export const DropdownTop = styled.span<tDropDownTop>`
 					background-color: ${backgroundColor};
 			  `
 			: css`
-					background-color: ${theme.colors.buttonSuccess};
+					background-color: ${theme.colors.success100};
 			  `}
 `;
 

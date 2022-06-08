@@ -15,9 +15,9 @@ export const StyledLi = styled.li`
 
 export const StyledLink = styled(Link)`
 	${linkStyles}
-	color: ${({ theme }) => theme.colors.primaryFont};
+	color: ${({ theme }) => theme.colors.dark};
 	${({ theme: { animations, colors } }) =>
-		animations.menuTransition(colors.primaryFont, colors.light)}
+		animations.menuTransition(colors.dark, colors.light)}
 `;
 
 export const StyledLinkWithFn = styled.button`
@@ -27,9 +27,9 @@ export const StyledLinkWithFn = styled.button`
 	border: none;
 	outline: none;
 	background-color: transparent;
-	color: ${({ theme }) => theme.colors.primaryFont};
+	color: ${({ theme }) => theme.colors.dark};
 	${({ theme: { animations, colors } }) =>
-		animations.menuTransition(colors.primaryFont, colors.light)}
+		animations.menuTransition(colors.dark, colors.light)}
 `;
 
 export const StyledIcon = styled(Icon)`

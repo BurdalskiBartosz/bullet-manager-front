@@ -36,8 +36,8 @@ export const BottomLink = styled(Link)`
 	padding: 1.7rem 2rem;
 	text-decoration: none;
 	font-weight: bold;
-	border-top: 1px solid ${({ theme }) => theme.colors.primaryFont};
+	border-top: 1px solid ${({ theme }) => theme.colors.dark};
 
 	${({ theme: { animations, colors } }) =>
-		animations.menuTransition(colors.primaryFont, colors.light)}
+		animations.menuTransition(colors.dark, colors.light)}
 `;
