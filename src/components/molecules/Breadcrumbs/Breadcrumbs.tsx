@@ -8,9 +8,8 @@ type Props = {};
 
 const Breadcrumbs: FC<Props> = () => {
 	const { pathname } = useLocation();
-	const mockedPathname = '/app/tasks/annual/12032/32/332';
 	const getPaths = () => {
-		const pathnames = mockedPathname
+		const pathnames = pathname
 			.split('/')
 			.filter((el) => el && el !== appRootRoute)
 			.map((el, i, arr) => {
