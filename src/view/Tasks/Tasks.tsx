@@ -1,7 +1,29 @@
+import { useState } from 'react';
+import { Button } from 'components';
+import { Table } from 'components';
+import { ButtonsWrapper } from './Tasks.styles';
+
+type tViewType = 'cards' | 'table';
+
 const Tasks = () => {
+	const [view, setView] = useState<tViewType>('table');
+
+	const addTask = () => {
+		console.log('Dodaj zadanie');
+	};
+
 	return (
 		<div>
-			<h1>Tasks</h1>
+			<ButtonsWrapper>
+				<Button fn={() => addTask()}>Dodaj zadanie</Button>
+				<Button fn={() => setView('table')} colorType="dark">
+					Widok tabeli
+				</Button>
+				<Button fn={() => setView('cards')} colorType="secondary">
+					Widok karteczek
+				</Button>
+			</ButtonsWrapper>
+			{view === 'table' ? <Table /> : <div>CARDS</div>}
 		</div>
 	);
 };
