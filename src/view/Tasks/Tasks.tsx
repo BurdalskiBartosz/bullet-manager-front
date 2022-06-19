@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from 'components';
 import { Table } from 'components';
 import { ButtonsWrapper } from './Tasks.styles';
+import { mockedTasks } from './mock';
 
 type tViewType = 'cards' | 'table';
 
@@ -14,6 +15,7 @@ const Tasks = () => {
 
 	return (
 		<div>
+			{console.log(mockedTasks)}
 			<ButtonsWrapper>
 				<Button fn={() => addTask()}>Dodaj zadanie</Button>
 				<Button fn={() => setView('table')} colorType="dark">
