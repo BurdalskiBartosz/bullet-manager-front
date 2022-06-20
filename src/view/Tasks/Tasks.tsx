@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'components';
+import { AddTaskForm, Button } from 'components';
 import { Table } from 'components';
 import { ButtonsWrapper } from './Tasks.styles';
 import { mockedTasks } from './mock';
@@ -25,6 +25,7 @@ const Tasks = () => {
 					Widok karteczek
 				</Button>
 			</ButtonsWrapper>
+			<AddTaskForm />
 			{view === 'table' ? <Table /> : <div>CARDS</div>}
 		</div>
 	);
