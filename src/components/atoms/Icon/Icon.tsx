@@ -15,7 +15,8 @@ export type tIconNames =
 	| 'account'
 	| 'settings'
 	| 'logout'
-	| 'task';
+	| 'task'
+	| 'close';
 
 export type tIcon = {
 	iconName: tIconNames;

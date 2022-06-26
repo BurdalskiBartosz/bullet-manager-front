@@ -1,9 +1,65 @@
-import { FC } from 'react';
+import {
+	FC,
+	MutableRefObject,
+	ReactNode,
+	useCallback,
+	useEffect,
+	useRef
+} from 'react';
+import ReactDOM from 'react-dom';
+import { IconButton, Font } from 'components';
+import { ModalContent, ModalTop, ModalWrapper } from './Modal.style';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 
-type Props = {};
+type Props = {
+	children: ReactNode[] | ReactNode;
+	handleClose: Function;
+	header: string;
+};
 
-const Modal: FC<Props> = () => {
-	return <div>Modal</div>;
+const modalWrapper = document.querySelector('#modal-wrapper');
+
+const Modal: FC<Props> = ({ handleClose, header, children }) => {
+	const ref = useRef() as MutableRefObject<HTMLDivElement>;
+
+	const modalNode = document.createElement('div');
+
+	useEffect(() => {
+		modalWrapper?.appendChild(modalNode);
+		return () => {
+			modalWrapper?.removeChild(modalNode);
+		};
+	});
+
+	useOnClickOutside(
+		ref,
+		useCallback(() => handleClose(), [handleClose])
+	);
+
+	return ReactDOM.createPortal(
+		<ModalWrapper>
+			<ModalContent ref={ref}>
+				<ModalTop>
+					<IconButton
+						width="24px"
+						height="24px"
+						iconName="close"
+						fn={handleClose}
+					/>
+					<Font
+						style={{
+							fontSize: '2rem',
+							textTransform: 'uppercase'
+						}}
+					>
+						{header}
+					</Font>
+				</ModalTop>
+				{children}
+			</ModalContent>
+		</ModalWrapper>,
+		modalNode
+	);
 };
 
 export default Modal;
