@@ -1,21 +1,24 @@
 import { useState } from 'react';
-import { AddTaskForm, Button } from 'components';
+import { AddTaskForm, Button, Modal } from 'components';
 import { Table } from 'components';
 import { ButtonsWrapper } from './Tasks.styles';
-import { mockedTasks } from './mock';
+import useModal from 'hooks/useModal';
+import { useGetTasksQuery } from 'store/api/task';
 
 type tViewType = 'cards' | 'table';
 
 const Tasks = () => {
 	const [view, setView] = useState<tViewType>('table');
-
+	const { handleCloseModal, handleOpenModal, isOpen } = useModal();
+	const tasks = useGetTasksQuery();
+	console.log(tasks);
 	const addTask = () => {
 		console.log('Dodaj zadanie');
+		handleOpenModal();
 	};
 
 	return (
 		<div>
-			{console.log(mockedTasks)}
 			<ButtonsWrapper>
 				<Button fn={() => addTask()}>Dodaj zadanie</Button>
 				<Button fn={() => setView('table')} colorType="dark">
@@ -25,8 +28,12 @@ const Tasks = () => {
 					Widok karteczek
 				</Button>
 			</ButtonsWrapper>
-			<AddTaskForm />
 			{view === 'table' ? <Table /> : <div>CARDS</div>}
+			{isOpen ? (
+				<Modal header="Dodaj zadanie" handleClose={handleCloseModal}>
+					<AddTaskForm />
+				</Modal>
+			) : null}
 		</div>
 	);
 };
