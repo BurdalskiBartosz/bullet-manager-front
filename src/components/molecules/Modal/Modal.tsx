@@ -49,7 +49,8 @@ const Modal: FC<Props> = ({ handleClose, header, children }) => {
 					<Font
 						style={{
 							fontSize: '2rem',
-							textTransform: 'uppercase'
+							textTransform: 'uppercase',
+							fontWeight: 'bold'
 						}}
 					>
 						{header}

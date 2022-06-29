@@ -17,6 +17,7 @@ export const ModalContent = styled.div`
 	min-width: 400px;
 	padding: 2rem;
 	background-color: ${({ theme }) => theme.colors.light};
+	border-radius: ${({ theme }) => theme.sizes.borderRadius}; ;
 `;
 
 export const ModalTop = styled.div`
