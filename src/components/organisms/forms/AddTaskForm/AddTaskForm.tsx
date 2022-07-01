@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Input, Button } from 'components';
+import { Input, Button, SelectInput } from 'components';
 import { FC } from 'react';
-import { useAddTaskMutation } from 'store/api/task';
+import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
 
 type Props = {};
 
@@ -32,7 +32,7 @@ const AddTaskForm: FC<Props> = () => {
 	});
 
 	const [addTask] = useAddTaskMutation();
-
+	useGetTasksQuery();
 	const test = (data: any) => {
 		console.log(new Date(data.plannedFinishDate));
 		console.log(data);
@@ -50,6 +50,7 @@ const AddTaskForm: FC<Props> = () => {
 						<option value={1}>admin@gaill.com</option>
 					</select>
 				</div>
+				<SelectInput keyValue="title" getOptionsFn={useGetTasksQuery} />
 				<Input
 					id="title"
 					label="Nazwa zadania"
