@@ -8,14 +8,14 @@ import {
 	StyledLinkWithFn
 } from './ListLink.style';
 
-type Props = {
+type tProps = {
 	iconName: tIconNames;
 	text: string;
 	link?: string;
 	fn?: Function;
 };
 
-const ListLink: FC<Props> = ({ iconName, link, text, fn }) => {
+const ListLink: FC<tProps> = ({ iconName, link, text, fn }) => {
 	return (
 		<StyledLi>
 			{link && (

@@ -4,9 +4,9 @@ import { appRootRoute } from 'utils/constants';
 import { Font, Icon } from 'components';
 import { BreadLink, Wrapper } from './Breadcrumbs.style';
 
-type Props = {};
+type tProps = {};
 
-const Breadcrumbs: FC<Props> = () => {
+const Breadcrumbs: FC<tProps> = () => {
 	const { pathname } = useLocation();
 	const getPaths = () => {
 		const pathnames = pathname

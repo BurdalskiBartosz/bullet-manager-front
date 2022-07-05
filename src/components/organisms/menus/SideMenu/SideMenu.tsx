@@ -13,7 +13,7 @@ import {
 } from './SideMenu.style';
 import logo from 'assets/images/bullet-manager-logo.png';
 
-type Props = {};
+type tProps = {};
 
 const menuItems = [
 	{
@@ -58,7 +58,7 @@ const menuItems = [
 	}
 ];
 
-const SideMenu: FC<Props> = () => {
+const SideMenu: FC<tProps> = () => {
 	const getMenuList = () =>
 		menuItems.map((item) => (
 			<ListLink

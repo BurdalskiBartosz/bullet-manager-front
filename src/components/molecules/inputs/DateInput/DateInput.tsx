@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-type Props = {
+type tProps = {
 	options: {
 		name: string;
 		value: string;
 	}[];
 };
 
-const DateInput: FC<Props> = () => {
+const DateInput: FC<tProps> = () => {
 	return <div>DateInput</div>;
 };
 

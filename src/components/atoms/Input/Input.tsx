@@ -8,7 +8,7 @@ import {
 	StyledWrapper
 } from './Input.styles';
 
-type Props = {
+type tProps = {
 	id: string;
 	label: string;
 	type?: string;
@@ -19,7 +19,7 @@ type Props = {
 	};
 };
 
-const Input: FC<Props> = ({ id, label, type = 'text', register, error }) => {
+const Input: FC<tProps> = ({ id, label, type = 'text', register, error }) => {
 	const { t } = useTranslation();
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const showPassword = () => {

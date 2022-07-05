@@ -9,12 +9,12 @@ import {
 import useOnClickOutside from 'hooks/useOnClickOutside';
 import { DropdownBody, DropdownButton, Wrapper } from './Dropdown.style';
 
-type Props = {
+type tProps = {
 	dropdownTop: ReactNode;
 	dropdownBody: ReactNode;
 };
 
-const Dropdown: FC<Props> = ({ dropdownTop, dropdownBody }) => {
+const Dropdown: FC<tProps> = ({ dropdownTop, dropdownBody }) => {
 	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 	const [isActive, setIsActive] = useState<boolean>(false);
 

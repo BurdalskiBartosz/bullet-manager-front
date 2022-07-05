@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { StyledHomeLink, StyledNav, StyledUl } from './HomeMenu.style';
 
-type Props = {};
+type tProps = {};
 
-const HomeMenu: FC<Props> = (props: Props) => {
+const HomeMenu: FC<tProps> = (props: tProps) => {
 	return (
 		<StyledNav>
 			<StyledUl>

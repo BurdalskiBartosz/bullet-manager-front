@@ -11,7 +11,7 @@ import { IconButton, Font } from 'components';
 import { ModalContent, ModalTop, ModalWrapper } from './Modal.style';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 
-type Props = {
+type tProps = {
 	children: ReactNode[] | ReactNode;
 	handleClose: Function;
 	header: string;
@@ -19,7 +19,7 @@ type Props = {
 
 const modalWrapper = document.querySelector('#modal-wrapper');
 
-const Modal: FC<Props> = ({ handleClose, header, children }) => {
+const Modal: FC<tProps> = ({ handleClose, header, children }) => {
 	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 
 	const modalNode = document.createElement('div');

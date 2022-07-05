@@ -1,9 +1,9 @@
 import { Font } from 'components';
 import { FC } from 'react';
 
-type Props = {};
+type tProps = {};
 
-const Table: FC<Props> = () => {
+const Table: FC<tProps> = () => {
 	return <Font style={{ color: 'white' }}>Table</Font>;
 };
 

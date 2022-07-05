@@ -16,9 +16,9 @@ import {
 	Wrapper
 } from './TopMenu.style';
 
-type Props = {};
+type tProps = {};
 
-const TopMenu: FC<Props> = () => {
+const TopMenu: FC<tProps> = () => {
 	const auth = useAuth();
 
 	return (

@@ -4,9 +4,9 @@ import { SideMenu, TopMenu } from 'components';
 import { Main, PageWrapper, Wrapper } from './AppTemplate.styles';
 import Circles from './_components/Circles';
 
-type Props = {};
+type tProps = {};
 
-const AppTemplate: FC<Props> = () => {
+const AppTemplate: FC<tProps> = () => {
 	return (
 		<Wrapper>
 			<Circles />
