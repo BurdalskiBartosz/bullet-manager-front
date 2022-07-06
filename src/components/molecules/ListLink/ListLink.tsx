@@ -16,18 +16,19 @@ type tProps = {
 };
 
 const ListLink: FC<tProps> = ({ iconName, link, text, fn }) => {
+	const linkContent = (
+		<>
+			<StyledIcon iconName={iconName} />
+			<Font variant="menu">{text}</Font>
+		</>
+	);
+
 	return (
 		<StyledLi>
-			{link && (
-				<StyledLink to={link}>
-					<StyledIcon iconName={iconName} />
-					<Font variant="menu">{text}</Font>
-				</StyledLink>
-			)}
+			{link && <StyledLink to={link}>{linkContent}</StyledLink>}
 			{fn && (
 				<StyledLinkWithFn onClick={() => fn()}>
-					<StyledIcon iconName={iconName} />
-					<Font variant="menu">{text}</Font>
+					{linkContent}
 				</StyledLinkWithFn>
 			)}
 		</StyledLi>

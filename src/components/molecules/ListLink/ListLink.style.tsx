@@ -27,7 +27,6 @@ export const StyledLinkWithFn = styled.button`
 	border: none;
 	outline: none;
 	background-color: transparent;
-	color: ${({ theme }) => theme.colors.dark};
 	${({ theme: { animations, colors } }) =>
 		animations.menuTransition(colors.dark, colors.light)}
 `;
