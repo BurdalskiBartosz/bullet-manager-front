@@ -5,11 +5,8 @@ import * as yup from 'yup';
 import { useAuth } from 'providers/AuthProvider';
 import { tRegistrationUserData } from 'types/forms/authForm';
 import { Button, Font, Input, Link } from 'components';
-import {
-	StyledErrorBar,
-	StyledForm,
-	StyledTextUnderForm
-} from 'styles/shared/auth';
+import { StyledErrorBar, StyledTextUnderForm } from 'styles/shared/auth';
+import { StyledForm } from 'styles/shared/global';
 
 const validationSchema = yup.object().shape({
 	email: yup.string().required(),

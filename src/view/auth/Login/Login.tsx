@@ -5,11 +5,8 @@ import * as yup from 'yup';
 import { useAuth } from 'providers/AuthProvider';
 import { tLoginUserData } from 'types/forms/authForm';
 import { Button, Font, Input, Link } from 'components';
-import {
-	StyledErrorBar,
-	StyledForm,
-	StyledTextUnderForm
-} from 'styles/shared/auth';
+import { StyledErrorBar, StyledTextUnderForm } from 'styles/shared/auth';
+import { StyledForm } from 'styles/shared/global';
 
 const validationSchema = yup.object().shape({
 	loginOrEmail: yup.string().required(),
@@ -42,23 +39,23 @@ const Login = () => {
 					id="loginOrEmail"
 					label="Login or email input"
 					register={register}
+					fullWidth={false}
 					error={{
 						isError: !!errors.loginOrEmail,
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-
 				<Input
 					id="password"
 					label="Password input"
 					register={register}
+					fullWidth={false}
 					type="password"
 					error={{
 						isError: !!errors.password,
 						errorMessage: 'Password validation message'
 					}}
 				/>
-
 				<Button>Login</Button>
 			</StyledForm>
 			<StyledTextUnderForm>
