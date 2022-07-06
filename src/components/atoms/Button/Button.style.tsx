@@ -11,7 +11,7 @@ export const StyledButton = styled.button<tButton>`
 	width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
 	padding: 1rem 1.8rem;
 	border: none;
-	font-weight: bold;
+	font-weight: 500;
 	font-family: ${({ theme }) => theme.fonts.primary};
 	color: ${({ theme }) => theme.colors.light};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};

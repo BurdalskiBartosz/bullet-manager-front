@@ -1,11 +1,15 @@
 import styled, { css } from 'styled-components';
 import IconButton from '../IconButton';
 
-type WrapperProps = {
+type tWrapperProps = {
 	isError: boolean;
 };
 
-export const StyledWrapper = styled.div<WrapperProps>`
+type tInputProps = {
+	fullWidth: boolean;
+};
+
+export const StyledWrapper = styled.div<tWrapperProps>`
 	display: flex;
 	flex-direction: column;
 	${({ isError }) =>
@@ -22,12 +26,13 @@ export const StyledWrapper = styled.div<WrapperProps>`
 export const StyledInnerWrapper = styled.div`
 	position: relative;
 `;
-export const StyledInput = styled.input`
-	width: 330px;
+export const StyledInput = styled.input<tInputProps>`
+	width: ${({ fullWidth }) => (fullWidth ? '100%' : '330px')};
 	padding: 1.2rem 2rem;
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
 	border: 1px solid ${({ theme }) => theme.colors.lightGray};
+	font-family: ${({ theme }) => theme.fonts.primary};
 	&:focus {
 		border-color: ${({ theme }) => theme.colors.dark};
 	}
@@ -35,6 +40,7 @@ export const StyledInput = styled.input`
 		color: ${({ theme }) => theme.colors.gray};
 		font-style: italic;
 		opacity: 0.6;
+		font-size: 13px;
 	}
 `;
 
