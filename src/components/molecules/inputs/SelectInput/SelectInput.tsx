@@ -5,6 +5,7 @@ import Select, { GroupBase } from 'react-select';
 import { customStyles, StyledInputWrapper } from './SelectInput.style';
 declare module 'react-select/dist/declarations/src/Select' {
 	export interface Props<
+		/* eslint-disable @typescript-eslint/no-unused-vars */
 		Option,
 		IsMulti extends boolean,
 		Group extends GroupBase<Option>

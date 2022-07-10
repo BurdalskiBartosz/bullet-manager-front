@@ -12,7 +12,6 @@ export const customStyles = {
 		cursor: 'pointer'
 	}),
 	control: (provided: any, state: any) => {
-		console.log(state);
 		return {
 			...provided,
 			border: `1px solid ${
