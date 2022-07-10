@@ -10,6 +10,8 @@ export { default as Breadcrumbs } from './molecules/Breadcrumbs';
 export { default as SearchInput } from './molecules/inputs/SearchInput';
 export { default as SelectInput } from './molecules/inputs/SelectInput';
 export { default as DateInput } from './molecules/inputs/DateInput';
+export { default as TextArea } from './molecules/inputs/TextArea';
+export { default as CalendarInput } from './molecules/inputs/CalendarInput';
 export { default as ListLink } from './molecules/ListLink';
 export { default as Dropdown } from './molecules/Dropdown';
 export { default as Modal } from './molecules/Modal';
