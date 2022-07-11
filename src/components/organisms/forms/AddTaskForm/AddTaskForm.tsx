@@ -2,29 +2,39 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Input, Button, SelectInput } from 'components';
+import {
+	Input,
+	Button,
+	SelectInput,
+	TextArea,
+	CalendarInput
+} from 'components';
 import { FC } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
+import { StyledForm } from 'styles/shared/global';
 
-type Props = {};
+type tProps = {};
 
 const validationSchema = yup.object().shape({
 	title: yup.string().required(),
-	description: yup.string().required().min(6)
+	description: yup.string().required().min(6),
+	task: yup.string().required()
 });
 
 type tTaskData = {
 	user: string;
 	title: string;
+	task: string;
 	description: string;
 	plannedFinishDate: Date;
 	priority: string;
 	tags: string[];
 };
 
-const AddTaskForm: FC<Props> = () => {
+const AddTaskForm: FC<tProps> = () => {
 	const {
 		register,
+		control,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<tTaskData>({
@@ -32,17 +42,14 @@ const AddTaskForm: FC<Props> = () => {
 	});
 
 	const [addTask] = useAddTaskMutation();
-	useGetTasksQuery();
-	const test = (data: any) => {
-		console.log(new Date(data.plannedFinishDate));
-		console.log(data);
 
-		addTask(data);
+	const test = (data: any) => {
+		// addTask(data);
 	};
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit(test)}>
+			<StyledForm onSubmit={handleSubmit(test)}>
 				<div>
 					<label htmlFor="user">Użytkownik:</label>
 
@@ -50,7 +57,17 @@ const AddTaskForm: FC<Props> = () => {
 						<option value={1}>admin@gaill.com</option>
 					</select>
 				</div>
-				<SelectInput keyValue="title" getOptionsFn={useGetTasksQuery} />
+				<SelectInput
+					id="task"
+					label="task"
+					control={control}
+					keyValue="title"
+					getOptionsFn={useGetTasksQuery}
+					error={{
+						isError: !!errors.task,
+						errorMessage: 'Login or email validation message'
+					}}
+				/>
 				<Input
 					id="title"
 					label="Nazwa zadania"
@@ -60,28 +77,27 @@ const AddTaskForm: FC<Props> = () => {
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-				<Input
+
+				<TextArea
 					id="description"
 					label="Opis"
-					type="form"
 					register={register}
 					error={{
 						isError: !!errors.description,
 						errorMessage: 'Password validation message'
 					}}
 				/>
+				<CalendarInput
+					id="plannedFinishDate"
+					label="Planowana data ukończenia"
+					control={control}
+					error={{
+						isError: !!errors.description,
+						errorMessage: 'Password validation message'
+					}}
+				/>
 				<div>
-					<label htmlFor="plannedFinishDate">
-						Planowana data ukończenia
-					</label>
-					<input
-						id="plannedFinishDate"
-						{...register('plannedFinishDate')}
-						type="date"
-					/>
-				</div>
-				<div>
-					<label htmlFor="cars">Choose a car:</label>
+					<label htmlFor="cars">Choose priority:</label>
 
 					<select
 						{...register('priority')}
@@ -108,7 +124,7 @@ const AddTaskForm: FC<Props> = () => {
 					</select>
 				</div>
 				<Button>Login</Button>
-			</form>
+			</StyledForm>
 		</div>
 	);
 };
