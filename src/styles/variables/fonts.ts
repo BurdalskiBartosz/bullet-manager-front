@@ -1,3 +1,3 @@
 export const fonts = {
-	primary: 'Open Sans, sans-serif'
+	primary: 'Rubik, sans-serif'
 };

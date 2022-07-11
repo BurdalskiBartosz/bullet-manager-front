@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { SideMenu, TopMenu } from 'components';
-import { Main, Wrapper } from './AppTemplate.styles';
+import { Main, PageWrapper, Wrapper } from './AppTemplate.styles';
 import Circles from './_components/Circles';
 
-type Props = {};
+type tProps = {};
 
-const AppTemplate: FC<Props> = () => {
+const AppTemplate: FC<tProps> = () => {
 	return (
 		<Wrapper>
 			<Circles />
@@ -14,7 +14,9 @@ const AppTemplate: FC<Props> = () => {
 				<SideMenu />
 				<div>
 					<TopMenu />
-					<Outlet />
+					<PageWrapper>
+						<Outlet />
+					</PageWrapper>
 				</div>
 			</Main>
 		</Wrapper>

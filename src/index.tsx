@@ -8,15 +8,19 @@ import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/theme';
 import App from './App';
 import './i18n/index';
+import { Provider } from 'react-redux';
+import store from 'store/store';
 
 ReactDOM.render(
 	<StrictMode>
 		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<AuthProvider>
-					<App />
-				</AuthProvider>
-			</ThemeProvider>
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<AuthProvider>
+						<App />
+					</AuthProvider>
+				</ThemeProvider>
+			</Provider>
 		</BrowserRouter>
 		<GlobalStyles />
 	</StrictMode>,

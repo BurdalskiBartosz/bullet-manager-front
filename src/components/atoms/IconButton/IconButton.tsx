@@ -2,11 +2,11 @@ import { FC } from 'react';
 import Icon, { tIcon } from '../Icon/Icon';
 import { StyledIconButton } from './IconButton.styles';
 
-type Props = {
+type tProps = {
 	fn?: Function;
 } & tIcon;
 
-const IconButton: FC<Props> = ({
+const IconButton: FC<tProps> = ({
 	iconName,
 	fill,
 	fn = () => {},

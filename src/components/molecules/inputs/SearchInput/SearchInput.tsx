@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { StyledIcon, StyledInput, Wrapper } from './SearchInput.style';
 
-type Props = {};
+type tProps = {};
 
-const SearchInput: FC<Props> = () => {
+const SearchInput: FC<tProps> = () => {
 	return (
 		<Wrapper>
 			<StyledIcon iconName="magnifier" width="18.5" height="18.5" />

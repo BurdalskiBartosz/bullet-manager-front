@@ -14,6 +14,7 @@ import { ReactComponent as calendar } from './icons/calendar.svg';
 import { ReactComponent as settings } from './icons/settings.svg';
 import { ReactComponent as account } from './icons/account.svg';
 import { ReactComponent as logout } from './icons/logout.svg';
+import { ReactComponent as close } from './icons/close.svg';
 
 const icons = {
 	password,
@@ -31,6 +32,7 @@ const icons = {
 	calendar,
 	settings,
 	logout,
-	account
+	account,
+	close
 };
 export default icons;

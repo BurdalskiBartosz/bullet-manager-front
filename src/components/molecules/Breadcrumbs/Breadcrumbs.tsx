@@ -4,13 +4,12 @@ import { appRootRoute } from 'utils/constants';
 import { Font, Icon } from 'components';
 import { BreadLink, Wrapper } from './Breadcrumbs.style';
 
-type Props = {};
+type tProps = {};
 
-const Breadcrumbs: FC<Props> = () => {
+const Breadcrumbs: FC<tProps> = () => {
 	const { pathname } = useLocation();
-	const mockedPathname = '/app/tasks/annual/12032/32/332';
 	const getPaths = () => {
-		const pathnames = mockedPathname
+		const pathnames = pathname
 			.split('/')
 			.filter((el) => el && el !== appRootRoute)
 			.map((el, i, arr) => {

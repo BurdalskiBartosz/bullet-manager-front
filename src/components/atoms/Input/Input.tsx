@@ -6,20 +6,28 @@ import {
 	StyledInnerWrapper,
 	StyledInput,
 	StyledWrapper
-} from './Input.styles';
+} from './Input.style';
 
-type Props = {
+type tProps = {
 	id: string;
 	label: string;
 	type?: string;
 	register: Function;
+	fullWidth?: boolean;
 	error: {
 		isError: boolean;
 		errorMessage: string;
 	};
 };
 
-const Input: FC<Props> = ({ id, label, type = 'text', register, error }) => {
+const Input: FC<tProps> = ({
+	id,
+	label,
+	type = 'text',
+	register,
+	error,
+	fullWidth = true
+}) => {
 	const { t } = useTranslation();
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const showPassword = () => {
@@ -38,6 +46,7 @@ const Input: FC<Props> = ({ id, label, type = 'text', register, error }) => {
 						isPasswordVisible && type === 'password' ? 'text' : type
 					}
 					placeholder={t(`${label} placeholder`)}
+					fullWidth={fullWidth}
 					{...register(id)}
 				/>
 				{type === 'password' && (

@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 
 export const StyledInput = styled.input`
 	padding: 1rem 1rem 1rem 3.5rem;
-	border: 1px solid ${({ theme }) => theme.colors.primaryFont};
+	border: 1px solid ${({ theme }) => theme.colors.dark};
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
 	&::placeholder {

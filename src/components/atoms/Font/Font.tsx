@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { tTags, tVariants, variants } from 'styles/typography';
 
-type Props = {
+type tProps = {
 	children: string | string[];
 	variant?: tVariants;
 	component?: tTags;
@@ -20,7 +20,7 @@ const StyledTag = styled.p<tTagProps>`
 	${(props) => props.$overideStyle};
 `;
 
-const Font: FC<Props> = ({ children, variant, component, style, ...rest }) => {
+const Font: FC<tProps> = ({ children, variant, component, style, ...rest }) => {
 	const { t } = useTranslation();
 	let overideStyle;
 	let tag: tTags = 'p';

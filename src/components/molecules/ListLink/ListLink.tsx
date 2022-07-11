@@ -8,26 +8,27 @@ import {
 	StyledLinkWithFn
 } from './ListLink.style';
 
-type Props = {
+type tProps = {
 	iconName: tIconNames;
 	text: string;
 	link?: string;
 	fn?: Function;
 };
 
-const ListLink: FC<Props> = ({ iconName, link, text, fn }) => {
+const ListLink: FC<tProps> = ({ iconName, link, text, fn }) => {
+	const linkContent = (
+		<>
+			<StyledIcon iconName={iconName} />
+			<Font variant="menu">{text}</Font>
+		</>
+	);
+
 	return (
 		<StyledLi>
-			{link && (
-				<StyledLink to={link}>
-					<StyledIcon iconName={iconName} />
-					<Font variant="menu">{text}</Font>
-				</StyledLink>
-			)}
+			{link && <StyledLink to={link}>{linkContent}</StyledLink>}
 			{fn && (
 				<StyledLinkWithFn onClick={() => fn()}>
-					<StyledIcon iconName={iconName} />
-					<Font variant="menu">{text}</Font>
+					{linkContent}
 				</StyledLinkWithFn>
 			)}
 		</StyledLi>
