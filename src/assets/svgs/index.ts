@@ -15,6 +15,10 @@ import { ReactComponent as settings } from './icons/settings.svg';
 import { ReactComponent as account } from './icons/account.svg';
 import { ReactComponent as logout } from './icons/logout.svg';
 import { ReactComponent as close } from './icons/close.svg';
+import { ReactComponent as navigate_before } from './icons/navigate_before.svg';
+import { ReactComponent as double_navigate_next } from './icons/double_navigate_next.svg';
+import { ReactComponent as double_navigate_before } from './icons/double_navigate_before.svg';
+import { ReactComponent as navigate_next } from './icons/navigate_next.svg';
 
 const icons = {
 	password,
@@ -33,6 +37,10 @@ const icons = {
 	settings,
 	logout,
 	account,
-	close
+	double_navigate_before,
+	navigate_before,
+	double_navigate_next,
+	close,
+	navigate_next
 };
 export default icons;
