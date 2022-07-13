@@ -9,7 +9,7 @@ import {
 	TextArea,
 	CalendarInput
 } from 'components';
-import { FC } from 'react';
+import { FC, MutableRefObject, useRef } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
 import { StyledForm } from 'styles/shared/global';
 
@@ -32,6 +32,7 @@ type tTaskData = {
 };
 
 const AddTaskForm: FC<tProps> = () => {
+	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 	const {
 		register,
 		control,
@@ -44,11 +45,12 @@ const AddTaskForm: FC<tProps> = () => {
 	const [addTask] = useAddTaskMutation();
 
 	const test = (data: any) => {
+		console.log(data);
 		// addTask(data);
 	};
 
 	return (
-		<div>
+		<div ref={ref}>
 			<StyledForm onSubmit={handleSubmit(test)}>
 				<div>
 					<label htmlFor="user">Użytkownik:</label>
@@ -91,6 +93,7 @@ const AddTaskForm: FC<tProps> = () => {
 					id="plannedFinishDate"
 					label="Planowana data ukończenia"
 					control={control}
+					refParent={ref}
 					error={{
 						isError: !!errors.description,
 						errorMessage: 'Password validation message'
