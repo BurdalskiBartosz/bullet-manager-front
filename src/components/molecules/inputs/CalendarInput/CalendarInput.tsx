@@ -1,12 +1,12 @@
-import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
 import { Controller } from 'react-hook-form';
 
 import Font from 'components/atoms/Font';
-import { FC, Ref } from 'react';
-import { StyledWrapper } from './CalendarInput.style';
+import { FC } from 'react';
+import { StyledWrapper, CalendarWrapper } from './CalendarInput.style';
 import Modal from 'components/molecules/Modal';
 import useModal from 'hooks/useModal';
+import Icon from 'components/atoms/Icon';
 
 type tProps = {
 	id: string;
@@ -51,10 +51,24 @@ const CalendarInput: FC<tProps> = ({
 							render={({ field }) => {
 								const { onChange, value } = field;
 								return (
-									<Calendar
-										onChange={onChange}
-										value={value}
-									/>
+									<CalendarWrapper>
+										<Calendar
+											onChange={onChange}
+											value={value}
+											nextLabel={
+												<Icon iconName="navigate_next" />
+											}
+											next2Label={
+												<Icon iconName="double_navigate_next" />
+											}
+											prevLabel={
+												<Icon iconName="navigate_before" />
+											}
+											prev2Label={
+												<Icon iconName="double_navigate_before" />
+											}
+										/>
+									</CalendarWrapper>
 								);
 							}}
 						/>
