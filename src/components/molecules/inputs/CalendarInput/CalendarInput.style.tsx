@@ -54,7 +54,8 @@ export const CalendarWrapper = styled.div`
 		&__month-view__weekdays,
 		&__month-view__days,
 		&__year-view__months,
-		&__century-view__decades {
+		&__century-view__decades,
+		&__decade-view__years {
 			display: grid !important;
 		}
 		&__month-view__weekdays,
@@ -65,7 +66,8 @@ export const CalendarWrapper = styled.div`
 			}
 		}
 		&__year-view__months,
-		&__century-view__decades {
+		&__century-view__decades,
+		&__decade-view__years {
 			grid-template-columns: repeat(3, 1fr);
 		}
 
@@ -76,6 +78,7 @@ export const CalendarWrapper = styled.div`
 		}
 		&__month-view__days {
 		}
+
 		&__tile {
 			border: none;
 			background-color: transparent;
@@ -83,6 +86,9 @@ export const CalendarWrapper = styled.div`
 			border-radius: ${({ theme }) => theme.sizes.borderRadius};
 			padding: 0.5rem;
 			font-size: 15px;
+			&--now {
+				border: 2px dashed ${({ theme }) => theme.colors.purple100};
+			}
 			&:hover {
 				background-color: ${({ theme }) => theme.colors.purple200};
 				color: ${({ theme }) => theme.colors.light};

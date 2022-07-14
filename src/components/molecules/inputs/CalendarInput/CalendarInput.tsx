@@ -2,11 +2,13 @@ import Calendar from 'react-calendar';
 import { Controller } from 'react-hook-form';
 
 import Font from 'components/atoms/Font';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { StyledWrapper, CalendarWrapper } from './CalendarInput.style';
 import Modal from 'components/molecules/Modal';
 import useModal from 'hooks/useModal';
 import Icon from 'components/atoms/Icon';
+import { format } from 'date-fns';
+import Input from 'components/atoms/Input';
 
 type tProps = {
 	id: string;
@@ -29,16 +31,22 @@ const CalendarInput: FC<tProps> = ({
 	refParent
 }) => {
 	const { handleCloseModal, handleOpenModal, isOpen } = useModal();
+	const [date, setDate] = useState<Date>(new Date());
 
 	return (
 		<StyledWrapper isError={error.isError}>
-			<Font htmlFor={id} variant="label">
-				{label}
-			</Font>
 			<div>
-				<button type="button" onClick={handleOpenModal}>
-					OPEN
-				</button>
+				<Input
+					id={id}
+					label={label}
+					isDisabled
+					fullWidth={false}
+					value={format(date, 'MM/dd/yy')}
+					customIcon={{
+						iconName: 'calendar',
+						fn: handleOpenModal
+					}}
+				/>
 				{isOpen ? (
 					<Modal
 						header="Dodaj zadanie"
@@ -53,7 +61,11 @@ const CalendarInput: FC<tProps> = ({
 								return (
 									<CalendarWrapper>
 										<Calendar
-											onChange={onChange}
+											minDetail="year"
+											onChange={(value: Date) => {
+												setDate(value);
+												onChange(value);
+											}}
 											value={value}
 											nextLabel={
 												<Icon iconName="navigate_next" />
