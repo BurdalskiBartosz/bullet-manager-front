@@ -5,6 +5,7 @@ export type tIconNames =
 	| 'password'
 	| 'show_password'
 	| 'magnifier'
+	| 'calendar'
 	| 'arrow_right'
 	| 'add'
 	| 'goal'
