@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Font from '../Font';
+import { tIconNames } from '../Icon/Icon';
 import {
 	StyledIconButton,
 	StyledInnerWrapper,
@@ -12,9 +13,15 @@ type tProps = {
 	id: string;
 	label: string;
 	type?: string;
-	register: Function;
+	register?: Function;
 	fullWidth?: boolean;
-	error: {
+	isDisabled?: boolean;
+	customIcon?: {
+		iconName: tIconNames;
+		fn: Function;
+	};
+	value?: string;
+	error?: {
 		isError: boolean;
 		errorMessage: string;
 	};
@@ -26,7 +33,10 @@ const Input: FC<tProps> = ({
 	type = 'text',
 	register,
 	error,
-	fullWidth = true
+	fullWidth = true,
+	isDisabled = false,
+	value,
+	customIcon
 }) => {
 	const { t } = useTranslation();
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -35,7 +45,10 @@ const Input: FC<tProps> = ({
 		else setIsPasswordVisible(true);
 	};
 	return (
-		<StyledWrapper isError={error.isError}>
+		<StyledWrapper
+			fullWidth={fullWidth}
+			isError={error ? error.isError : false}
+		>
 			<Font htmlFor={id} variant="label">
 				{label}
 			</Font>
@@ -45,9 +58,10 @@ const Input: FC<tProps> = ({
 					type={
 						isPasswordVisible && type === 'password' ? 'text' : type
 					}
+					value={value}
+					disabled={isDisabled}
 					placeholder={t(`${label} placeholder`)}
-					fullWidth={fullWidth}
-					{...register(id)}
+					{...(register ? register(id) : {})}
 				/>
 				{type === 'password' && (
 					<StyledIconButton
@@ -57,13 +71,21 @@ const Input: FC<tProps> = ({
 						fn={showPassword}
 					/>
 				)}
+				{customIcon && (
+					<StyledIconButton
+						iconName={customIcon.iconName}
+						fn={customIcon.fn}
+					/>
+				)}
 			</StyledInnerWrapper>
-			<Font
-				variant="inputError"
-				style={{ alignSelf: 'flex-end', height: '10px' }}
-			>
-				{error.isError ? error.errorMessage : ''}
-			</Font>
+			{error && (
+				<Font
+					variant="inputError"
+					style={{ alignSelf: 'flex-end', height: '10px' }}
+				>
+					{error.isError ? error.errorMessage : ''}
+				</Font>
+			)}
 		</StyledWrapper>
 	);
 };
