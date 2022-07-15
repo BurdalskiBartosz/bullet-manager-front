@@ -11,9 +11,7 @@ const Tasks = () => {
 	const [view, setView] = useState<tViewType>('table');
 	const { handleCloseModal, handleOpenModal, isOpen } = useModal();
 	const tasks = useGetTasksQuery();
-	console.log(tasks);
 	const addTask = () => {
-		console.log('Dodaj zadanie');
 		handleOpenModal();
 	};
 

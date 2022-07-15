@@ -95,7 +95,7 @@ const AddTaskForm: FC<tProps> = () => {
 					control={control}
 					refParent={ref}
 					error={{
-						isError: !!errors.description,
+						isError: !!errors.plannedFinishDate,
 						errorMessage: 'Password validation message'
 					}}
 				/>
