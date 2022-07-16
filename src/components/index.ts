@@ -1,6 +1,7 @@
 // atoms
 export { default as Icon } from './atoms/Icon';
 export { default as Input } from './atoms/Input';
+export { default as MaskInput } from './atoms/MaskInput';
 export { default as Font } from './atoms/Font';
 export { default as Button } from './atoms/Button';
 export { default as IconButton } from './atoms/IconButton';
