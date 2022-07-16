@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { dateMask } from 'utils/masks';
 import Font from '../Font';
 import {
 	StyledInnerWrapper,
@@ -20,7 +20,6 @@ type tProps = {
 		errorMessage: string;
 	};
 };
-type tMask = (string | RegExp)[];
 const MaskInput: FC<tProps> = ({
 	id,
 	label,
@@ -31,19 +30,6 @@ const MaskInput: FC<tProps> = ({
 	isDisabled = false,
 	value
 }) => {
-	const { t } = useTranslation();
-	const dateMask: tMask = [
-		/\d/,
-		/\d/,
-		'/',
-		/\d/,
-		/\d/,
-		'/',
-		/\d/,
-		/\d/,
-		/\d/,
-		/\d/
-	];
 	return (
 		<StyledWrapper
 			fullWidth={fullWidth}
