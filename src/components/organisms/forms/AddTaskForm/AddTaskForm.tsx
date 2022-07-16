@@ -7,7 +7,8 @@ import {
 	Button,
 	SelectInput,
 	TextArea,
-	CalendarInput
+	CalendarInput,
+	MaskInput
 } from 'components';
 import { FC, MutableRefObject, useRef } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
@@ -47,6 +48,7 @@ const AddTaskForm: FC<tProps> = () => {
 	const test = (data: any) => {
 		console.log(data);
 		// addTask(data);
+		console.log(data);
 	};
 
 	return (
@@ -59,6 +61,15 @@ const AddTaskForm: FC<tProps> = () => {
 						<option value={1}>admin@gaill.com</option>
 					</select>
 				</div>
+				<MaskInput
+					id="title"
+					label="Nazwa zadania Input mask"
+					register={register}
+					error={{
+						isError: !!errors.title,
+						errorMessage: 'Login or email validation message'
+					}}
+				/>
 				<SelectInput
 					id="task"
 					label="task"
@@ -67,15 +78,6 @@ const AddTaskForm: FC<tProps> = () => {
 					getOptionsFn={useGetTasksQuery}
 					error={{
 						isError: !!errors.task,
-						errorMessage: 'Login or email validation message'
-					}}
-				/>
-				<Input
-					id="title"
-					label="Nazwa zadania"
-					register={register}
-					error={{
-						isError: !!errors.title,
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
