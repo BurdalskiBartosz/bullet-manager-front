@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 import { useAuth } from 'providers/AuthProvider';
 import { tLoginUserData } from 'types/forms/authForm';
-import { Button, Font, Input, Link } from 'components';
+import { Button, Font, Input, Link, PasswordInput } from 'components';
 import { StyledErrorBar, StyledTextUnderForm } from 'styles/shared/auth';
 import { StyledForm } from 'styles/shared/global';
 
@@ -45,7 +45,7 @@ const Login = () => {
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-				<Input
+				{/* <Input
 					id="password"
 					label="Password input"
 					register={register}
@@ -54,6 +54,19 @@ const Login = () => {
 					error={{
 						isError: !!errors.password,
 						errorMessage: 'Password validation message'
+					}}
+				/> */}
+				<PasswordInput
+					inputBase={{
+						id: 'password',
+						label: 'Password input',
+						register: register,
+						fullWidth: false,
+						type: 'password',
+						error: {
+							isError: !!errors.password,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
 				<Button>Login</Button>
