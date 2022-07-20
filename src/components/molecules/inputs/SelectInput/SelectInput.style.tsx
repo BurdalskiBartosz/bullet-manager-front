@@ -1,4 +1,3 @@
-import styled, { css } from 'styled-components';
 import { colors } from 'styles/variables/colors';
 
 const getColor = (condition: boolean) =>
