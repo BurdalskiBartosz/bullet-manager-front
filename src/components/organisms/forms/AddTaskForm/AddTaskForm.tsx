@@ -69,14 +69,17 @@ const AddTaskForm: FC<tProps> = () => {
 					}}
 				/>
 				<SelectInput
-					id="task"
-					label="task"
 					control={control}
 					keyValue="title"
 					getOptionsFn={useGetTasksQuery}
-					error={{
-						isError: !!errors.task,
-						errorMessage: 'Login or email validation message'
+					inputBase={{
+						id: 'task',
+						label: 'SELECT',
+						fullWidth: false,
+						error: {
+							isError: !!errors.task,
+							errorMessage: 'Login or email validation message'
+						}
 					}}
 				/>
 

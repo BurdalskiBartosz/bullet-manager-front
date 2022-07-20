@@ -1,8 +1,9 @@
-import Font from 'components/atoms/Font';
+import InputBase from 'components/atoms/InputBase';
+import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 import Select, { GroupBase } from 'react-select';
-import { customStyles, StyledInputWrapper } from './SelectInput.style';
+import { customStyles } from './SelectInput.style';
 declare module 'react-select/dist/declarations/src/Select' {
 	export interface Props<
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -15,29 +16,22 @@ declare module 'react-select/dist/declarations/src/Select' {
 }
 
 type tProps = {
-	id: string;
-	label: string;
 	getOptionsFn: Function;
 	keyValue: string;
 	control: any;
 	multi?: boolean;
-	error: {
-		isError: boolean;
-		errorMessage: string;
-	};
+	inputBase: tInputBase;
 };
 
 const SelectInput: FC<tProps> = ({
-	id,
-	label,
+	inputBase,
 	control,
 	getOptionsFn,
 	keyValue,
-	error,
 	multi = false
 }) => {
 	const { data } = getOptionsFn();
-
+	const { id, error } = inputBase;
 	const selectOptions = data.map((option: any) => {
 		return {
 			label: option[keyValue],
@@ -46,10 +40,7 @@ const SelectInput: FC<tProps> = ({
 	});
 
 	return (
-		<StyledInputWrapper isError={error.isError}>
-			<Font htmlFor={id} variant="label">
-				{label}
-			</Font>
+		<InputBase {...inputBase}>
 			<Controller
 				name={id}
 				control={control}
@@ -84,13 +75,7 @@ const SelectInput: FC<tProps> = ({
 					);
 				}}
 			/>
-			<Font
-				variant="inputError"
-				style={{ alignSelf: 'flex-end', height: '10px' }}
-			>
-				{error.isError ? error.errorMessage : ''}
-			</Font>
-		</StyledInputWrapper>
+		</InputBase>
 	);
 };
 
