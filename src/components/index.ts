@@ -12,7 +12,6 @@ export { default as PasswordInput } from './molecules/inputs/PasswordInput';
 export { default as MaskInput } from './molecules/inputs/MaskInput';
 export { default as SearchInput } from './molecules/inputs/SearchInput';
 export { default as SelectInput } from './molecules/inputs/SelectInput';
-export { default as DateInput } from './molecules/inputs/DateInput';
 export { default as TextArea } from './molecules/inputs/TextArea';
 export { default as CalendarInput } from './molecules/inputs/CalendarInput';
 
