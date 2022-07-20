@@ -1,30 +1,21 @@
 import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
 import { Controller } from 'react-hook-form';
-
-import Font from 'components/atoms/Font';
 import { FC } from 'react';
-import { StyledWrapper } from './CalendarInput.style';
+import InputBase from 'components/atoms/InputBase';
+import { tInputBase } from 'components/atoms/InputBase/InputBase';
 
 type tProps = {
-	id: string;
-	label: string;
 	control: any;
-	error: {
-		isError: boolean;
-		errorMessage: string;
-	};
+	inputBase: tInputBase;
 };
 
-const CalendarInput: FC<tProps> = ({ id, label, control, error }) => {
+const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 	return (
-		<StyledWrapper isError={error.isError}>
-			<Font htmlFor={id} variant="label">
-				{label}
-			</Font>
+		<InputBase {...inputBase}>
 			<div>
 				<Controller
-					name={id}
+					name={inputBase.id}
 					control={control}
 					render={({ field }) => {
 						const { onChange, value } = field;
@@ -32,13 +23,7 @@ const CalendarInput: FC<tProps> = ({ id, label, control, error }) => {
 					}}
 				/>
 			</div>
-			<Font
-				variant="inputError"
-				style={{ alignSelf: 'flex-end', height: '10px' }}
-			>
-				{error.isError ? error.errorMessage : ''}
-			</Font>
-		</StyledWrapper>
+		</InputBase>
 	);
 };
 

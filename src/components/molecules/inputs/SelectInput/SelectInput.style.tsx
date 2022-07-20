@@ -1,4 +1,3 @@
-import styled, { css } from 'styled-components';
 import { colors } from 'styles/variables/colors';
 
 const getColor = (condition: boolean) =>
@@ -77,19 +76,3 @@ export const customStyles = {
 		}
 	})
 };
-
-type tWrapperProps = {
-	isError: boolean;
-};
-
-export const StyledInputWrapper = styled.div<tWrapperProps>`
-	display: flex;
-	flex-direction: column;
-	${({ isError }) =>
-		isError &&
-		css`
-			& label {
-				color: ${({ theme }) => theme.colors.danger};
-			}
-		`};
-`;

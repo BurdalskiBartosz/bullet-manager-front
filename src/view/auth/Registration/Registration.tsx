@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 import { useAuth } from 'providers/AuthProvider';
 import { tRegistrationUserData } from 'types/forms/authForm';
-import { Button, Font, Input, Link } from 'components';
+import { Button, Font, InputBase, Link, PasswordInput } from 'components';
 import { StyledErrorBar, StyledTextUnderForm } from 'styles/shared/auth';
 import { StyledForm } from 'styles/shared/global';
 
@@ -40,7 +40,7 @@ const Registration = () => {
 				</StyledErrorBar>
 			)}
 			<StyledForm onSubmit={handleSubmit(auth.signUp)}>
-				<Input
+				<InputBase
 					id="login"
 					label="Login input"
 					register={register}
@@ -49,7 +49,7 @@ const Registration = () => {
 						errorMessage: 'Login validation message'
 					}}
 				/>
-				<Input
+				<InputBase
 					id="email"
 					label="Email input"
 					register={register}
@@ -58,24 +58,29 @@ const Registration = () => {
 						errorMessage: 'Email validation message'
 					}}
 				/>
-				<Input
-					id="password"
-					label="Password input"
-					register={register}
-					type="password"
-					error={{
-						isError: !!errors.password,
-						errorMessage: 'Password validation message'
+				<PasswordInput
+					inputBase={{
+						id: 'password',
+						label: 'Password input',
+						register: register,
+						type: 'password',
+						error: {
+							isError: !!errors.password,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
-				<Input
-					id="confirmPassword"
-					label="Confirm password input"
-					register={register}
-					type="password"
-					error={{
-						isError: !!errors.confirmPassword,
-						errorMessage: 'Confirm password validation message'
+				<PasswordInput
+					inputBase={{
+						id: 'confirmPassword',
+						label: 'Confirm password input',
+						register: register,
+						fullWidth: false,
+						type: 'password',
+						error: {
+							isError: !!errors.confirmPassword,
+							errorMessage: 'Confirm password validation message'
+						}
 					}}
 				/>
 				<Button>Register</Button>
