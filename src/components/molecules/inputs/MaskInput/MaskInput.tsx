@@ -1,24 +1,33 @@
 import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { FC } from 'react';
-import { dateMask } from 'utils/masks';
+import { Controller } from 'react-hook-form';
+import { tMask } from 'utils/masks';
 import { StyledInput } from './MaskInput.style';
 
 type tProps = {
-	value?: string;
-
+	control: any;
+	mask: tMask;
+	placeholder: string;
 	inputBase: tInputBase;
 };
-const MaskInput: FC<tProps> = ({ inputBase, value }) => {
-	const { id, type, register } = inputBase;
+
+const MaskInput: FC<tProps> = ({ inputBase, control, mask, placeholder }) => {
 	return (
 		<InputBase {...inputBase}>
-			<StyledInput
-				id={id}
-				mask={dateMask}
-				placeholder="DD/MM/YYYY"
-				type={type}
-				{...(register ? register(id) : {})}
+			<Controller
+				name={inputBase.id}
+				control={control}
+				render={({ field }) => {
+					const { onChange } = field;
+					return (
+						<StyledInput
+							onChange={onChange}
+							mask={mask}
+							placeholder={placeholder}
+						/>
+					);
+				}}
 			/>
 		</InputBase>
 	);

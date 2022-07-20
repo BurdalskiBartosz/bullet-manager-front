@@ -1,4 +1,4 @@
-type tMask = (string | RegExp)[];
+export type tMask = (string | RegExp)[];
 
 export const dateMask: tMask = [
 	/\d/,
