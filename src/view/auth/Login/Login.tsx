@@ -45,17 +45,6 @@ const Login = () => {
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-				{/* <Input
-					id="password"
-					label="Password input"
-					register={register}
-					fullWidth={false}
-					type="password"
-					error={{
-						isError: !!errors.password,
-						errorMessage: 'Password validation message'
-					}}
-				/> */}
 				<PasswordInput
 					inputBase={{
 						id: 'password',
