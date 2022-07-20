@@ -16,6 +16,7 @@ export type tInputBase = {
 	register?: Function;
 	fullWidth?: boolean;
 	isDisabled?: boolean;
+	as?: 'textarea';
 	children?: ReactNode | ReactNode[];
 	icon?: {
 		iconName: tIconNames;
@@ -34,6 +35,7 @@ const InputBase: FC<tInputBase> = ({
 	register,
 	error,
 	isDisabled,
+	as,
 	icon,
 	children,
 	fullWidth = true
@@ -52,6 +54,7 @@ const InputBase: FC<tInputBase> = ({
 					) : (
 						<>
 							<StyledInput
+								as={as}
 								id={id}
 								type={type}
 								disabled={isDisabled}
