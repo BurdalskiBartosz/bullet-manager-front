@@ -46,17 +46,28 @@ const InputBase: FC<tInputBase> = ({
 				{label}
 			</Font>
 			<StyledInnerWrapper>
-				<StyledInput
-					id={id}
-					type={type}
-					disabled={isDisabled}
-					placeholder={t(`${label} placeholder`)}
-					fullWidth={fullWidth}
-					{...(register ? register(id) : {})}
-				/>
-				{icon && (
-					<StyledIconButton iconName={icon.iconName} fn={icon.fn} />
-				)}
+				<StyledInnerWrapper>
+					{children ? (
+						children
+					) : (
+						<>
+							<StyledInput
+								id={id}
+								type={type}
+								disabled={isDisabled}
+								placeholder={t(`${label} placeholder`)}
+								fullWidth={fullWidth}
+								{...(register ? register(id) : {})}
+							/>
+							{icon && (
+								<StyledIconButton
+									iconName={icon.iconName}
+									fn={icon.fn}
+								/>
+							)}
+						</>
+					)}
+				</StyledInnerWrapper>
 			</StyledInnerWrapper>
 			<Font
 				variant="inputError"
