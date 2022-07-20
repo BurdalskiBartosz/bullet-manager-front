@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
 import {
 	Button,
 	SelectInput,
@@ -88,12 +87,14 @@ const AddTaskForm: FC<tProps> = () => {
 				/>
 
 				<TextArea
-					id="description"
-					label="Opis"
-					register={register}
-					error={{
-						isError: !!errors.description,
-						errorMessage: 'Password validation message'
+					inputBase={{
+						id: 'description',
+						label: 'Opis',
+						register: register,
+						error: {
+							isError: !!errors.description,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
 				<CalendarInput
