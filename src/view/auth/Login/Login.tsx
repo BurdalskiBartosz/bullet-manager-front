@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 import { useAuth } from 'providers/AuthProvider';
 import { tLoginUserData } from 'types/forms/authForm';
-import { Button, Font, Input, Link } from 'components';
+import { Button, Font, InputBase, Link, PasswordInput } from 'components';
 import { StyledErrorBar, StyledTextUnderForm } from 'styles/shared/auth';
 import { StyledForm } from 'styles/shared/global';
 
@@ -35,7 +35,7 @@ const Login = () => {
 				</StyledErrorBar>
 			)}
 			<StyledForm onSubmit={handleSubmit(auth.signIn)}>
-				<Input
+				<InputBase
 					id="loginOrEmail"
 					label="Login or email input"
 					register={register}
@@ -45,15 +45,17 @@ const Login = () => {
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-				<Input
-					id="password"
-					label="Password input"
-					register={register}
-					fullWidth={false}
-					type="password"
-					error={{
-						isError: !!errors.password,
-						errorMessage: 'Password validation message'
+				<PasswordInput
+					inputBase={{
+						id: 'password',
+						label: 'Password input',
+						register: register,
+						fullWidth: false,
+						type: 'password',
+						error: {
+							isError: !!errors.password,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
 				<Button>Login</Button>

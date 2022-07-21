@@ -8,45 +8,23 @@ import Modal from 'components/molecules/Modal';
 import useModal from 'hooks/useModal';
 import Icon from 'components/atoms/Icon';
 import { format } from 'date-fns';
-import Input from 'components/atoms/Input';
+import InputBase from 'components/atoms/InputBase';
+import { tInputBase } from 'components/atoms/InputBase/InputBase';
 
 type tProps = {
-	id: string;
-	label: string;
 	control: any;
-	refParent?: {
-		current: HTMLElement;
-	};
-	error: {
-		isError: boolean;
-		errorMessage: string;
-	};
+	refParent: any;
+	inputBase: tInputBase;
 };
 
-const CalendarInput: FC<tProps> = ({
-	id,
-	label,
-	control,
-	error,
-	refParent
-}) => {
+const CalendarInput: FC<tProps> = ({ inputBase, control, refParent }) => {
 	const { handleCloseModal, handleOpenModal, isOpen } = useModal();
 	const [date, setDate] = useState<Date>(new Date());
 
 	return (
-		<StyledWrapper isError={error.isError}>
+		<InputBase {...inputBase}>
 			<div>
-				<Input
-					id={id}
-					label={label}
-					isDisabled
-					fullWidth={false}
-					value={format(date, 'MM/dd/yy')}
-					customIcon={{
-						iconName: 'calendar',
-						fn: handleOpenModal
-					}}
-				/>
+				<button onClick={handleOpenModal}>TETG</button>
 				{isOpen ? (
 					<Modal
 						header="Dodaj zadanie"
@@ -54,7 +32,7 @@ const CalendarInput: FC<tProps> = ({
 						customParent={refParent?.current}
 					>
 						<Controller
-							name={id}
+							name={inputBase.id}
 							control={control}
 							render={({ field }) => {
 								const { onChange, value } = field;
@@ -87,13 +65,7 @@ const CalendarInput: FC<tProps> = ({
 					</Modal>
 				) : null}
 			</div>
-			<Font
-				variant="inputError"
-				style={{ alignSelf: 'flex-end', height: '10px' }}
-			>
-				{error.isError ? error.errorMessage : ''}
-			</Font>
-		</StyledWrapper>
+		</InputBase>
 	);
 };
 

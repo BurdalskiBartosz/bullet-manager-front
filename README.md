@@ -1,46 +1,106 @@
-# Getting Started with Create React App
+# Frontend of Bullet Manager application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Backend appliaction you can find [here](https://github.com/BurdalskiBartosz/bullet-manager-backend).
 
-## Available Scripts
+* [Description](#description)
+* [Technologies](#technologies)
+* [Workflow](#workflow)
+* [Assumptions to be met by the application](#assumptions-to-be-met-by-the-application)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+An application that I am writing as part of self-development, the assumption of which is to create a system in which users will be able to create accounts together with the choice of a plan. In the basic plan, the application will be a kind of ToDo application, but a bit extensive. In the highest plan, it is supposed to be a project manager like asana or in the future jira.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Some of the technologies used from which the project is created:
 
-### `npm test`
+* React.js
+* Redux-toolkit
+* Typescript
+* Styled-components
+* React-hook-form
+* i18n
+* raect-testing-library
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Workflow
 
-### `npm run build`
+The main branch is master (change to develop or main). Each task is one branch, which begins with the main branch, branch names are created according to the formula: project abbreviation/task type/task number from asana, for example BM/feature/1202288889962010.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Based on the currently performed work in the project, each major task should be divided into several smaller tasks so that there is regularity in pull requests.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+//TODO add changelog file, CI/CD?, Docker?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Assumptions to be met by the application
 
-### `npm run eject`
+Account creation with in-app plan selection. There are several types of plans, they are:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Free
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Free version of the application. It has the basic functionalities needed to manage daily tasks. It is possible to open a limited number of projects and invite up to 5 other users with an account in the system to each of them. Perfect for people working alone or in a small team on a small project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Specifications
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- free plan,
+- up to 5 users in the project,
+- 5 active projects,
+- up to 150 tasks per project,
+- 15mb of material warehouse memory,
+- 10 days of activity history
 
-## Learn More
+### Team
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Paid version x PLN per month. It has all the functionalities available in the Free plan, expanded with the possibility of assigning more people to the project. Comparing to the Free plan, all specification parameters are also increased. For medium-sized teams working on more demanding projects.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Specifications
+
+- paid plan x PLN / month,
+- up to 20 users in the project,
+- up to 300 active projects,
+- reminders,
+- activity history without limits
+
+### Team+
+
+Paid version x PLN per month. It has a Team plan, but in addition, you can assign roles in the project to users, thus granting appropriate permissions.
+
+#### Specifications
+
+- paid plan x PLN / month,
+- what is in the Team plan, but additionally the possibility of assigning a role to users in projects
+
+### Enterprise
+
+The version is priced individually, the price is not lower than PLN x per user. It has a new view of projects existing in the organization, dedicated to the plan, including: lists of projects, users, assigning tasks to the user,. In addition, you can create an account for an employee from the panel, while giving him the appropriate role or specific rights. Project manager or admin can create tasks of certain types: regular task, bug, epic. Each type of task has a different workflow specification that can be freely edited or used predefined.
+
+#### Specifications
+
+- plan priced individually, from PLN x per user in the organization,
+- view dedicated to the plan,
+- creating an account for a user who can simultaneously use the Free plan functionality on his own,
+- roles and powers,
+- tasks have their types
+
+### Functionalities available to all users
+
+- creating tasks,
+- creating notes,
+- creating schedules,
+- budget,
+- body measurements,
+- creating lists,
+- kanban,
+- measuring the time needed to complete the task,
+- comments in tasks,
+- activity history - depends on the plan,
+- habits,
+- goals,
+- search engine,
+- labels,
+- calendar,
+- materials warehouse - capacity depends on the plan,
+- projects,
+- counters,
+- project planning,
+- project view,
+- priorities

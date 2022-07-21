@@ -1,23 +1,21 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
 import {
-	Input,
 	Button,
 	SelectInput,
+	MaskInput,
 	TextArea,
-	CalendarInput,
-	MaskInput
+	CalendarInput
 } from 'components';
 import { FC, MutableRefObject, useRef } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
 import { StyledForm } from 'styles/shared/global';
+import { dateMask } from 'utils/masks';
 
 type tProps = {};
 
 const validationSchema = yup.object().shape({
-	title: yup.string().required(),
 	description: yup.string().required().min(6),
 	task: yup.string().required()
 });
@@ -62,43 +60,56 @@ const AddTaskForm: FC<tProps> = () => {
 					</select>
 				</div>
 				<MaskInput
-					id="title"
-					label="Nazwa zadania Input mask"
-					register={register}
-					error={{
-						isError: !!errors.title,
-						errorMessage: 'Login or email validation message'
+					mask={dateMask}
+					placeholder="DD/MM/YYYY"
+					control={control}
+					inputBase={{
+						id: 'title',
+						label: 'SELECT',
+						fullWidth: false,
+						error: {
+							isError: !!errors.title,
+							errorMessage: 'Login or email validation message'
+						}
 					}}
 				/>
 				<SelectInput
-					id="task"
-					label="task"
 					control={control}
 					keyValue="title"
 					getOptionsFn={useGetTasksQuery}
-					error={{
-						isError: !!errors.task,
-						errorMessage: 'Login or email validation message'
+					inputBase={{
+						id: 'task',
+						label: 'SELECT',
+						fullWidth: false,
+						error: {
+							isError: !!errors.task,
+							errorMessage: 'Login or email validation message'
+						}
 					}}
 				/>
 
 				<TextArea
-					id="description"
-					label="Opis"
-					register={register}
-					error={{
-						isError: !!errors.description,
-						errorMessage: 'Password validation message'
+					inputBase={{
+						id: 'description',
+						label: 'Opis',
+						register: register,
+						error: {
+							isError: !!errors.description,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
 				<CalendarInput
-					id="plannedFinishDate"
-					label="Planowana data ukończenia"
 					control={control}
 					refParent={ref}
-					error={{
-						isError: !!errors.plannedFinishDate,
-						errorMessage: 'Password validation message'
+					inputBase={{
+						id: 'plannedFinishDate',
+						label: 'Planowana data ukończenia',
+						fullWidth: false,
+						error: {
+							isError: !!errors.description,
+							errorMessage: 'Password validation message'
+						}
 					}}
 				/>
 				<div>
