@@ -18,6 +18,7 @@ export type tInputBase = {
 	isDisabled?: boolean;
 	as?: 'textarea';
 	children?: ReactNode | ReactNode[];
+	value?: any;
 	icon?: {
 		iconName: tIconNames;
 		fn: () => void;
@@ -38,6 +39,7 @@ const InputBase: FC<tInputBase> = ({
 	as,
 	icon,
 	children,
+	value,
 	fullWidth = true
 }) => {
 	const { t } = useTranslation();
@@ -56,19 +58,20 @@ const InputBase: FC<tInputBase> = ({
 							<StyledInput
 								as={as}
 								id={id}
+								value={value}
 								type={type}
 								disabled={isDisabled}
 								placeholder={t(`${label} placeholder`)}
 								fullWidth={fullWidth}
 								{...(register ? register(id) : {})}
 							/>
-							{icon && (
-								<StyledIconButton
-									iconName={icon.iconName}
-									fn={icon.fn}
-								/>
-							)}
 						</>
+					)}
+					{icon && (
+						<StyledIconButton
+							iconName={icon.iconName}
+							fn={icon.fn}
+						/>
 					)}
 				</StyledInnerWrapper>
 			</StyledInnerWrapper>

@@ -24,6 +24,7 @@ const MaskInput: FC<tProps> = ({ inputBase, control, mask, placeholder }) => {
 						<StyledInput
 							onChange={onChange}
 							mask={mask}
+							value={inputBase.value}
 							placeholder={placeholder}
 						/>
 					);
