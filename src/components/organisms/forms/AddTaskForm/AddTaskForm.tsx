@@ -66,7 +66,6 @@ const AddTaskForm: FC<tProps> = () => {
 					inputBase={{
 						id: 'title',
 						label: 'SELECT',
-						fullWidth: false,
 						error: {
 							isError: !!errors.title,
 							errorMessage: 'Login or email validation message'
@@ -80,7 +79,6 @@ const AddTaskForm: FC<tProps> = () => {
 					inputBase={{
 						id: 'task',
 						label: 'SELECT',
-						fullWidth: false,
 						error: {
 							isError: !!errors.task,
 							errorMessage: 'Login or email validation message'
