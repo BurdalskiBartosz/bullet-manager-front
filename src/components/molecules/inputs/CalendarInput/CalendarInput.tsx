@@ -1,16 +1,10 @@
-import Calendar from 'react-calendar';
 import { Controller } from 'react-hook-form';
-
-import Font from 'components/atoms/Font';
-import { FC, useState } from 'react';
-import { StyledWrapper, CalendarWrapper } from './CalendarInput.style';
-import Modal from 'components/molecules/Modal';
-import useModal from 'hooks/useModal';
-import Icon from 'components/atoms/Icon';
-import { format } from 'date-fns';
+import { FC } from 'react';
+import { CalendarWrapper, StyledInput } from './CalendarInput.style';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
-import MaskInput from '../MaskInput';
-import { dateMask } from 'utils/masks';
+import DatePicker from 'react-datepicker';
+import IconButton from 'components/atoms/IconButton';
+import 'react-datepicker/dist/react-datepicker.css';
 
 type tProps = {
 	control: any;
@@ -18,66 +12,110 @@ type tProps = {
 	inputBase: tInputBase;
 };
 
-const CalendarInput: FC<tProps> = ({ inputBase, control, refParent }) => {
-	const { handleCloseModal, handleOpenModal, isOpen } = useModal();
-	const [date, setDate] = useState<Date>(new Date());
-
+const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
+	console.log(inputBase.value);
+	const years = new Array(10)
+		.fill(null)
+		.map((el, i) => new Date().getFullYear() + i);
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
 	return (
 		<>
-			<MaskInput
-				mask={dateMask}
-				placeholder="DD/MM/YYYY"
+			<Controller
+				name={inputBase.id}
 				control={control}
-				inputBase={{
-					id: 'title',
-					label: 'SELECT',
-					error: inputBase.error,
-					value: format(date, 'MM/dd/yyyy'),
-					icon: {
-						iconName: 'calendar',
-						fn: handleOpenModal
-					}
+				defaultValue={inputBase.value}
+				render={({ field }) => {
+					const { onChange, value } = field;
+					return (
+						<CalendarWrapper>
+							<DatePicker
+								selected={value}
+								onChange={onChange}
+								customInput={<StyledInput />}
+								renderCustomHeader={({
+									date,
+									changeYear,
+									changeMonth,
+									decreaseMonth,
+									increaseMonth,
+									prevMonthButtonDisabled,
+									nextMonthButtonDisabled
+								}) => (
+									<div
+										style={{
+											margin: 10,
+											display: 'flex',
+											justifyContent: 'center'
+										}}
+									>
+										<IconButton
+											iconName="navigate_before"
+											fn={decreaseMonth}
+											disabled={prevMonthButtonDisabled}
+										/>
+										<select
+											value={new Date(date).getFullYear()}
+											onChange={({ target: { value } }) =>
+												changeYear(+value)
+											}
+										>
+											{years.map((option) => (
+												<option
+													key={option}
+													value={option}
+												>
+													{option}
+												</option>
+											))}
+										</select>
+
+										<select
+											value={
+												months[
+													new Date(date).getMonth()
+												]
+											}
+											onChange={({ target: { value } }) =>
+												changeMonth(
+													months.indexOf(value)
+												)
+											}
+										>
+											{months.map((option) => (
+												<option
+													key={option}
+													value={option}
+												>
+													{option}
+												</option>
+											))}
+										</select>
+
+										<IconButton
+											iconName="navigate_next"
+											fn={increaseMonth}
+											disabled={nextMonthButtonDisabled}
+										/>
+									</div>
+								)}
+							/>
+						</CalendarWrapper>
+					);
 				}}
 			/>
-			{isOpen ? (
-				<Modal
-					header="Dodaj zadanie"
-					handleClose={handleCloseModal}
-					customParent={refParent?.current}
-				>
-					<Controller
-						name={inputBase.id}
-						control={control}
-						render={({ field }) => {
-							const { onChange, value } = field;
-							return (
-								<CalendarWrapper>
-									<Calendar
-										minDetail="year"
-										onChange={(value: Date) => {
-											setDate(value);
-											onChange(value);
-										}}
-										value={value}
-										nextLabel={
-											<Icon iconName="navigate_next" />
-										}
-										next2Label={
-											<Icon iconName="double_navigate_next" />
-										}
-										prevLabel={
-											<Icon iconName="navigate_before" />
-										}
-										prev2Label={
-											<Icon iconName="double_navigate_before" />
-										}
-									/>
-								</CalendarWrapper>
-							);
-						}}
-					/>
-				</Modal>
-			) : null}
 		</>
 	);
 };
