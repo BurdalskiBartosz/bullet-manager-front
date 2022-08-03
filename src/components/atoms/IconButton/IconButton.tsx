@@ -4,6 +4,7 @@ import { StyledIconButton } from './IconButton.styles';
 
 type tProps = {
 	fn?: Function;
+	disabled?: boolean;
 } & tIcon;
 
 const IconButton: FC<tProps> = ({
@@ -11,6 +12,7 @@ const IconButton: FC<tProps> = ({
 	fill,
 	fn = () => {},
 	className,
+	disabled,
 	width = '20px',
 	height = '20px'
 }) => {
@@ -19,6 +21,7 @@ const IconButton: FC<tProps> = ({
 			className={className}
 			type="button"
 			onClick={() => fn()}
+			disabled={disabled}
 		>
 			<Icon
 				iconName={iconName}
