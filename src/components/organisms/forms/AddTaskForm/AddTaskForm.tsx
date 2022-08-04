@@ -8,7 +8,7 @@ import {
 	TextArea,
 	CalendarInput
 } from 'components';
-import { FC, MutableRefObject, useRef } from 'react';
+import { FC, MutableRefObject, useRef, useState } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
 import { StyledForm } from 'styles/shared/global';
 import { dateMask } from 'utils/masks';
@@ -44,8 +44,6 @@ const AddTaskForm: FC<tProps> = () => {
 	const [addTask] = useAddTaskMutation();
 
 	const test = (data: any) => {
-		console.log(data);
-		// addTask(data);
 		console.log(data);
 	};
 
@@ -103,6 +101,7 @@ const AddTaskForm: FC<tProps> = () => {
 					inputBase={{
 						id: 'plannedFinishDate',
 						label: 'Planowana data ukończenia',
+						value: new Date(),
 						fullWidth: false,
 						error: {
 							isError: !!errors.description,
