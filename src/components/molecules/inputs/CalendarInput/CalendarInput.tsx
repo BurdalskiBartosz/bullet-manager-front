@@ -13,7 +13,6 @@ type tProps = {
 };
 
 const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
-	console.log(inputBase.value);
 	const years = new Array(10)
 		.fill(null)
 		.map((el, i) => new Date().getFullYear() + i);
