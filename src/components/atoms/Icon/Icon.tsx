@@ -43,6 +43,7 @@ const Icon: FC<tIcon> = ({
 			fill={fill}
 			width={width}
 			height={height}
+			data-testid="icon-component"
 		/>
 	);
 };

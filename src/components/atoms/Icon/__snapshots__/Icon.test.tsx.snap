@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon should render correctly  1`] = `
+<svg
+  data-testid="icon-component"
+  height="20px"
+  width="20px"
+>
+  close.svg
+</svg>
+`;
+
+exports[`Icon should render correctly 1`] = `
+<svg
+  data-testid="icon-component"
+  height="20px"
+  width="20px"
+>
+  close.svg
+</svg>
+`;
+
+exports[`Icon should render correctly without any props 1`] = `
+<svg
+  data-testid="icon-component"
+  height="20px"
+  width="20px"
+>
+  close.svg
+</svg>
+`;
