@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly without any props 1`] = `
+.c0 {
+  width: auto;
+  padding: 1rem 1.8rem;
+  border: none;
+  font-weight: 500;
+  font-family: Rubik,sans-serif;
+  color: #FCFCFC;
+  border-radius: 15px;
+  cursor: pointer;
+  -webkit-transition: 0.3s linear;
+  transition: 0.3s linear;
+  background-color: #6B48CE;
+}
+
+<button
+  class="c0"
+>
+  Button
+</button>
+`;
