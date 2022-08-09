@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton should render correctly 1`] = `
+.c0 {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+<button
+  class="c0"
+  data-testid="icon-button-component"
+  type="button"
+>
+  <svg
+    data-testid="icon-component"
+    height="20px"
+    width="20px"
+  >
+    close.svg
+  </svg>
+</button>
+`;

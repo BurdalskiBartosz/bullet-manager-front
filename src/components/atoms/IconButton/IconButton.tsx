@@ -19,6 +19,7 @@ const IconButton: FC<tProps> = ({
 			className={className}
 			type="button"
 			onClick={() => fn()}
+			data-testid="icon-button-component"
 		>
 			<Icon
 				iconName={iconName}
