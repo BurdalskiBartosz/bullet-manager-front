@@ -37,7 +37,7 @@ const Breadcrumbs: FC<tProps> = () => {
 			});
 		return pathnames;
 	};
-	return <Wrapper>{getPaths()}</Wrapper>;
+	return <Wrapper data-testid="breadcrumbs-component">{getPaths()}</Wrapper>;
 };
 
 export default Breadcrumbs;
