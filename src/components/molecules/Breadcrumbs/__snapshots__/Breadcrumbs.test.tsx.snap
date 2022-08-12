@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs should correctly 1`] = `
+.c2 {
+  margin-right: 1rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-size: 2.5rem;
+}
+
+<div
+  class="c0"
+  data-testid="breadcrumbs-component"
+>
+  <a
+    class="c1"
+    href="/app/dashboard"
+    style="color: white;"
+  >
+    <p
+      class="c2"
+    >
+      Dashboard
+    </p>
+    <svg
+      data-testid="icon-component"
+      fill="#FFF"
+      height="15"
+      width="20px"
+    >
+      arrow_right.svg
+    </svg>
+  </a>
+  <a
+    class="c1"
+    href="/app/dashboard/example"
+    style="color: white;"
+  >
+    <p
+      class="c2"
+    >
+      Example
+    </p>
+    <svg
+      data-testid="icon-component"
+      fill="#FFF"
+      height="15"
+      width="20px"
+    >
+      arrow_right.svg
+    </svg>
+  </a>
+  <a
+    class="c1"
+    href="/app/dashboard/example/path"
+    style="color: white;"
+  >
+    <p
+      class="c2"
+    >
+      Path
+    </p>
+  </a>
+</div>
+`;

@@ -57,6 +57,7 @@
   "devDependencies": {
     "@testing-library/user-event": "^14.0.0-beta",
     "@types/react-calendar": "^3.5.1",
-    "@types/react-text-mask": "^5.4.11"
+    "@types/react-text-mask": "^5.4.11",
+    "jest-styled-components": "^7.0.8"
   }
 }
