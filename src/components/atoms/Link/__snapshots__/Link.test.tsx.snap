@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render correctly 1`] = `
+.c0 {
+  font-weight: bold;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #171717;
+  font-size: 1.2rem;
+}
+
+<a
+  class="c0"
+  href="/dashboard"
+>
+  Link
+</a>
+`;
