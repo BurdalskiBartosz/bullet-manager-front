@@ -45,7 +45,10 @@ const InputBase: FC<tInputBase> = ({
 	const { t } = useTranslation();
 
 	return (
-		<StyledWrapper fullWidth={fullWidth} isError={error.isError}>
+		<StyledWrapper
+			fullWidth={fullWidth} isError={error.isError}
+			data-testid="input-base-component"
+		>
 			<Font htmlFor={id} variant="label">
 				{label}
 			</Font>
