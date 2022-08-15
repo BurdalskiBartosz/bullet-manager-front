@@ -37,7 +37,7 @@ type tProps = {
 type SelectData = {
 	label: string | number;
 	value: string | number;
-};
+} | null;
 
 const SelectInput: FC<tProps> = ({
 	inputBase,
@@ -66,10 +66,13 @@ const SelectInput: FC<tProps> = ({
 		});
 	}
 
-	const handleChange = (data: any) => {
-		return multi
-			? data?.map((option: SelectData) => option.value)
-			: data?.value;
+	const handleChange = (data: SelectData | SelectData[]) => {
+		if (!data) return;
+		if ('value' in data) {
+			return data?.value;
+		} else if (multi) {
+			return data?.map((option: SelectData) => option?.value);
+		}
 	};
 
 	return (
@@ -86,14 +89,17 @@ const SelectInput: FC<tProps> = ({
 							options={selectData}
 							isMulti={multi}
 							onBlur={onBlur}
-							onChange={(data) => onChange(handleChange(data))}
+							onChange={(data) =>
+								onChange(handleChange(data as SelectData))
+							}
 							value={
 								multi
 									? selectData.filter((option: SelectData) =>
-											value?.includes(option.value)
+											value?.includes(option?.value)
 									  )
 									: selectData.find(
-											(c: SelectData) => c.value === value
+											(c: SelectData) =>
+												c?.value === value
 									  )
 							}
 						/>
