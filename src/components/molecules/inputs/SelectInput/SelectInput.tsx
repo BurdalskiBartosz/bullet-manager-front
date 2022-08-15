@@ -15,29 +15,62 @@ declare module 'react-select/dist/declarations/src/Select' {
 	}
 }
 
-type tProps = {
+type EntitySelect = {
 	getOptionsFn: Function;
 	keyValue: string;
+};
+
+type CustomSelect = {
+	value: string;
+	key: string;
+}[];
+
+type SelectOptions = EntitySelect | CustomSelect;
+
+type tProps = {
 	control: any;
 	multi?: boolean;
 	inputBase: tInputBase;
+	selectOptions: SelectOptions;
+};
+
+type SelectData = {
+	label: string | number;
+	value: string | number;
 };
 
 const SelectInput: FC<tProps> = ({
 	inputBase,
 	control,
-	getOptionsFn,
-	keyValue,
-	multi = false
+	multi = false,
+	selectOptions
 }) => {
-	const { data } = getOptionsFn();
 	const { id, error } = inputBase;
-	const selectOptions = data.map((option: any) => {
-		return {
-			label: option[keyValue],
-			value: option.id
-		};
-	});
+	let selectData: Array<SelectData> = [];
+
+	if ('getOptionsFn' in selectOptions) {
+		const { getOptionsFn, keyValue } = selectOptions;
+		const { data } = getOptionsFn();
+		selectData = data.map((option: any) => {
+			return {
+				label: option[keyValue],
+				value: option.id
+			};
+		});
+	} else {
+		selectData = selectOptions.map(({ value, key }) => {
+			return {
+				label: value,
+				value: key
+			};
+		});
+	}
+
+	const handleChange = (data: any) => {
+		return multi
+			? data?.map((option: SelectData) => option.value)
+			: data?.value;
+	};
 
 	return (
 		<InputBase {...inputBase}>
@@ -50,25 +83,17 @@ const SelectInput: FC<tProps> = ({
 						<Select
 							styles={customStyles}
 							isError={error.isError}
-							options={selectOptions}
+							options={selectData}
 							isMulti={multi}
 							onBlur={onBlur}
-							onChange={(data) =>
-								onChange(
-									multi
-										? data?.map(
-												(option: any) => option.value
-										  )
-										: data.value
-								)
-							}
+							onChange={(data) => onChange(handleChange(data))}
 							value={
 								multi
-									? selectOptions.filter((option: any) =>
+									? selectData.filter((option: SelectData) =>
 											value?.includes(option.value)
 									  )
-									: selectOptions.find(
-											(c: any) => c.value === value
+									: selectData.find(
+											(c: SelectData) => c.value === value
 									  )
 							}
 						/>
