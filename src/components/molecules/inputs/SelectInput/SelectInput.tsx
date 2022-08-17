@@ -84,10 +84,10 @@ const SelectInput: FC<tProps> = ({
 					const { onChange, value, onBlur } = field;
 					return (
 						<Select
-							id={id}
-							data-testid="select-input-component"
+							inputId={id}
 							styles={customStyles}
 							isError={error.isError}
+							name={id}
 							options={selectData}
 							isMulti={multi}
 							onBlur={onBlur}

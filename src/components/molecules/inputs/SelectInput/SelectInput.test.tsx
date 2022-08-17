@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { fireEvent, render, screen, waitFor } from 'utils/tests';
 import SelectInput from './SelectInput';
+import selectEvent from 'react-select-event';
 
 type Form = {
 	select: string[] | string;
@@ -21,36 +22,42 @@ const Component = () => {
 		formState: { errors }
 	} = useForm<Form>();
 	return (
-		<SelectInput
-			control={control}
-			multi
-			selectOptions={{
-				getOptionsFn: mockGetOptionsFn,
-				keyValue: 'title'
-			}}
-			inputBase={{
-				id: 'task',
-				label: 'SELECT',
-				fullWidth: false,
-				error: {
-					isError: !!errors.select,
-					errorMessage: 'Login or email validation message'
-				}
-			}}
-		/>
+		<form role="form">
+			<SelectInput
+				control={control}
+				multi
+				selectOptions={{
+					getOptionsFn: mockGetOptionsFn,
+					keyValue: 'title'
+				}}
+				inputBase={{
+					id: 'selectValues',
+					label: 'SELECT',
+					fullWidth: false,
+					error: {
+						isError: !!errors.select,
+						errorMessage: 'Login or email validation message'
+					}
+				}}
+			/>
+		</form>
 	);
 };
 
 describe('SelectInput', () => {
-	it('should not show body', async () => {
+	it('should works correctly with multi prop', async () => {
 		render(<Component />);
 
-		const bodyText = screen.getByRole('combobox');
-		fireEvent.click(bodyText);
+		expect(screen.getByRole('form')).toHaveFormValues({
+			selectValues: ''
+		});
 
-		const getSelectItem = async (selectLabel: any, itemText: any) => {
-			fireEvent.keyDown(bodyText, 'DOWN_ARROW');
-		};
-		await getSelectItem('SELECT', 'Option');
+		await selectEvent.select(screen.getByLabelText('SELECT'), [
+			'Titile',
+			'Second title'
+		]);
+		expect(screen.getByRole('form')).toHaveFormValues({
+			selectValues: ['1', '2']
+		});
 	});
 });
