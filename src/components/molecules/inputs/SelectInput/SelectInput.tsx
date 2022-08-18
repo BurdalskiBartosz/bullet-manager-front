@@ -2,8 +2,9 @@ import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import Select, { GroupBase } from 'react-select';
+import Select, { GroupBase, OnChangeValue } from 'react-select';
 import { customStyles } from './SelectInput.style';
+import CreatableSelect from 'react-select/creatable';
 declare module 'react-select/dist/declarations/src/Select' {
 	export interface Props<
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -32,6 +33,7 @@ type tProps = {
 	multi?: boolean;
 	inputBase: tInputBase;
 	selectOptions: SelectOptions;
+	creatable?: boolean;
 };
 
 type SelectData = {
@@ -43,7 +45,8 @@ const SelectInput: FC<tProps> = ({
 	inputBase,
 	control,
 	multi = false,
-	selectOptions
+	selectOptions,
+	creatable
 }) => {
 	const { id, error } = inputBase;
 	let selectData: Array<SelectData> = [];
@@ -65,14 +68,25 @@ const SelectInput: FC<tProps> = ({
 			};
 		});
 	}
-
-	const handleChange = (data: SelectData | SelectData[]) => {
+	// To change "typeof multi"
+	const handleChange = (data: OnChangeValue<SelectData, typeof multi>) => {
 		if (!data) return;
 		if ('value' in data) {
 			return data?.value;
 		} else if (multi) {
-			return data?.map((option: SelectData) => option?.value);
+			return data?.map((option: SelectData) => {
+				return option?.value;
+			});
 		}
+	};
+
+	const setValue = (value: any) => {
+		if (multi) {
+			return selectData.filter((option: SelectData) =>
+				value?.includes(option?.value)
+			);
+		}
+		return selectData.find((option: SelectData) => option?.value === value);
 	};
 
 	return (
@@ -82,28 +96,30 @@ const SelectInput: FC<tProps> = ({
 				control={control}
 				render={({ field }) => {
 					const { onChange, value, onBlur } = field;
-					return (
+					return creatable ? (
+						// ToDo Change it so that there is no conditional if possible
+						// <SelectComponent {...props}/>
+						<CreatableSelect
+							inputId={id}
+							name={id}
+							isMulti={multi}
+							onChange={(data) => onChange(handleChange(data))}
+							options={selectData}
+							isError={error.isError}
+							styles={customStyles}
+							onBlur={onBlur}
+						/>
+					) : (
 						<Select
 							inputId={id}
-							styles={customStyles}
-							isError={error.isError}
 							name={id}
-							options={selectData}
 							isMulti={multi}
+							onChange={(data) => onChange(handleChange(data))}
+							options={selectData}
+							isError={error.isError}
+							styles={customStyles}
 							onBlur={onBlur}
-							onChange={(data) =>
-								onChange(handleChange(data as SelectData))
-							}
-							value={
-								multi
-									? selectData.filter((option: SelectData) =>
-											value?.includes(option?.value)
-									  )
-									: selectData.find(
-											(c: SelectData) =>
-												c?.value === value
-									  )
-							}
+							value={setValue(value)}
 						/>
 					);
 				}}
