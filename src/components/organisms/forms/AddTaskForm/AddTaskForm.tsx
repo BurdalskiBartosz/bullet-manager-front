@@ -73,14 +73,40 @@ const AddTaskForm: FC<tProps> = () => {
 				/>
 				<SelectInput
 					control={control}
-					keyValue="title"
-					getOptionsFn={useGetTasksQuery}
+					multi
+					selectOptions={{
+						getOptionsFn: useGetTasksQuery,
+						keyValue: 'title'
+					}}
 					inputBase={{
 						id: 'task',
 						label: 'SELECT',
 						fullWidth: false,
 						error: {
-							isError: !!errors.task,
+							isError: false,
+							errorMessage: 'Login or email validation message'
+						}
+					}}
+				/>
+				<SelectInput
+					control={control}
+					creatable
+					selectOptions={[
+						{
+							value: 'value',
+							key: 'key'
+						},
+						{
+							value: 'value2',
+							key: 'key2'
+						}
+					]}
+					inputBase={{
+						id: 'task2',
+						label: 'SELECT2',
+						fullWidth: false,
+						error: {
+							isError: false,
 							errorMessage: 'Login or email validation message'
 						}
 					}}
