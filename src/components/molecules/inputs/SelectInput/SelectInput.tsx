@@ -2,8 +2,9 @@ import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import Select, { GroupBase } from 'react-select';
+import Select, { GroupBase, OnChangeValue } from 'react-select';
 import { customStyles } from './SelectInput.style';
+import CreatableSelect from 'react-select/creatable';
 declare module 'react-select/dist/declarations/src/Select' {
 	export interface Props<
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -15,29 +16,78 @@ declare module 'react-select/dist/declarations/src/Select' {
 	}
 }
 
-type tProps = {
+type EntitySelect = {
 	getOptionsFn: Function;
 	keyValue: string;
+};
+
+type CustomSelect = {
+	value: string;
+	key: string;
+}[];
+
+type SelectOptions = EntitySelect | CustomSelect;
+
+type tProps = {
 	control: any;
 	multi?: boolean;
 	inputBase: tInputBase;
+	selectOptions: SelectOptions;
+	creatable?: boolean;
 };
+
+type SelectData = {
+	label: string | number;
+	value: string | number;
+} | null;
 
 const SelectInput: FC<tProps> = ({
 	inputBase,
 	control,
-	getOptionsFn,
-	keyValue,
-	multi = false
+	multi = false,
+	selectOptions,
+	creatable
 }) => {
-	const { data } = getOptionsFn();
 	const { id, error } = inputBase;
-	const selectOptions = data.map((option: any) => {
-		return {
-			label: option[keyValue],
-			value: option.id
-		};
-	});
+	let selectData: Array<SelectData> = [];
+
+	if ('getOptionsFn' in selectOptions) {
+		const { getOptionsFn, keyValue } = selectOptions;
+		const { data } = getOptionsFn();
+		selectData = data.map((option: any) => {
+			return {
+				label: option[keyValue],
+				value: option.id
+			};
+		});
+	} else {
+		selectData = selectOptions.map(({ value, key }) => {
+			return {
+				label: value,
+				value: key
+			};
+		});
+	}
+	// To change "typeof multi"
+	const handleChange = (data: OnChangeValue<SelectData, typeof multi>) => {
+		if (!data) return;
+		if ('value' in data) {
+			return data?.value;
+		} else if (multi) {
+			return data?.map((option: SelectData) => {
+				return option?.value;
+			});
+		}
+	};
+
+	const setValue = (value: any) => {
+		if (multi) {
+			return selectData.filter((option: SelectData) =>
+				value?.includes(option?.value)
+			);
+		}
+		return selectData.find((option: SelectData) => option?.value === value);
+	};
 
 	return (
 		<InputBase {...inputBase}>
@@ -46,31 +96,30 @@ const SelectInput: FC<tProps> = ({
 				control={control}
 				render={({ field }) => {
 					const { onChange, value, onBlur } = field;
-					return (
-						<Select
-							styles={customStyles}
-							isError={error.isError}
-							options={selectOptions}
+					return creatable ? (
+						// ToDo Change it so that there is no conditional if possible
+						// <SelectComponent {...props}/>
+						<CreatableSelect
+							inputId={id}
+							name={id}
 							isMulti={multi}
+							onChange={(data) => onChange(handleChange(data))}
+							options={selectData}
+							isError={error.isError}
+							styles={customStyles}
 							onBlur={onBlur}
-							onChange={(data) =>
-								onChange(
-									multi
-										? data?.map(
-												(option: any) => option.value
-										  )
-										: data.value
-								)
-							}
-							value={
-								multi
-									? selectOptions.filter((option: any) =>
-											value?.includes(option.value)
-									  )
-									: selectOptions.find(
-											(c: any) => c.value === value
-									  )
-							}
+						/>
+					) : (
+						<Select
+							inputId={id}
+							name={id}
+							isMulti={multi}
+							onChange={(data) => onChange(handleChange(data))}
+							options={selectData}
+							isError={error.isError}
+							styles={customStyles}
+							onBlur={onBlur}
+							value={setValue(value)}
 						/>
 					);
 				}}
