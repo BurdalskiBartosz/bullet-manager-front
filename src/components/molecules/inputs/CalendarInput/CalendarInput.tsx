@@ -5,6 +5,7 @@ import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import DatePicker from 'react-datepicker';
 import IconButton from 'components/atoms/IconButton';
 import 'react-datepicker/dist/react-datepicker.css';
+import SelectInput from '../SelectInput';
 
 type tProps = {
 	control: any;
@@ -13,22 +14,27 @@ type tProps = {
 };
 
 const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
-	const years = new Array(10)
-		.fill(null)
-		.map((el, i) => new Date().getFullYear() + i);
+	const years = new Array(10).fill(null).map((el, i) => {
+		const year = new Date().getFullYear() + i;
+		return {
+			label: year,
+			value: year
+		};
+	});
+
 	const months = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
+		{ label: 'January', value: '1' },
+		{ label: 'February', value: '2' },
+		{ label: 'March', value: '3' },
+		{ label: 'April', value: '4' },
+		{ label: 'May', value: '5' },
+		{ label: 'June', value: '6' },
+		{ label: 'July', value: '7' },
+		{ label: 'August', value: '8' },
+		{ label: 'September', value: '9' },
+		{ label: 'October', value: '10' },
+		{ label: 'November', value: '11' },
+		{ label: 'December', value: '12' }
 	];
 	return (
 		<>
@@ -65,43 +71,54 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 											fn={decreaseMonth}
 											disabled={prevMonthButtonDisabled}
 										/>
-										<select
-											value={new Date(date).getFullYear()}
-											onChange={({ target: { value } }) =>
-												changeYear(+value)
-											}
-										>
-											{years.map((option) => (
-												<option
-													key={option}
-													value={option}
-												>
-													{option}
-												</option>
-											))}
-										</select>
 
-										<select
-											value={
+										<SelectInput
+											control={control}
+											selectOptions={years}
+											onChangeHandler={(data) =>
+												changeYear(data.label)
+											}
+											customValue={() => {
+												new Date(date).getFullYear();
+											}}
+											inputBase={{
+												id: 'task2',
+												label: 'SELECT2',
+												error: {
+													isError: false,
+													errorMessage:
+														'Login or email validation message'
+												}
+											}}
+										/>
+
+										<SelectInput
+											control={control}
+											selectOptions={months}
+											onChangeHandler={(data) => {
+												const monthIndex =
+													months.findIndex(
+														(month) =>
+															month.label ===
+															data.label
+													);
+												changeMonth(monthIndex);
+											}}
+											customValue={() =>
 												months[
 													new Date(date).getMonth()
 												]
 											}
-											onChange={({ target: { value } }) =>
-												changeMonth(
-													months.indexOf(value)
-												)
-											}
-										>
-											{months.map((option) => (
-												<option
-													key={option}
-													value={option}
-												>
-													{option}
-												</option>
-											))}
-										</select>
+											inputBase={{
+												id: 'task2',
+												label: 'SELECT2',
+												error: {
+													isError: false,
+													errorMessage:
+														'Login or email validation message'
+												}
+											}}
+										/>
 
 										<IconButton
 											iconName="navigate_next"

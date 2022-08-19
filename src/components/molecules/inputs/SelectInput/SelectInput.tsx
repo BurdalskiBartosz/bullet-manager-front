@@ -22,8 +22,8 @@ type EntitySelect = {
 };
 
 type CustomSelect = {
-	value: string;
-	key: string;
+	label: string | number;
+	value: string | number;
 }[];
 
 type SelectOptions = EntitySelect | CustomSelect;
@@ -34,6 +34,8 @@ type tProps = {
 	inputBase: tInputBase;
 	selectOptions: SelectOptions;
 	creatable?: boolean;
+	onChangeHandler?: (arg0: any) => any;
+	customValue?: any;
 };
 
 type SelectData = {
@@ -46,7 +48,9 @@ const SelectInput: FC<tProps> = ({
 	control,
 	multi = false,
 	selectOptions,
-	creatable
+	creatable,
+	onChangeHandler,
+	customValue
 }) => {
 	const { id, error } = inputBase;
 	let selectData: Array<SelectData> = [];
@@ -61,10 +65,10 @@ const SelectInput: FC<tProps> = ({
 			};
 		});
 	} else {
-		selectData = selectOptions.map(({ value, key }) => {
+		selectData = selectOptions.map(({ label, value }) => {
 			return {
-				label: value,
-				value: key
+				label,
+				value
 			};
 		});
 	}
@@ -114,12 +118,22 @@ const SelectInput: FC<tProps> = ({
 							inputId={id}
 							name={id}
 							isMulti={multi}
-							onChange={(data) => onChange(handleChange(data))}
+							onChange={
+								// TODO Change into one handler
+								onChangeHandler
+									? (data) => onChange(onChangeHandler(data))
+									: (data) => onChange(handleChange(data))
+							}
 							options={selectData}
 							isError={error.isError}
 							styles={customStyles}
 							onBlur={onBlur}
-							value={setValue(value)}
+							value={
+								// TODO Change into one handler
+								customValue
+									? customValue(value)
+									: setValue(value)
+							}
 						/>
 					);
 				}}
