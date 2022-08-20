@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import Icon, { tIcon } from '../Icon/Icon';
 import { StyledIconButton } from './IconButton.styles';
 
 type tProps = {
 	fn?: Function;
 	disabled?: boolean;
+	children?: ReactNode;
 } & tIcon;
 
 const IconButton: FC<tProps> = ({

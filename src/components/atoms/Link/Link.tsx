@@ -10,13 +10,13 @@ type tProps = {
 
 const Link: FC<tProps> = ({ children, link, external }) => {
 	const { t } = useTranslation();
-
+	const textContent = t(children);
 	return external ? (
 		<StyledLink as="a" href={link}>
-			{t(children)}
+			{textContent}
 		</StyledLink>
 	) : (
-		<StyledLink to={link}>{t(children)}</StyledLink>
+		<StyledLink to={link}>{textContent}</StyledLink>
 	);
 };
 export default Link;

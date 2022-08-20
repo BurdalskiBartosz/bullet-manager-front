@@ -25,6 +25,7 @@ const Font: FC<tProps> = ({ children, variant, component, style, ...rest }) => {
 	let overideStyle;
 	let tag: tTags = 'p';
 	let variantStyles;
+	const textContent = typeof children === 'object' ? children : t(children);
 
 	if (variant) {
 		tag = variants[variant].tag;
@@ -48,7 +49,7 @@ const Font: FC<tProps> = ({ children, variant, component, style, ...rest }) => {
 			$overideStyle={overideStyle ?? ''}
 			{...rest}
 		>
-			{typeof children === 'object' ? children : t(children)}
+			{textContent}
 		</StyledTag>
 	);
 };
