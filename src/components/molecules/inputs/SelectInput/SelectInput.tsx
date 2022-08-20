@@ -53,13 +53,15 @@ const SelectInput: FC<tProps> = ({
 
 	if ('getOptionsFn' in selectOptions) {
 		const { getOptionsFn, keyValue } = selectOptions;
-		const { data } = getOptionsFn();
-		selectData = data.map((option: any) => {
-			return {
-				label: option[keyValue],
-				value: option.id
-			};
-		});
+		const { data, isLoading } = getOptionsFn();
+		if (!isLoading) {
+			selectData = data.map((option: any) => {
+				return {
+					label: option[keyValue],
+					value: option.id
+				};
+			});
+		}
 	} else {
 		selectData = selectOptions.map(({ value, key }) => {
 			return {
