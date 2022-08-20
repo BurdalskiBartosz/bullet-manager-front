@@ -1,26 +1,23 @@
 import { useForm } from 'react-hook-form';
-import { render, screen } from 'utils/tests';
+import { render, renderWithProviders, screen } from 'utils/tests';
 import SelectInput from './SelectInput';
 import selectEvent from 'react-select-event';
 import { FC } from 'react';
+import { useGetTasksQuery } from 'store/api/task';
+import { server } from 'mocks/msw';
 
 type Form = {
 	select: string[] | string;
 };
 
-const mockGetOptionsFn = () => {
-	return {
-		data: [
-			{ id: 1, title: 'Titile' },
-			{ id: 2, title: 'Second title' }
-		]
-	};
-};
+// Enable API mocking before tests.
+beforeAll(() => server.listen());
 
-const entitySelectData = {
-	getOptionsFn: mockGetOptionsFn,
-	keyValue: 'title'
-};
+// Reset any runtime request handlers we may add during the tests.
+afterEach(() => server.resetHandlers());
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close());
 
 const customSelectData = [
 	{
@@ -83,13 +80,20 @@ const Component: FC<ComponentType> = ({
 
 describe('SelectInput', () => {
 	it('should works correctly with multi prop', async () => {
-		render(<Component selectOptions={entitySelectData} />);
+		renderWithProviders(
+			<Component
+				selectOptions={{
+					getOptionsFn: useGetTasksQuery,
+					keyValue: 'title'
+				}}
+			/>
+		);
 		expect(screen.getByRole('form')).toHaveFormValues({
 			selectValues: ''
 		});
 		await selectEvent.select(screen.getByLabelText('Select title'), [
-			'Titile',
-			'Second title'
+			'Mocked value',
+			'Mocked second value'
 		]);
 		expect(screen.getByRole('form')).toHaveFormValues({
 			selectValues: ['1', '2']
@@ -97,13 +101,21 @@ describe('SelectInput', () => {
 	});
 
 	it('should works correctly without multi and select only one item', async () => {
-		render(<Component selectOptions={entitySelectData} multi={false} />);
+		render(
+			<Component
+				selectOptions={{
+					getOptionsFn: useGetTasksQuery,
+					keyValue: 'title'
+				}}
+				multi={false}
+			/>
+		);
 		expect(screen.getByRole('form')).toHaveFormValues({
 			selectValues: ''
 		});
 		await selectEvent.select(screen.getByLabelText('Select title'), [
-			'Titile',
-			'Second title'
+			'Mocked value',
+			'Mocked second value'
 		]);
 		expect(screen.getByRole('form')).toHaveFormValues({
 			selectValues: '2'
@@ -113,7 +125,10 @@ describe('SelectInput', () => {
 	it('should works correctly without creatable props and create new item and select it', async () => {
 		render(
 			<Component
-				selectOptions={entitySelectData}
+				selectOptions={{
+					getOptionsFn: useGetTasksQuery,
+					keyValue: 'title'
+				}}
 				multi={false}
 				creatable
 			/>
