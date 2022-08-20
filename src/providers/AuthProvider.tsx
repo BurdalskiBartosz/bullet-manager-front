@@ -44,7 +44,7 @@ const AuthContext = createContext<tAuthContex>({
 	signOut: () => {}
 });
 
-export const AuthProvider: FC<ReactNode> = ({ children }) => {
+export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const { getItem, setItem, removeItem } = useLocalStorage();
 	const navigate = useNavigate();
 	const location = useLocation() as tLocation;

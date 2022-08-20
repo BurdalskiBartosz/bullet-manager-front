@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import store from 'store/store';
+import { setupStore } from 'store/store';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { AuthProvider } from './AuthProvider';
@@ -11,6 +11,7 @@ type tProps = {
 };
 
 const Providers: FC<tProps> = ({ children }) => {
+	const store = setupStore();
 	return (
 		<BrowserRouter>
 			<Provider store={store}>
