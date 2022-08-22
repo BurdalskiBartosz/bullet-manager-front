@@ -25,7 +25,7 @@ export const StyledInnerWrapper = styled.div`
 	position: relative;
 `;
 export const StyledInput = styled.input`
-	padding: 1.2rem 2rem;
+	padding: 1.2rem 1.5rem;
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
 	border: 1px solid ${({ theme }) => theme.colors.lightGray};
