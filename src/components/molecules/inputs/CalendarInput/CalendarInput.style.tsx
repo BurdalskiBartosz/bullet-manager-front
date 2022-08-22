@@ -40,13 +40,15 @@ export const CalendarWrapper = styled.div`
 		& * {
 			font-family: ${({ theme }) => theme.fonts.primary};
 		}
-		&__day-names {
-			display: grid;
-			grid-template-columns: repeat(7, 1fr);
-		}
+		&__day-names,
 		&__week {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
+			place-items: center;
+		}
+
+		&__month-container {
+			width: 330px;
 		}
 		&__day,
 		&__day--keyboard-selected {

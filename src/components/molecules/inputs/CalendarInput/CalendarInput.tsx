@@ -2,14 +2,15 @@ import { Controller } from 'react-hook-form';
 import { FC } from 'react';
 import { CalendarWrapper, StyledInput } from './CalendarInput.style';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import IconButton from 'components/atoms/IconButton';
 import 'react-datepicker/dist/react-datepicker.css';
 import SelectInput from '../SelectInput';
+import pl from 'date-fns/locale/pl';
+registerLocale('pl', pl);
 
 type tProps = {
 	control: any;
-	refParent: any;
 	inputBase: tInputBase;
 };
 
@@ -47,9 +48,11 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 					return (
 						<CalendarWrapper>
 							<DatePicker
+								locale="pl"
 								selected={value}
 								onChange={onChange}
 								customInput={<StyledInput />}
+								disabledKeyboardNavigation
 								renderCustomHeader={({
 									date,
 									changeYear,
@@ -79,16 +82,16 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 												changeYear(data.label)
 											}
 											customValue={() => {
-												new Date(date).getFullYear();
+												const data = new Date(
+													date
+												).getFullYear();
+												const year = years.find(
+													(el) => el.label === data
+												);
+												return year;
 											}}
 											inputBase={{
-												id: 'task2',
-												label: 'SELECT2',
-												error: {
-													isError: false,
-													errorMessage:
-														'Login or email validation message'
-												}
+												id: 'Year'
 											}}
 										/>
 
@@ -110,13 +113,7 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 												]
 											}
 											inputBase={{
-												id: 'task2',
-												label: 'SELECT2',
-												error: {
-													isError: false,
-													errorMessage:
-														'Login or email validation message'
-												}
+												id: 'Month'
 											}}
 										/>
 

@@ -12,7 +12,7 @@ declare module 'react-select/dist/declarations/src/Select' {
 		IsMulti extends boolean,
 		Group extends GroupBase<Option>
 	> {
-		isError: boolean;
+		isError: boolean | undefined;
 	}
 }
 
@@ -111,7 +111,7 @@ const SelectInput: FC<tProps> = ({
 							isMulti={multi}
 							onChange={(data) => onChange(handleChange(data))}
 							options={selectData}
-							isError={error.isError}
+							isError={error?.isError}
 							styles={customStyles}
 							onBlur={onBlur}
 						/>
@@ -127,7 +127,7 @@ const SelectInput: FC<tProps> = ({
 									: (data) => onChange(handleChange(data))
 							}
 							options={selectData}
-							isError={error.isError}
+							isError={error?.isError}
 							styles={customStyles}
 							onBlur={onBlur}
 							value={
