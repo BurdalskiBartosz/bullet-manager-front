@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import IconButton from '../IconButton';
 
 type tWrapperProps = {
-	isError: boolean;
+	isError: boolean | undefined;
 	fullWidth: boolean;
 };
 
