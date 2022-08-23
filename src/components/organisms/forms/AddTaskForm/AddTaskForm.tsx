@@ -4,20 +4,18 @@ import * as yup from 'yup';
 import {
 	Button,
 	SelectInput,
-	MaskInput,
 	TextArea,
-	CalendarInput
+	CalendarInput,
+	InputBase
 } from 'components';
-import { FC, MutableRefObject, useRef, useState } from 'react';
-import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
+import { FC } from 'react';
+import { useAddTaskMutation } from 'store/api/task';
 import { StyledForm } from 'styles/shared/global';
-import { dateMask } from 'utils/masks';
 
 type tProps = {};
 
 const validationSchema = yup.object().shape({
-	description: yup.string().required().min(6),
-	task: yup.string().required()
+	description: yup.string().required().min(6)
 });
 
 type tTaskData = {
@@ -31,7 +29,6 @@ type tTaskData = {
 };
 
 const AddTaskForm: FC<tProps> = () => {
-	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 	const {
 		register,
 		control,
@@ -45,64 +42,41 @@ const AddTaskForm: FC<tProps> = () => {
 
 	const test = (data: any) => {
 		console.log(data);
+		addTask(data);
 	};
 
 	return (
-		<div ref={ref}>
+		<div>
 			<StyledForm onSubmit={handleSubmit(test)}>
-				<div>
-					<label htmlFor="user">Użytkownik:</label>
+				<InputBase
+					id="title"
+					label="Title"
+					register={register}
+					error={{
+						isError: !!errors.title,
+						errorMessage: 'Login or email validation message'
+					}}
+				/>
 
-					<select {...register('user')} name="user" id="user">
-						<option value={1}>admin@gaill.com</option>
-					</select>
-				</div>
-				<MaskInput
-					mask={dateMask}
-					placeholder="DD/MM/YYYY"
-					control={control}
-					inputBase={{
-						id: 'title',
-						label: 'SELECT',
-						error: {
-							isError: !!errors.title,
-							errorMessage: 'Login or email validation message'
-						}
-					}}
-				/>
 				<SelectInput
 					control={control}
-					multi
-					selectOptions={{
-						getOptionsFn: useGetTasksQuery,
-						keyValue: 'title'
-					}}
-					inputBase={{
-						id: 'task',
-						label: 'SELECT',
-						error: {
-							isError: false,
-							errorMessage: 'Login or email validation message'
-						}
-					}}
-				/>
-				<SelectInput
-					control={control}
-					creatable
 					selectOptions={[
 						{
-							value: 'value',
-							key: 'key'
+							label: '1',
+							value: '1'
 						},
 						{
-							value: 'value2',
-							key: 'key2'
+							label: '2',
+							value: '2'
+						},
+						{
+							label: '3',
+							value: '3'
 						}
 					]}
 					inputBase={{
-						id: 'task2',
-						label: 'SELECT2',
-						fullWidth: false,
+						id: 'user',
+						label: 'Assign user',
 						error: {
 							isError: false,
 							errorMessage: 'Login or email validation message'
@@ -113,7 +87,7 @@ const AddTaskForm: FC<tProps> = () => {
 				<TextArea
 					inputBase={{
 						id: 'description',
-						label: 'Opis',
+						label: 'Description',
 						register: register,
 						error: {
 							isError: !!errors.description,
@@ -123,7 +97,6 @@ const AddTaskForm: FC<tProps> = () => {
 				/>
 				<CalendarInput
 					control={control}
-					refParent={ref}
 					inputBase={{
 						id: 'plannedFinishDate',
 						label: 'Planowana data ukończenia',
@@ -135,33 +108,58 @@ const AddTaskForm: FC<tProps> = () => {
 						}
 					}}
 				/>
-				<div>
-					<label htmlFor="cars">Choose priority:</label>
-
-					<select
-						{...register('priority')}
-						name="priority"
-						id="priority"
-					>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
-				</div>
-				<div>
-					<label htmlFor="tags">Tags:</label>
-
-					<select
-						{...register('tags')}
-						name="tags"
-						id="tags"
-						multiple
-					>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
-				</div>
+				<SelectInput
+					control={control}
+					selectOptions={[
+						{
+							label: '1',
+							value: '1'
+						},
+						{
+							label: '2',
+							value: '2'
+						},
+						{
+							label: '3',
+							value: '3'
+						}
+					]}
+					inputBase={{
+						id: 'priority',
+						label: 'Priority',
+						error: {
+							isError: false,
+							errorMessage: 'Login or email validation message'
+						}
+					}}
+				/>
+				<SelectInput
+					control={control}
+					creatable
+					multi
+					selectOptions={[
+						{
+							label: 'Tag1',
+							value: '1'
+						},
+						{
+							label: 'Tag2',
+							value: '2'
+						},
+						{
+							label: 'Tag3',
+							value: '3'
+						}
+					]}
+					inputBase={{
+						id: 'tags',
+						label: 'Tags',
+						error: {
+							isError: false,
+							errorMessage: 'Login or email validation message'
+						}
+					}}
+				/>
 				<Button>Login</Button>
 			</StyledForm>
 		</div>
