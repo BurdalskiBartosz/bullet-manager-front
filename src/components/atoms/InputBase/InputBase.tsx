@@ -11,18 +11,19 @@ import {
 
 export type tInputBase = {
 	id: string;
-	label: string;
+	label?: string;
 	type?: string;
 	register?: Function;
 	fullWidth?: boolean;
 	isDisabled?: boolean;
 	as?: 'textarea';
 	children?: ReactNode | ReactNode[];
+	value?: any;
 	icon?: {
 		iconName: tIconNames;
 		fn: () => void;
 	};
-	error: {
+	error?: {
 		isError: boolean;
 		errorMessage: string;
 	};
@@ -38,18 +39,22 @@ const InputBase: FC<tInputBase> = ({
 	as,
 	icon,
 	children,
+	value,
 	fullWidth = true
 }) => {
 	const { t } = useTranslation();
 
 	return (
 		<StyledWrapper
-			isError={error.isError}
+			fullWidth={fullWidth}
+			isError={error?.isError}
 			data-testid="input-base-component"
 		>
-			<Font htmlFor={id} variant="label">
-				{label}
-			</Font>
+			{label && (
+				<Font htmlFor={id} variant="label">
+					{label}
+				</Font>
+			)}
 			<StyledInnerWrapper>
 				<StyledInnerWrapper>
 					{children ? (
@@ -59,28 +64,31 @@ const InputBase: FC<tInputBase> = ({
 							<StyledInput
 								as={as}
 								id={id}
+								value={value}
 								type={type}
 								disabled={isDisabled}
 								placeholder={t(`${label} placeholder`)}
 								fullWidth={fullWidth}
 								{...(register ? register(id) : {})}
 							/>
-							{icon && (
-								<StyledIconButton
-									iconName={icon.iconName}
-									fn={icon.fn}
-								/>
-							)}
 						</>
+					)}
+					{icon && (
+						<StyledIconButton
+							iconName={icon.iconName}
+							fn={icon.fn}
+						/>
 					)}
 				</StyledInnerWrapper>
 			</StyledInnerWrapper>
-			<Font
-				variant="inputError"
-				style={{ alignSelf: 'flex-end', height: '10px' }}
-			>
-				{error.isError ? error.errorMessage : ''}
-			</Font>
+			{error && (
+				<Font
+					variant="inputError"
+					style={{ alignSelf: 'flex-end', height: '10px' }}
+				>
+					{error.isError ? error.errorMessage : ''}
+				</Font>
+			)}
 		</StyledWrapper>
 	);
 };

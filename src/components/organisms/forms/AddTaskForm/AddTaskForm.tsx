@@ -8,7 +8,7 @@ import {
 	TextArea,
 	CalendarInput
 } from 'components';
-import { FC } from 'react';
+import { FC, MutableRefObject, useRef, useState } from 'react';
 import { useAddTaskMutation, useGetTasksQuery } from 'store/api/task';
 import { StyledForm } from 'styles/shared/global';
 import { dateMask } from 'utils/masks';
@@ -31,6 +31,7 @@ type tTaskData = {
 };
 
 const AddTaskForm: FC<tProps> = () => {
+	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 	const {
 		register,
 		control,
@@ -43,12 +44,11 @@ const AddTaskForm: FC<tProps> = () => {
 	const [addTask] = useAddTaskMutation();
 
 	const test = (data: any) => {
-		// addTask(data);
 		console.log(data);
 	};
 
 	return (
-		<div>
+		<div ref={ref}>
 			<StyledForm onSubmit={handleSubmit(test)}>
 				<div>
 					<label htmlFor="user">Użytkownik:</label>
@@ -64,7 +64,6 @@ const AddTaskForm: FC<tProps> = () => {
 					inputBase={{
 						id: 'title',
 						label: 'SELECT',
-						fullWidth: false,
 						error: {
 							isError: !!errors.title,
 							errorMessage: 'Login or email validation message'
@@ -81,7 +80,6 @@ const AddTaskForm: FC<tProps> = () => {
 					inputBase={{
 						id: 'task',
 						label: 'SELECT',
-						fullWidth: false,
 						error: {
 							isError: false,
 							errorMessage: 'Login or email validation message'
@@ -125,9 +123,11 @@ const AddTaskForm: FC<tProps> = () => {
 				/>
 				<CalendarInput
 					control={control}
+					refParent={ref}
 					inputBase={{
 						id: 'plannedFinishDate',
 						label: 'Planowana data ukończenia',
+						value: new Date(),
 						fullWidth: false,
 						error: {
 							isError: !!errors.description,

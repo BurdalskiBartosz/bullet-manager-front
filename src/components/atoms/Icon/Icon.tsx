@@ -5,6 +5,7 @@ export type tIconNames =
 	| 'password'
 	| 'show_password'
 	| 'magnifier'
+	| 'calendar'
 	| 'arrow_right'
 	| 'add'
 	| 'goal'
@@ -16,7 +17,11 @@ export type tIconNames =
 	| 'settings'
 	| 'logout'
 	| 'task'
-	| 'close';
+	| 'close'
+	| 'double_navigate_before'
+	| 'navigate_before'
+	| 'navigate_next'
+	| 'double_navigate_next';
 
 export type tIcon = {
 	iconName: tIconNames;

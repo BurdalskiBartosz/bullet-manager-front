@@ -14,9 +14,10 @@ const Button: FC<tProps> = ({
 	fn = () => {}
 }) => {
 	const { t } = useTranslation();
+	const textContent = t(children);
 	return (
 		<StyledButton colorType={colorType} onClick={() => fn()}>
-			{t(children)}
+			{textContent}
 		</StyledButton>
 	);
 };

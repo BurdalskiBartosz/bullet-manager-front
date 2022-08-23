@@ -15,19 +15,21 @@ type tProps = {
 	children: ReactNode[] | ReactNode;
 	handleClose: Function;
 	header: string;
+	customParent?: any;
 };
 
 const modalWrapper = document.querySelector('#modal-wrapper');
 
-const Modal: FC<tProps> = ({ handleClose, header, children }) => {
+const Modal: FC<tProps> = ({ handleClose, header, children, customParent }) => {
 	const ref = useRef() as MutableRefObject<HTMLDivElement>;
 
 	const modalNode = document.createElement('div');
 
 	useEffect(() => {
-		modalWrapper?.appendChild(modalNode);
+		const parent = customParent ?? modalWrapper;
+		parent?.appendChild(modalNode);
 		return () => {
-			modalWrapper?.removeChild(modalNode);
+			parent?.removeChild(modalNode);
 		};
 	});
 

@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components';
 import IconButton from '../IconButton';
 
 type tWrapperProps = {
-	isError: boolean;
-};
-
-type tInputProps = {
+	isError: boolean | undefined;
 	fullWidth: boolean;
 };
 
 export const StyledWrapper = styled.div<tWrapperProps>`
 	display: flex;
 	flex-direction: column;
+	width: ${({ fullWidth }) => (fullWidth ? '100%' : '330px')};
 	${({ isError }) =>
 		isError &&
 		css`
@@ -26,13 +24,13 @@ export const StyledWrapper = styled.div<tWrapperProps>`
 export const StyledInnerWrapper = styled.div`
 	position: relative;
 `;
-export const StyledInput = styled.input<tInputProps>`
-	width: ${({ fullWidth }) => (fullWidth ? '100%' : '330px')};
-	padding: 1.2rem 2rem;
+export const StyledInput = styled.input`
+	padding: 1.2rem 1.5rem;
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
 	border: 1px solid ${({ theme }) => theme.colors.lightGray};
 	font-family: ${({ theme }) => theme.fonts.primary};
+	width: 100%;
 	&:focus {
 		border-color: ${({ theme }) => theme.colors.dark};
 	}
@@ -50,6 +48,10 @@ export const StyledIconButton = styled(IconButton)`
 	right: 20px;
 	transform: translateY(-50%);
 	cursor: pointer;
+	transition: 0.3s ease;
+	&:hover {
+		fill: ${({ theme }) => theme.colors.purple100};
+	}
 `;
 
 export const StyledError = styled.p`

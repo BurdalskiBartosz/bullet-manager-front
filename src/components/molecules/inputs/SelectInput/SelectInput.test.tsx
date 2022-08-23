@@ -21,12 +21,12 @@ afterAll(() => server.close());
 
 const customSelectData = [
 	{
-		value: 'Custom value',
-		key: 'custom value key'
+		label: 'Custom value',
+		value: 'custom value key'
 	},
 	{
-		value: 'Another custom value',
-		key: 'another custom value key'
+		label: 'Another custom value',
+		value: 'another custom value key'
 	}
 ];
 
@@ -42,8 +42,8 @@ type EntitySelect = {
 };
 
 type CustomSelect = {
+	label: string;
 	value: string;
-	key: string;
 }[];
 
 type SelectOptions = EntitySelect | CustomSelect;
