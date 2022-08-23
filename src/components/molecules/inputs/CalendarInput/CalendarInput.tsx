@@ -66,7 +66,8 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 										style={{
 											margin: 10,
 											display: 'flex',
-											justifyContent: 'center'
+											justifyContent: 'center',
+											gap: '5px'
 										}}
 									>
 										<IconButton
