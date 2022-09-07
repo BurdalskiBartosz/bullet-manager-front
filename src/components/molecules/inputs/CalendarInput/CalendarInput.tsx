@@ -1,12 +1,17 @@
 import { Controller } from 'react-hook-form';
 import { FC } from 'react';
-import { CalendarWrapper, StyledInput } from './CalendarInput.style';
+import {
+	CalendarWrapper,
+	StyledInput,
+	StyledWrapper
+} from './CalendarInput.style';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import IconButton from 'components/atoms/IconButton';
 import 'react-datepicker/dist/react-datepicker.css';
 import SelectInput from '../SelectInput';
 import pl from 'date-fns/locale/pl';
+import Font from 'components/atoms/Font';
 registerLocale('pl', pl);
 
 type tProps = {
@@ -15,13 +20,11 @@ type tProps = {
 };
 
 const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
-	const years = new Array(10).fill(null).map((el, i) => {
-		const year = new Date().getFullYear() + i;
-		return {
-			label: year,
-			value: year
-		};
-	});
+	const year = new Date().getFullYear();
+	const years = new Array(10).fill(null).map((el, i) => ({
+		label: year + i,
+		value: year + i
+	}));
 
 	const months = [
 		{ label: 'January', value: '1' },
@@ -38,7 +41,15 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 		{ label: 'December', value: '12' }
 	];
 	return (
-		<>
+		<StyledWrapper
+			fullWidth={inputBase.fullWidth}
+			isError={inputBase.error?.isError}
+		>
+			{inputBase.label && (
+				<Font htmlFor={inputBase.id} variant="label">
+					{inputBase.label}
+				</Font>
+			)}
 			<Controller
 				name={inputBase.id}
 				control={control}
@@ -134,7 +145,7 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 					);
 				}}
 			/>
-		</>
+		</StyledWrapper>
 	);
 };
 
