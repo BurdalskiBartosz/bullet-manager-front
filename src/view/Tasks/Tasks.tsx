@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AddTaskForm, Button, Modal } from 'components';
+import { AddUserTaskForm, Button, Modal } from 'components';
 import { Table } from 'components';
 import { ButtonsWrapper } from './Tasks.styles';
 import useModal from 'hooks/useModal';
@@ -29,7 +29,7 @@ const Tasks = () => {
 			{view === 'table' ? <Table /> : <div>CARDS</div>}
 			{isOpen ? (
 				<Modal header="Dodaj zadanie" handleClose={handleCloseModal}>
-					<AddTaskForm />
+					<AddUserTaskForm />
 				</Modal>
 			) : null}
 		</div>

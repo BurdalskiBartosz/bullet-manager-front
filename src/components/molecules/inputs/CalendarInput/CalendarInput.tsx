@@ -48,11 +48,15 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 					return (
 						<CalendarWrapper>
 							<DatePicker
+								showTimeInput
+								shouldCloseOnSelect={false}
 								locale="pl"
 								selected={value}
 								onChange={onChange}
 								customInput={<StyledInput />}
 								disabledKeyboardNavigation
+								timeInputLabel="Godzina:"
+								dateFormat="dd/MM/yyyy, HH:mm"
 								renderCustomHeader={({
 									date,
 									changeYear,

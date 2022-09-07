@@ -28,7 +28,7 @@ type tTaskData = {
 	tags: string[];
 };
 
-const AddTaskForm: FC<tProps> = () => {
+const AddUserTaskForm: FC<tProps> = () => {
 	const {
 		register,
 		control,
@@ -57,33 +57,6 @@ const AddTaskForm: FC<tProps> = () => {
 						errorMessage: 'Login or email validation message'
 					}}
 				/>
-
-				<SelectInput
-					control={control}
-					selectOptions={[
-						{
-							label: '1',
-							value: '1'
-						},
-						{
-							label: '2',
-							value: '2'
-						},
-						{
-							label: '3',
-							value: '3'
-						}
-					]}
-					inputBase={{
-						id: 'user',
-						label: 'Assign user',
-						error: {
-							isError: false,
-							errorMessage: 'Login or email validation message'
-						}
-					}}
-				/>
-
 				<TextArea
 					inputBase={{
 						id: 'description',
@@ -108,62 +81,11 @@ const AddTaskForm: FC<tProps> = () => {
 						}
 					}}
 				/>
-				<SelectInput
-					control={control}
-					selectOptions={[
-						{
-							label: '1',
-							value: '1'
-						},
-						{
-							label: '2',
-							value: '2'
-						},
-						{
-							label: '3',
-							value: '3'
-						}
-					]}
-					inputBase={{
-						id: 'priority',
-						label: 'Priority',
-						error: {
-							isError: false,
-							errorMessage: 'Login or email validation message'
-						}
-					}}
-				/>
-				<SelectInput
-					control={control}
-					creatable
-					multi
-					selectOptions={[
-						{
-							label: 'Tag1',
-							value: '1'
-						},
-						{
-							label: 'Tag2',
-							value: '2'
-						},
-						{
-							label: 'Tag3',
-							value: '3'
-						}
-					]}
-					inputBase={{
-						id: 'tags',
-						label: 'Tags',
-						error: {
-							isError: false,
-							errorMessage: 'Login or email validation message'
-						}
-					}}
-				/>
+
 				<Button>Login</Button>
 			</StyledForm>
 		</div>
 	);
 };
 
-export default AddTaskForm;
+export default AddUserTaskForm;
