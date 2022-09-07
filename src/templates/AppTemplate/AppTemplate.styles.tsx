@@ -14,5 +14,5 @@ export const Main = styled.main`
 `;
 
 export const PageWrapper = styled.div`
-	padding: 2rem 4rem;
+	padding: 2rem 0 2rem 4rem;
 `;
