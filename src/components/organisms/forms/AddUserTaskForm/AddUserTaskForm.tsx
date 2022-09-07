@@ -4,13 +4,13 @@ import * as yup from 'yup';
 import {
 	Button,
 	SelectInput,
-	TextArea,
 	CalendarInput,
+	TextArea,
 	InputBase
 } from 'components';
 import { FC } from 'react';
 import { useAddTaskMutation } from 'store/api/task';
-import { StyledForm } from 'styles/shared/global';
+import { Wrapper, InnerFormWrapper, StyledForm } from './AddUserTaskForm.style';
 
 type tProps = {};
 
@@ -46,45 +46,67 @@ const AddUserTaskForm: FC<tProps> = () => {
 	};
 
 	return (
-		<div>
+		<Wrapper>
 			<StyledForm onSubmit={handleSubmit(test)}>
-				<InputBase
-					id="title"
-					label="Title"
-					register={register}
-					error={{
-						isError: !!errors.title,
-						errorMessage: 'Login or email validation message'
-					}}
-				/>
+				<InnerFormWrapper>
+					<InputBase
+						id="title"
+						label="Title"
+						register={register}
+						fullWidth={false}
+						error={{
+							isError: !!errors.title,
+							errorMessage: 'Login or email validation message'
+						}}
+					/>
+
+					<CalendarInput
+						control={control}
+						inputBase={{
+							id: 'plannedFinishDate',
+							label: 'Planowana data ukończenia',
+							value: new Date(),
+							error: {
+								isError: !!errors.description,
+								errorMessage: 'Password validation message'
+							}
+						}}
+					/>
+					<SelectInput
+						control={control}
+						selectOptions={[
+							{
+								label: 'Custom value',
+								value: 'custom value key'
+							},
+							{
+								label: 'Another custom value',
+								value: 'another custom value key'
+							}
+						]}
+						creatable
+						inputBase={{
+							id: 'category',
+							label: 'Kategoria',
+							fullWidth: false,
+							error: {
+								isError: !!errors.description,
+								errorMessage: 'Password validation message'
+							}
+						}}
+					/>
+				</InnerFormWrapper>
+
 				<TextArea
 					inputBase={{
 						id: 'description',
-						label: 'Description',
-						register: register,
-						error: {
-							isError: !!errors.description,
-							errorMessage: 'Password validation message'
-						}
+						label: 'Dodatkowy opis',
+						register: register
 					}}
 				/>
-				<CalendarInput
-					control={control}
-					inputBase={{
-						id: 'plannedFinishDate',
-						label: 'Planowana data ukończenia',
-						value: new Date(),
-						fullWidth: false,
-						error: {
-							isError: !!errors.description,
-							errorMessage: 'Password validation message'
-						}
-					}}
-				/>
-
-				<Button>Login</Button>
+				<Button>Dodaj zadanie</Button>
 			</StyledForm>
-		</div>
+		</Wrapper>
 	);
 };
 
