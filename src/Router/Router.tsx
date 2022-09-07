@@ -8,7 +8,7 @@ import Home from 'view/webpages/Home/Home';
 import PrivateRoute from 'view/PrivateRoute';
 import AppTemplate from 'templates/AppTemplate/AppTemplate';
 import Dashboard from 'view/apppages/Dashboard/Dashboard';
-import Tasks from 'view/Tasks/Tasks';
+import UserTasks from 'view/Tasks/UserTasks';
 
 const Router = () => {
 	return (
@@ -29,7 +29,7 @@ const Router = () => {
 				}
 			>
 				<Route path="dashboard" element={<Dashboard />} />
-				<Route path="tasks" element={<Tasks />} />
+				<Route path="tasks" element={<UserTasks />} />
 			</Route>
 		</Routes>
 	);
