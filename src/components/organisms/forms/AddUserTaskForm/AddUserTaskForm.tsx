@@ -15,7 +15,7 @@ import { Wrapper, InnerFormWrapper, StyledForm } from './AddUserTaskForm.style';
 type tProps = {};
 
 const validationSchema = yup.object().shape({
-	description: yup.string().required().min(6)
+	title: yup.string().required().min(6)
 });
 
 type tTaskData = {
@@ -51,12 +51,12 @@ const AddUserTaskForm: FC<tProps> = () => {
 				<InnerFormWrapper>
 					<InputBase
 						id="title"
-						label="Title"
+						label="UserTask Title"
 						register={register}
 						fullWidth={false}
 						error={{
 							isError: !!errors.title,
-							errorMessage: 'Login or email validation message'
+							errorMessage: 'UserTask Title validation message'
 						}}
 					/>
 
@@ -65,11 +65,7 @@ const AddUserTaskForm: FC<tProps> = () => {
 						inputBase={{
 							id: 'plannedFinishDate',
 							label: 'Planowana data ukończenia',
-							value: new Date(),
-							error: {
-								isError: !!errors.description,
-								errorMessage: 'Password validation message'
-							}
+							value: new Date()
 						}}
 					/>
 					<SelectInput
@@ -85,14 +81,11 @@ const AddUserTaskForm: FC<tProps> = () => {
 							}
 						]}
 						creatable
+						clearable
 						inputBase={{
 							id: 'category',
-							label: 'Kategoria',
-							fullWidth: false,
-							error: {
-								isError: !!errors.description,
-								errorMessage: 'Password validation message'
-							}
+							label: 'UserTask category',
+							fullWidth: false
 						}}
 					/>
 				</InnerFormWrapper>
@@ -100,11 +93,11 @@ const AddUserTaskForm: FC<tProps> = () => {
 				<TextArea
 					inputBase={{
 						id: 'description',
-						label: 'Dodatkowy opis',
+						label: 'UserTask additional description',
 						register: register
 					}}
 				/>
-				<Button>Dodaj zadanie</Button>
+				<Button>UserTask add task</Button>
 			</StyledForm>
 		</Wrapper>
 	);
