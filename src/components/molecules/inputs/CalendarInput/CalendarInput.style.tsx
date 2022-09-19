@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 type tWrapperProps = {
-	isError: boolean;
+	fullWidth: boolean | undefined;
+	isError: boolean | undefined;
 };
 
 export const StyledWrapper = styled.div<tWrapperProps>`
@@ -13,11 +14,12 @@ export const StyledWrapper = styled.div<tWrapperProps>`
 			& label {
 				color: ${({ theme }) => theme.colors.danger};
 			}
-			& textarea {
+			& input {
 				border-color: ${({ theme }) => theme.colors.danger};
 			}
 		`};
 `;
+
 export const StyledInput = styled.input`
 	padding: 1.2rem 2rem;
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
@@ -39,6 +41,9 @@ export const CalendarWrapper = styled.div`
 	.react-datepicker {
 		& * {
 			font-family: ${({ theme }) => theme.fonts.primary};
+		}
+		&__input-container {
+			max-width: 180px;
 		}
 		&__day-names,
 		&__week {

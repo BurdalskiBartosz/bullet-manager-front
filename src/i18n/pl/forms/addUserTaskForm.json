@@ -1,0 +1,9 @@
+{
+	"UserTask Title": "Tytuł zadania",
+	"UserTask Title placeholder": "Nazwa zadania",
+	"UserTask Title validation message": "Pole z tytułem zadania nie może być puste",
+	"UserTask additional description": "Dodatkowy opis zadania",
+	"UserTask additional description placeholder": "Lorem ipsum dolores...",
+	"UserTask category": "Kategoria",
+	"UserTask add task": "Dodaj zadanie"
+}

@@ -4,18 +4,18 @@ import * as yup from 'yup';
 import {
 	Button,
 	SelectInput,
-	TextArea,
 	CalendarInput,
+	TextArea,
 	InputBase
 } from 'components';
 import { FC } from 'react';
 import { useAddTaskMutation } from 'store/api/task';
-import { StyledForm } from 'styles/shared/global';
+import { Wrapper, InnerFormWrapper, StyledForm } from './AddUserTaskForm.style';
 
 type tProps = {};
 
 const validationSchema = yup.object().shape({
-	description: yup.string().required().min(6)
+	title: yup.string().required().min(6)
 });
 
 type tTaskData = {
@@ -46,45 +46,60 @@ const AddUserTaskForm: FC<tProps> = () => {
 	};
 
 	return (
-		<div>
+		<Wrapper>
 			<StyledForm onSubmit={handleSubmit(test)}>
-				<InputBase
-					id="title"
-					label="Title"
-					register={register}
-					error={{
-						isError: !!errors.title,
-						errorMessage: 'Login or email validation message'
-					}}
-				/>
+				<InnerFormWrapper>
+					<InputBase
+						id="title"
+						label="UserTask Title"
+						register={register}
+						fullWidth={false}
+						error={{
+							isError: !!errors.title,
+							errorMessage: 'UserTask Title validation message'
+						}}
+					/>
+
+					<CalendarInput
+						control={control}
+						inputBase={{
+							id: 'plannedFinishDate',
+							label: 'Planowana data ukończenia',
+							value: new Date()
+						}}
+					/>
+					<SelectInput
+						control={control}
+						selectOptions={[
+							{
+								label: 'Custom value',
+								value: 'custom value key'
+							},
+							{
+								label: 'Another custom value',
+								value: 'another custom value key'
+							}
+						]}
+						creatable
+						clearable
+						inputBase={{
+							id: 'category',
+							label: 'UserTask category',
+							fullWidth: false
+						}}
+					/>
+				</InnerFormWrapper>
+
 				<TextArea
 					inputBase={{
 						id: 'description',
-						label: 'Description',
-						register: register,
-						error: {
-							isError: !!errors.description,
-							errorMessage: 'Password validation message'
-						}
+						label: 'UserTask additional description',
+						register: register
 					}}
 				/>
-				<CalendarInput
-					control={control}
-					inputBase={{
-						id: 'plannedFinishDate',
-						label: 'Planowana data ukończenia',
-						value: new Date(),
-						fullWidth: false,
-						error: {
-							isError: !!errors.description,
-							errorMessage: 'Password validation message'
-						}
-					}}
-				/>
-
-				<Button>Login</Button>
+				<Button>UserTask add task</Button>
 			</StyledForm>
-		</div>
+		</Wrapper>
 	);
 };
 
