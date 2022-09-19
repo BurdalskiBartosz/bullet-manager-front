@@ -31,6 +31,7 @@ type SelectOptions = EntitySelect | CustomSelect;
 type tProps = {
 	control: any;
 	multi?: boolean;
+	clearable?: boolean;
 	inputBase: tInputBase;
 	selectOptions: SelectOptions;
 	creatable?: boolean;
@@ -49,6 +50,7 @@ const SelectInput: FC<tProps> = ({
 	multi = false,
 	selectOptions,
 	creatable,
+	clearable = false,
 	onChangeHandler,
 	customValue
 }) => {
@@ -106,9 +108,11 @@ const SelectInput: FC<tProps> = ({
 						inputId: id,
 						name: id,
 						isMulti: multi,
-						placeholder: 'Wybierz...',
+						placeholder: creatable
+							? 'Wybierz lub dodaj nowe...'
+							: 'Wybierz...',
 						styles: customStyles,
-						isClearable: true,
+						isClearable: clearable,
 						isError: error?.isError,
 						options: selectData,
 						onBlur
