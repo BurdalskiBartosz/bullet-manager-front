@@ -102,34 +102,33 @@ const SelectInput: FC<tProps> = ({
 				control={control}
 				render={({ field }) => {
 					const { onChange, value, onBlur } = field;
+					const selectProps = {
+						inputId: id,
+						name: id,
+						isMulti: multi,
+						placeholder: 'Wybierz...',
+						styles: customStyles,
+						isClearable: true,
+						isError: error?.isError,
+						options: selectData,
+						onBlur
+					};
 					return creatable ? (
 						// ToDo Change it so that there is no conditional if possible
 						// <SelectComponent {...props}/>
 						<CreatableSelect
-							inputId={id}
-							name={id}
-							isMulti={multi}
+							{...selectProps}
 							onChange={(data) => onChange(handleChange(data))}
-							options={selectData}
-							isError={error?.isError}
-							styles={customStyles}
-							onBlur={onBlur}
 						/>
 					) : (
 						<Select
-							inputId={id}
-							name={id}
-							isMulti={multi}
+							{...selectProps}
 							onChange={
 								// TODO Change into one handler
 								onChangeHandler
 									? (data) => onChange(onChangeHandler(data))
 									: (data) => onChange(handleChange(data))
 							}
-							options={selectData}
-							isError={error?.isError}
-							styles={customStyles}
-							onBlur={onBlur}
 							value={
 								// TODO Change into one handler
 								customValue
