@@ -4,6 +4,7 @@ import forms from './forms.json';
 import errors from './errors.json';
 import menu from './menu.json';
 import addTaskForm from './forms/addTaskForm.json';
+import addUserTaskForm from './forms/addUserTaskForm.json';
 
 export const plTranslations = {
 	...login,
@@ -11,5 +12,6 @@ export const plTranslations = {
 	...forms,
 	...errors,
 	...menu,
-	...addTaskForm
+	...addTaskForm,
+	...addUserTaskForm
 };
