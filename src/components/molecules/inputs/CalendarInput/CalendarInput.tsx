@@ -107,7 +107,7 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 												return year;
 											}}
 											inputBase={{
-												id: 'Year'
+												id: 'plannedFinishDate'
 											}}
 										/>
 
@@ -129,7 +129,7 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 												]
 											}
 											inputBase={{
-												id: 'Month'
+												id: 'plannedFinishDate'
 											}}
 										/>
 
