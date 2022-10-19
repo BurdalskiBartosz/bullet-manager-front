@@ -3,7 +3,7 @@ import { render, renderWithProviders, screen } from 'utils/tests';
 import SelectInput from './SelectInput';
 import selectEvent from 'react-select-event';
 import { FC } from 'react';
-import { useGetTasksQuery } from 'store/api/task';
+import { useGetUserTasksQuery } from 'store/api/userTask';
 import { server } from 'mocks/msw';
 
 type Form = {
@@ -83,7 +83,7 @@ describe('SelectInput', () => {
 		renderWithProviders(
 			<Component
 				selectOptions={{
-					getOptionsFn: useGetTasksQuery,
+					getOptionsFn: useGetUserTasksQuery,
 					keyValue: 'title'
 				}}
 			/>
@@ -104,7 +104,7 @@ describe('SelectInput', () => {
 		render(
 			<Component
 				selectOptions={{
-					getOptionsFn: useGetTasksQuery,
+					getOptionsFn: useGetUserTasksQuery,
 					keyValue: 'title'
 				}}
 				multi={false}
@@ -126,7 +126,7 @@ describe('SelectInput', () => {
 		render(
 			<Component
 				selectOptions={{
-					getOptionsFn: useGetTasksQuery,
+					getOptionsFn: useGetUserTasksQuery,
 					keyValue: 'title'
 				}}
 				multi={false}
