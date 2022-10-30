@@ -9,7 +9,7 @@ import {
 	InputBase
 } from 'components';
 import { FC } from 'react';
-import { useAddTaskMutation } from 'store/api/task';
+import { useAddUserTaskMutation } from 'store/api/userTask';
 import { Wrapper, InnerFormWrapper, StyledForm } from './AddUserTaskForm.style';
 
 type tProps = {};
@@ -19,13 +19,10 @@ const validationSchema = yup.object().shape({
 });
 
 type tTaskData = {
-	user: string;
 	title: string;
-	task: string;
 	description: string;
 	plannedFinishDate: Date;
-	priority: string;
-	tags: string[];
+	category: string;
 };
 
 const AddUserTaskForm: FC<tProps> = () => {
@@ -38,16 +35,15 @@ const AddUserTaskForm: FC<tProps> = () => {
 		resolver: yupResolver(validationSchema)
 	});
 
-	const [addTask] = useAddTaskMutation();
+	const [addTask] = useAddUserTaskMutation();
 
-	const test = (data: any) => {
-		console.log(data);
+	const handleAddTask = (data: tTaskData) => {
 		addTask(data);
 	};
 
 	return (
 		<Wrapper>
-			<StyledForm onSubmit={handleSubmit(test)}>
+			<StyledForm onSubmit={handleSubmit(handleAddTask)}>
 				<InnerFormWrapper>
 					<InputBase
 						id="title"

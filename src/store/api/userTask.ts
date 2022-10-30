@@ -1,11 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
 import { createApiDefaultConfig } from '../config/config';
 
-type tGetUserTasksResponse = {
+export type tGetUserTasksResponse = {
 	id: number;
 	title: string;
 	plannedFinishDate: string;
-	category?: string;
+	description: string;
+	category?: {
+		id: number;
+		name: string;
+	};
 };
 
 export const userTaskApi = createApi({
