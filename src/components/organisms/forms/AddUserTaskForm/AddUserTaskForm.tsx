@@ -10,7 +10,12 @@ import {
 } from 'components';
 import { FC } from 'react';
 import { useAddUserTaskMutation } from 'store/api/userTask';
-import { Wrapper, InnerFormWrapper, StyledForm } from './AddUserTaskForm.style';
+import {
+	Wrapper,
+	InnerFormWrapper,
+	StyledForm,
+	FormRow
+} from './AddUserTaskForm.style';
 
 type tProps = {};
 
@@ -49,12 +54,58 @@ const AddUserTaskForm: FC<tProps> = () => {
 						id="title"
 						label="UserTask Title"
 						register={register}
-						fullWidth={false}
+						styleForm="FORM"
 						error={{
 							isError: !!errors.title,
 							errorMessage: 'UserTask Title validation message'
 						}}
 					/>
+					<FormRow>
+						<SelectInput
+							control={control}
+							selectOptions={[
+								{
+									label: 'Custom value',
+									value: 'custom value key'
+								},
+								{
+									label: 'Another custom value',
+									value: 'another custom value key'
+								}
+							]}
+							creatable
+							clearable
+							inputBase={{
+								id: 'category',
+								label: 'UserTask category',
+								fullWidth: false,
+								styleForm: 'FORM'
+							}}
+						/>
+						<SelectInput
+							control={control}
+							selectOptions={[
+								{
+									label: '1',
+									value: '1'
+								},
+								{
+									label: '2',
+									value: '2'
+								},
+								{
+									label: '3',
+									value: '3'
+								}
+							]}
+							inputBase={{
+								id: 'priority',
+								label: 'UserTask priority',
+								fullWidth: false,
+								styleForm: 'FORM'
+							}}
+						/>
+					</FormRow>
 
 					<CalendarInput
 						control={control}
@@ -64,35 +115,16 @@ const AddUserTaskForm: FC<tProps> = () => {
 							value: new Date()
 						}}
 					/>
-					<SelectInput
-						control={control}
-						selectOptions={[
-							{
-								label: 'Custom value',
-								value: 'custom value key'
-							},
-							{
-								label: 'Another custom value',
-								value: 'another custom value key'
-							}
-						]}
-						creatable
-						clearable
+					<TextArea
 						inputBase={{
-							id: 'category',
-							label: 'UserTask category',
-							fullWidth: false
+							id: 'description',
+							label: 'UserTask additional description',
+							register: register,
+							styleForm: 'FORM'
 						}}
 					/>
 				</InnerFormWrapper>
 
-				<TextArea
-					inputBase={{
-						id: 'description',
-						label: 'UserTask additional description',
-						register: register
-					}}
-				/>
 				<Button>UserTask add task</Button>
 			</StyledForm>
 		</Wrapper>
