@@ -19,6 +19,7 @@ export type tInputBase = {
 	as?: 'textarea';
 	children?: ReactNode | ReactNode[];
 	value?: any;
+	styleForm?: 'FORM' | 'BASE';
 	icon?: {
 		iconName: tIconNames;
 		fn: () => void;
@@ -33,6 +34,7 @@ const InputBase: FC<tInputBase> = ({
 	id,
 	label,
 	type = 'text',
+	styleForm = 'BASE',
 	register,
 	error,
 	isDisabled,
@@ -48,6 +50,7 @@ const InputBase: FC<tInputBase> = ({
 		<StyledWrapper
 			fullWidth={fullWidth}
 			isError={error?.isError}
+			styleForm={styleForm}
 			data-testid="input-base-component"
 		>
 			{label && (
@@ -55,31 +58,27 @@ const InputBase: FC<tInputBase> = ({
 					{label}
 				</Font>
 			)}
-			<StyledInnerWrapper>
-				<StyledInnerWrapper>
-					{children ? (
-						children
-					) : (
-						<>
-							<StyledInput
-								as={as}
-								id={id}
-								value={value}
-								type={type}
-								disabled={isDisabled}
-								placeholder={t(`${label} placeholder`)}
-								fullWidth={fullWidth}
-								{...(register ? register(id) : {})}
-							/>
-						</>
-					)}
-					{icon && (
-						<StyledIconButton
-							iconName={icon.iconName}
-							fn={icon.fn}
+			<StyledInnerWrapper className="helper-selector">
+				{children ? (
+					children
+				) : (
+					<>
+						<StyledInput
+							className="input-helper-selector"
+							as={as}
+							id={id}
+							value={value}
+							type={type}
+							disabled={isDisabled}
+							placeholder={t(`${label} placeholder`)}
+							fullWidth={fullWidth}
+							{...(register ? register(id) : {})}
 						/>
-					)}
-				</StyledInnerWrapper>
+					</>
+				)}
+				{icon && (
+					<StyledIconButton iconName={icon.iconName} fn={icon.fn} />
+				)}
 			</StyledInnerWrapper>
 			{error && (
 				<Font

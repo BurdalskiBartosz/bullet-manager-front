@@ -13,12 +13,14 @@ export const customStyles = {
 	control: (provided: any, state: any) => {
 		return {
 			...provided,
-			border: `1px solid ${
+			border: 'none',
+			borderBottom: `1px solid ${
 				state.isFocused
 					? colors.dark
 					: getColor(state.selectProps.isError)
 			}`,
-			borderRadius: '15px',
+			backgroundColor: '#FCFCFC',
+			borderRadius: 0,
 			paddingLeft: '5px',
 			maxWidth: '100%',
 			height: '41px',
@@ -30,11 +32,7 @@ export const customStyles = {
 	indicatorSeparator: (provided: any, state: any) => {
 		return {
 			...provided,
-			backgroundColor: `${
-				state.isFocused
-					? colors.dark
-					: getColor(state.selectProps.isError)
-			}`
+			backgroundColor: 'transparent'
 		};
 	},
 	dropdownIndicator: (provided: any, state: any) => {
@@ -53,11 +51,7 @@ export const customStyles = {
 	}),
 	placeholder: (provided: any) => ({
 		...provided,
-		fontStyle: 'italic',
-		opacity: '0.6',
-		color: colors.gray,
-		fontSize: '13px',
-		padding: '5px 0 5px 5px'
+		color: 'transparent'
 	}),
 	menuList: (base: any) => ({
 		...base,
