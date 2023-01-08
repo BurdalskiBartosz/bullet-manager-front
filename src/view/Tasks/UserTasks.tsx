@@ -1,10 +1,11 @@
 import { AddUserTaskForm, Link, Table } from 'components';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useGetUserTasksQuery } from 'store/api/userTask';
 import { tTableData } from 'types/table';
 import { appRootRoute } from 'utils/constants';
 import { transformApiToTableData } from 'utils/table';
-// import { Link } from 'react-router-dom';
+import { Wrapper } from './Tasks.styles';
+import { Box } from './_components/Box';
 
 export type UserTask = {
 	id: number;
@@ -33,7 +34,7 @@ const UserTasks = () => {
 						description,
 						category: category?.name ? (
 							<Link
-								link={`${appRootRoute}/category/${category.name}`}
+								link={`/${appRootRoute}/category/${category.name}`}
 							>
 								{category.name}
 							</Link>
@@ -47,23 +48,14 @@ const UserTasks = () => {
 			const data = transformApiToTableData(tableDataa, offset);
 			setTableData(data);
 		}
-	}, [userTasksData]);
-	return (
-		<div>
-			<AddUserTaskForm />
+	}, [userTasksData, offset]);
 
-			{tableData?.length && (
-				<Table
-					headData={[
-						'title',
-						'plannedFinishDate',
-						'description',
-						'category'
-					]}
-					data={tableData}
-				/>
-			)}
-		</div>
+	return (
+		<Wrapper>
+			<Box title="Dodaj zadanie">
+				<AddUserTaskForm />
+			</Box>
+		</Wrapper>
 	);
 };
 
