@@ -1,10 +1,16 @@
-import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
-import { FC } from 'react';
+import { Children, FC } from 'react';
 import { Controller } from 'react-hook-form';
-import Select, { GroupBase, OnChangeValue } from 'react-select';
+import Select, {
+	GroupBase,
+	OnChangeValue,
+	components,
+	ValueContainerProps
+} from 'react-select';
 import { customStyles } from './SelectInput.style';
 import CreatableSelect from 'react-select/creatable';
+
+const { ValueContainer, Placeholder } = components;
 declare module 'react-select/dist/declarations/src/Select' {
 	export interface Props<
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -43,6 +49,22 @@ type SelectData = {
 	label: string | number;
 	value: string | number;
 } | null;
+
+const CustomValueContainer = ({ children, ...props }: ValueContainerProps) => {
+	return (
+		<ValueContainer {...props}>
+			<Placeholder
+				innerProps={{}}
+				{...props}
+				isFocused={props.selectProps.menuIsOpen}
+			>
+				{props.selectProps.placeholder}
+			</Placeholder>
+			{Children.map(children, (child) => (child ? child : null))}
+		</ValueContainer>
+	);
+};
+const CustomPlaceholder = () => <div></div>;
 
 const SelectInput: FC<tProps> = ({
 	inputBase,
@@ -98,52 +120,56 @@ const SelectInput: FC<tProps> = ({
 	};
 
 	return (
-		<InputBase {...inputBase}>
-			<Controller
-				name={id}
-				control={control}
-				render={({ field }) => {
-					const { onChange, value, onBlur } = field;
-					const selectProps = {
-						inputId: id,
-						name: id,
-						isMulti: multi,
-						placeholder: creatable
-							? 'Wybierz lub dodaj nowe...'
-							: 'Wybierz...',
-						styles: customStyles,
-						isClearable: clearable,
-						isError: error?.isError,
-						options: selectData,
-						onBlur
-					};
-					return creatable ? (
-						// ToDo Change it so that there is no conditional if possible
-						// <SelectComponent {...props}/>
-						<CreatableSelect
-							{...selectProps}
-							onChange={(data) => onChange(handleChange(data))}
-						/>
-					) : (
-						<Select
-							{...selectProps}
-							onChange={
-								// TODO Change into one handler
-								onChangeHandler
-									? (data) => onChange(onChangeHandler(data))
-									: (data) => onChange(handleChange(data))
-							}
-							value={
-								// TODO Change into one handler
-								customValue
-									? customValue(value)
-									: setValue(value)
-							}
-						/>
-					);
-				}}
-			/>
-		</InputBase>
+		<Controller
+			name={id}
+			control={control}
+			render={({ field }) => {
+				const { onChange, value, onBlur } = field;
+				const selectProps = {
+					inputId: id,
+					name: id,
+					isMulti: multi,
+					placeholder: creatable
+						? 'Wybierz lub dodaj nowe...'
+						: 'Wybierz...',
+					components: {
+						ValueContainer: CustomValueContainer,
+						Placeholder: CustomPlaceholder
+					},
+					styles: customStyles,
+					isClearable: clearable,
+					isError: error?.isError,
+					options: selectData,
+					onBlur
+				};
+				return creatable ? (
+					// ToDo Change it so that there is no conditional if possible
+					// <SelectComponent {...props}/>
+					<CreatableSelect
+						{...selectProps}
+						onChange={(data) => onChange(handleChange(data))}
+						value={
+							// TODO Change into one handler
+							customValue ? customValue(value) : setValue(value)
+						}
+					/>
+				) : (
+					<Select
+						{...selectProps}
+						onChange={
+							// TODO Change into one handler
+							onChangeHandler
+								? (data) => onChange(onChangeHandler(data))
+								: (data) => onChange(handleChange(data))
+						}
+						value={
+							// TODO Change into one handler
+							customValue ? customValue(value) : setValue(value)
+						}
+					/>
+				);
+			}}
+		/>
 	);
 };
 
