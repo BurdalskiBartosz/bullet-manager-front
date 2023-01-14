@@ -1,4 +1,3 @@
-import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { Children, FC } from 'react';
 import { Controller } from 'react-hook-form';
@@ -140,23 +139,13 @@ const SelectInput: FC<tProps> = ({
 					isClearable: clearable,
 					isError: error?.isError,
 					options: selectData,
+					onChange: (data: OnChangeValue<SelectData, typeof multi>) =>
+						onChange(handleChange(data)),
+					value: setValue(value),
 					onBlur
 				};
-				return creatable ? (
-					// ToDo Change it so that there is no conditional if possible
-					// <SelectComponent {...props}/>
-					<CreatableSelect
-						{...selectProps}
-						onChange={(data) => onChange(handleChange(data))}
-						value={setValue(value)}
-					/>
-				) : (
-					<Select
-						{...selectProps}
-						onChange={(data) => onChange(handleChange(data))}
-						value={setValue(value)}
-					/>
-				);
+				const Component = creatable ? CreatableSelect : Select;
+				return <Component {...selectProps} />;
 			}}
 		/>
 	);
