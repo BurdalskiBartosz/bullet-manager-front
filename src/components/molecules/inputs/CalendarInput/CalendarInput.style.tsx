@@ -42,6 +42,9 @@ export const CalendarWrapper = styled.div`
 		& * {
 			font-family: ${({ theme }) => theme.fonts.primary};
 		}
+		&-popper {
+			z-index: 2;
+		}
 		&__input-container {
 			max-width: 180px;
 		}

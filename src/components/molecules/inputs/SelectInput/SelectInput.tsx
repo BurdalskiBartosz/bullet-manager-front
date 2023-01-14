@@ -1,3 +1,4 @@
+import InputBase from 'components/atoms/InputBase';
 import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import { Children, FC } from 'react';
 import { Controller } from 'react-hook-form';
@@ -41,8 +42,6 @@ type tProps = {
 	inputBase: tInputBase;
 	selectOptions: SelectOptions;
 	creatable?: boolean;
-	onChangeHandler?: (arg0: any) => any;
-	customValue?: any;
 };
 
 type SelectData = {
@@ -50,7 +49,10 @@ type SelectData = {
 	value: string | number;
 } | null;
 
-const CustomValueContainer = ({ children, ...props }: ValueContainerProps) => {
+const CustomValueContainer = ({
+	children,
+	...props
+}: ValueContainerProps<SelectData>) => {
 	return (
 		<ValueContainer {...props}>
 			<Placeholder
@@ -72,9 +74,7 @@ const SelectInput: FC<tProps> = ({
 	multi = false,
 	selectOptions,
 	creatable,
-	clearable = false,
-	onChangeHandler,
-	customValue
+	clearable = false
 }) => {
 	const { id, error } = inputBase;
 	let selectData: Array<SelectData> = [];
@@ -148,24 +148,13 @@ const SelectInput: FC<tProps> = ({
 					<CreatableSelect
 						{...selectProps}
 						onChange={(data) => onChange(handleChange(data))}
-						value={
-							// TODO Change into one handler
-							customValue ? customValue(value) : setValue(value)
-						}
+						value={setValue(value)}
 					/>
 				) : (
 					<Select
 						{...selectProps}
-						onChange={
-							// TODO Change into one handler
-							onChangeHandler
-								? (data) => onChange(onChangeHandler(data))
-								: (data) => onChange(handleChange(data))
-						}
-						value={
-							// TODO Change into one handler
-							customValue ? customValue(value) : setValue(value)
-						}
+						onChange={(data) => onChange(handleChange(data))}
+						value={setValue(value)}
 					/>
 				);
 			}}

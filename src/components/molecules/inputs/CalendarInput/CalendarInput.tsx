@@ -21,24 +21,37 @@ type tProps = {
 
 const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 	const year = new Date().getFullYear();
-	const years = new Array(10).fill(null).map((el, i) => ({
-		label: year + i,
-		value: year + i
-	}));
+
+	const years = new Array(10).fill(null).map((el, i) => year + i);
+
+	// const months = [
+	// 	{ label: 'January', value: '1' },
+	// 	{ label: 'February', value: '2' },
+	// 	{ label: 'March', value: '3' },
+	// 	{ label: 'April', value: '4' },
+	// 	{ label: 'May', value: '5' },
+	// 	{ label: 'June', value: '6' },
+	// 	{ label: 'July', value: '7' },
+	// 	{ label: 'August', value: '8' },
+	// 	{ label: 'September', value: '9' },
+	// 	{ label: 'October', value: '10' },
+	// 	{ label: 'November', value: '11' },
+	// 	{ label: 'December', value: '12' }
+	// ];
 
 	const months = [
-		{ label: 'January', value: '1' },
-		{ label: 'February', value: '2' },
-		{ label: 'March', value: '3' },
-		{ label: 'April', value: '4' },
-		{ label: 'May', value: '5' },
-		{ label: 'June', value: '6' },
-		{ label: 'July', value: '7' },
-		{ label: 'August', value: '8' },
-		{ label: 'September', value: '9' },
-		{ label: 'October', value: '10' },
-		{ label: 'November', value: '11' },
-		{ label: 'December', value: '12' }
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
 	];
 	return (
 		<StyledWrapper
@@ -64,10 +77,14 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 								locale="pl"
 								selected={value}
 								onChange={onChange}
+								onMonthChange={onChange}
+								onYearChange={onChange}
 								customInput={<StyledInput />}
 								disabledKeyboardNavigation
 								timeInputLabel="Godzina:"
 								dateFormat="dd/MM/yyyy, HH:mm"
+								showMonthDropdown
+								showYearDropdown
 								renderCustomHeader={({
 									date,
 									changeYear,
@@ -91,47 +108,43 @@ const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 											disabled={prevMonthButtonDisabled}
 										/>
 
-										<SelectInput
-											control={control}
-											selectOptions={years}
-											onChangeHandler={(data) =>
-												changeYear(data.label)
+										<select
+											value={new Date(date).getFullYear()}
+											onChange={({ target }) =>
+												changeYear(Number(target.value))
 											}
-											customValue={() => {
-												const data = new Date(
-													date
-												).getFullYear();
-												const year = years.find(
-													(el) => el.label === data
-												);
-												return year;
-											}}
-											inputBase={{
-												id: 'years'
-											}}
-										/>
+										>
+											{years.map((option) => (
+												<option
+													key={option}
+													value={option}
+												>
+													{option}
+												</option>
+											))}
+										</select>
 
-										<SelectInput
-											control={control}
-											selectOptions={months}
-											onChangeHandler={(data) => {
-												const monthIndex =
-													months.findIndex(
-														(month) =>
-															month.label ===
-															data.label
-													);
-												changeMonth(monthIndex);
-											}}
-											customValue={() =>
+										<select
+											value={
 												months[
 													new Date(date).getMonth()
 												]
 											}
-											inputBase={{
-												id: 'month'
-											}}
-										/>
+											onChange={({ target: { value } }) =>
+												changeMonth(
+													months.indexOf(value)
+												)
+											}
+										>
+											{months.map((option) => (
+												<option
+													key={option}
+													value={option}
+												>
+													{option}
+												</option>
+											))}
+										</select>
 
 										<IconButton
 											iconName="navigate_next"
