@@ -9,7 +9,6 @@ import { tInputBase } from 'components/atoms/InputBase/InputBase';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import IconButton from 'components/atoms/IconButton';
 import 'react-datepicker/dist/react-datepicker.css';
-import SelectInput from '../SelectInput';
 import pl from 'date-fns/locale/pl';
 import Font from 'components/atoms/Font';
 registerLocale('pl', pl);
@@ -21,23 +20,7 @@ type tProps = {
 
 const CalendarInput: FC<tProps> = ({ inputBase, control }) => {
 	const year = new Date().getFullYear();
-
 	const years = new Array(10).fill(null).map((el, i) => year + i);
-
-	// const months = [
-	// 	{ label: 'January', value: '1' },
-	// 	{ label: 'February', value: '2' },
-	// 	{ label: 'March', value: '3' },
-	// 	{ label: 'April', value: '4' },
-	// 	{ label: 'May', value: '5' },
-	// 	{ label: 'June', value: '6' },
-	// 	{ label: 'July', value: '7' },
-	// 	{ label: 'August', value: '8' },
-	// 	{ label: 'September', value: '9' },
-	// 	{ label: 'October', value: '10' },
-	// 	{ label: 'November', value: '11' },
-	// 	{ label: 'December', value: '12' }
-	// ];
 
 	const months = [
 		'January',
