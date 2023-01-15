@@ -77,6 +77,7 @@ export const customStyles = {
 	}),
 	placeholder: (provided: any, state: any) => ({
 		...provided,
+		color: '#707070',
 		transform:
 			state.hasValue || state.selectProps.inputValue
 				? 'translate(0px, -20px)'

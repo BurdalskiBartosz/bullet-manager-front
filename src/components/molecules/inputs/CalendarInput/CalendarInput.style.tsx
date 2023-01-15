@@ -21,10 +21,12 @@ export const StyledWrapper = styled.div<tWrapperProps>`
 `;
 
 export const StyledInput = styled.input`
-	padding: 1.2rem 2rem;
-	border-radius: ${({ theme }) => theme.sizes.borderRadius};
+	padding: 0.5rem;
+	font-size: 12px;
 	outline: none;
-	border: 1px solid ${({ theme }) => theme.colors.lightGray};
+	border: none;
+	border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+	color: ${({ theme }) => theme.colors.gray};
 	font-family: ${({ theme }) => theme.fonts.primary};
 	width: 100%;
 	&:focus {
