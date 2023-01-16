@@ -8,6 +8,7 @@ export { default as Link } from './atoms/Link';
 // molecules
 
 // molecules/inputs
+export { default as EntityInput } from './molecules/inputs/EntityInput';
 export { default as PasswordInput } from './molecules/inputs/PasswordInput';
 export { default as MaskInput } from './molecules/inputs/MaskInput';
 export { default as SearchInput } from './molecules/inputs/SearchInput';
