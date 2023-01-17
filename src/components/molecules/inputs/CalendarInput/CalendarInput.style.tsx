@@ -47,9 +47,7 @@ export const CalendarWrapper = styled.div`
 		&-popper {
 			z-index: 2;
 		}
-		&__input-container {
-			max-width: 180px;
-		}
+
 		&__day-names,
 		&__week {
 			display: grid;
