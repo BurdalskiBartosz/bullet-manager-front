@@ -24,6 +24,7 @@ export const InnerFormWrapper = styled.div`
 export const FormRow = styled.div`
 	display: flex;
 	gap: 15px;
+	align-items: flex-end;
 	& > :first-child {
 		flex-shrink: 0;
 		flex-basis: 250px;
