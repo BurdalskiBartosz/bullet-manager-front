@@ -103,13 +103,14 @@ const SelectInput: FC<tProps> = ({
 		if ('value' in data) {
 			return data?.value;
 		} else if (multi) {
-			return data?.map((option: SelectData) => {
+			return data?.map((option) => {
 				return option?.value;
 			});
 		}
 	};
 
 	const setValue = (value: any) => {
+		if (value === undefined) return null;
 		if (multi) {
 			return selectData.filter((option: SelectData) =>
 				value?.includes(option?.value)

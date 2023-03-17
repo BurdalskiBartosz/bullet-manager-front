@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+	display: grid;
+	grid-template-columns: repeat(3, 520px);
+	gap: 3rem;
+`;
+
 export const ButtonsWrapper = styled.div`
 	display: inline-flex;
 	gap: 2rem;

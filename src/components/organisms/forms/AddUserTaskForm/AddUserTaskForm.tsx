@@ -32,7 +32,7 @@ type tTaskData = {
 	title: string;
 	description: string;
 	plannedFinishDate: Date;
-	category: string;
+	category: any;
 	priority: string;
 };
 
@@ -41,7 +41,8 @@ const AddUserTaskForm: FC<tProps> = () => {
 		register,
 		control,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		reset
 	} = useForm<tTaskData>({
 		resolver: yupResolver(validationSchema)
 	});
@@ -58,8 +59,14 @@ const AddUserTaskForm: FC<tProps> = () => {
 	}));
 
 	const handleAddTask = async (data: tTaskData) => {
-		await addTask(data).unwrap();
-		if (isNewCategory(data.category)) refetchCategories();
+		try {
+			await addTask(data).unwrap();
+			if (isNewCategory(data.category)) refetchCategories();
+		} catch (e: any) {
+			console.error(e);
+		} finally {
+			reset();
+		}
 	};
 
 	const isNewCategory = (categoryId: string) =>
