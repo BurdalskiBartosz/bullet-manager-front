@@ -1,7 +1,7 @@
 import { tTableData } from 'types/table';
-import { UserTask } from 'view/Tasks/UserTasks';
+// import { UserTask } from 'view/Tasks/UserTasks';
 
-type tData = UserTask;
+type tData = any;
 
 export const transformApiToTableData = (data: tData[], offset: number) =>
 	data.map(({ id, ...rest }, index) => ({
