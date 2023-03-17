@@ -25,5 +25,4 @@ export { default as HomeMenu } from './organisms/menus/HomeMenu';
 export { default as SideMenu } from './organisms/menus/SideMenu';
 export { default as TopMenu } from './organisms/menus/TopMenu';
 export { default as Table } from './organisms/Table';
-export { default as AddTaskForm } from './organisms/forms/AddTaskForm';
 export { default as AddUserTaskForm } from './organisms/forms/AddUserTaskForm';
