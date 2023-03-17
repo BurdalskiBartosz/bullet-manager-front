@@ -15,7 +15,12 @@ type tTypography<T> = {
 
 export type tTags = 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'label';
 
-export type tVariants = 'header' | 'label' | 'menu' | 'inputError';
+export type tVariants =
+	| 'header'
+	| 'midHeader'
+	| 'label'
+	| 'menu'
+	| 'inputError';
 
 export const typography: tTypography<
 	tGenericIndexSignature<string | string[]>
@@ -27,6 +32,16 @@ export const typography: tTypography<
 			'line-height': ['4.7rem', '5.7rem', '6.7rem'],
 			'letter-spacing': '0.00em',
 			'font-weight': '400'
+		}
+	},
+	midHeader: {
+		tag: 'h2',
+		styles: {
+			'font-size': ['2rem', '2.5rem', '3rem'],
+			'line-height': ['2rem', '2.5rem', '3rem'],
+			'letter-spacing': '0.00em',
+			'font-weight': '600',
+			'margin-bottom': '3rem'
 		}
 	},
 	label: {

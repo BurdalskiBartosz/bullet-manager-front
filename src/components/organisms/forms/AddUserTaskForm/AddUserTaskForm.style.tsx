@@ -12,11 +12,21 @@ export const Wrapper = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	box-shadow: ${({ theme }) => theme.shadows.secondary};
 	background-color: rgba(255, 255, 255, 15%);
-	padding: 2rem;
-	width: max-content;
 `;
 
 export const InnerFormWrapper = styled.div`
 	display: flex;
-	gap: 20px;
+	width: 100%;
+	flex-direction: column;
+	gap: 30px;
+`;
+
+export const FormRow = styled.div`
+	display: flex;
+	gap: 15px;
+	align-items: flex-end;
+	& > :first-child {
+		flex-shrink: 0;
+		flex-basis: 250px;
+	}
 `;

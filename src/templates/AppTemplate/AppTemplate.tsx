@@ -12,7 +12,7 @@ const AppTemplate: FC<tProps> = () => {
 			<Circles />
 			<Main>
 				<SideMenu />
-				<div>
+				<div style={{ height: 'calc(100vh - 40px)' }}>
 					<TopMenu />
 					<PageWrapper>
 						<Outlet />

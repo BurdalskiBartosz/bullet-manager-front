@@ -8,6 +8,7 @@ export { default as Link } from './atoms/Link';
 // molecules
 
 // molecules/inputs
+export { default as EntityInput } from './molecules/inputs/EntityInput';
 export { default as PasswordInput } from './molecules/inputs/PasswordInput';
 export { default as MaskInput } from './molecules/inputs/MaskInput';
 export { default as SearchInput } from './molecules/inputs/SearchInput';
@@ -23,6 +24,4 @@ export { default as Modal } from './molecules/Modal';
 export { default as HomeMenu } from './organisms/menus/HomeMenu';
 export { default as SideMenu } from './organisms/menus/SideMenu';
 export { default as TopMenu } from './organisms/menus/TopMenu';
-export { default as Table } from './organisms/Table';
-export { default as AddTaskForm } from './organisms/forms/AddTaskForm';
 export { default as AddUserTaskForm } from './organisms/forms/AddUserTaskForm';

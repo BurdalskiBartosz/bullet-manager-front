@@ -2,7 +2,7 @@
 
 exports[`InputBase should correctly 1`] = `
 .c0 {
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.5rem;
   border-radius: 15px;
   outline: none;
   border: 1px solid #B7B7B7;

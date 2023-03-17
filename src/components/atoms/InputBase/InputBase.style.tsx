@@ -4,12 +4,64 @@ import IconButton from '../IconButton';
 type tWrapperProps = {
 	isError: boolean | undefined;
 	fullWidth: boolean;
+	styleForm: 'FORM' | 'BASE';
 };
 
 export const StyledWrapper = styled.div<tWrapperProps>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: ${({ fullWidth }) => (fullWidth ? '100%' : '330px')};
+	${({ styleForm }) => {
+		switch (styleForm) {
+			case 'FORM': {
+				return css`
+					${StyledInput} {
+						padding: 0.5rem;
+						border: none;
+						background-color: ${({ theme }) => theme.colors.light};
+						border-bottom: 1px solid
+							${({ theme }) => theme.colors.lightGray};
+						&::placeholder {
+							color: transparent;
+						}
+					}
+					label {
+						position: absolute;
+						top: -50%;
+
+						z-index: 1;
+						transition: 0.3s ease;
+						transform: translate(5px, 5px);
+						font-weight: 400;
+						&:has(
+								+ .helper-selector
+									> .input-helper-selector:placeholder-shown
+							) {
+							transform: translate(5px, 20px);
+						}
+						&:has(
+								+ .helper-selector
+									> .input-helper-selector:focus
+							) {
+							transform: translate(5px, 5px);
+						}
+					}
+				`;
+			}
+			case 'BASE': {
+				return css`
+					${StyledInput} {
+						padding: 1.2rem 1.5rem;
+						border: 1px solid
+							${({ theme }) => theme.colors.lightGray};
+						border-radius: ${({ theme }) =>
+							theme.sizes.borderRadius};
+					}
+				`;
+			}
+		}
+	}}
 	${({ isError }) =>
 		isError &&
 		css`
@@ -25,10 +77,7 @@ export const StyledInnerWrapper = styled.div`
 	position: relative;
 `;
 export const StyledInput = styled.input`
-	padding: 1.2rem 1.5rem;
-	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	outline: none;
-	border: 1px solid ${({ theme }) => theme.colors.lightGray};
 	font-family: ${({ theme }) => theme.fonts.primary};
 	width: 100%;
 	&:focus {

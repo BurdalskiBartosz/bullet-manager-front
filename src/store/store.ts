@@ -3,12 +3,14 @@ import {
 	configureStore,
 	PreloadedState
 } from '@reduxjs/toolkit';
-import { tasksApi } from './api/task';
+import { categoryApi } from './api/category';
+import { userTaskApi } from './api/userTask';
 
-const middlewares = [tasksApi.middleware];
+const middlewares = [userTaskApi.middleware, categoryApi.middleware];
 
 export const rootReducer = combineReducers({
-	[tasksApi.reducerPath]: tasksApi.reducer
+	[userTaskApi.reducerPath]: userTaskApi.reducer,
+	[categoryApi.reducerPath]: categoryApi.reducer
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

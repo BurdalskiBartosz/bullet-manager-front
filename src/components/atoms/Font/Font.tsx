@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { tTags, tVariants, variants } from 'styles/typography';
 
 type tProps = {
-	children: string | string[];
+	children: number | string | string[];
 	variant?: tVariants;
 	component?: tTags;
 	style?: CSSProperties;
@@ -25,7 +25,10 @@ const Font: FC<tProps> = ({ children, variant, component, style, ...rest }) => {
 	let overideStyle;
 	let tag: tTags = 'p';
 	let variantStyles;
-	const textContent = typeof children === 'object' ? children : t(children);
+	const textContent =
+		typeof children === 'object' || typeof children === 'number'
+			? children
+			: t(children);
 
 	if (variant) {
 		tag = variants[variant].tag;

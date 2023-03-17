@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
 	position: relative;

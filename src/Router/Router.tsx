@@ -30,6 +30,10 @@ const Router = () => {
 			>
 				<Route path="dashboard" element={<Dashboard />} />
 				<Route path="tasks" element={<UserTasks />} />
+				<Route
+					path="category/:name"
+					element={<div>NAZWA KATEGORII</div>}
+				/>
 			</Route>
 		</Routes>
 	);

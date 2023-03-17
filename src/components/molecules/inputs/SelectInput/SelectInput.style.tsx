@@ -12,16 +12,19 @@ export const customStyles = {
 	}),
 	control: (provided: any, state: any) => {
 		return {
-			...provided,
-			border: `1px solid ${
+			// ...provided,
+			display: 'flex',
+			border: 'none',
+			borderBottom: `1px solid ${
 				state.isFocused
 					? colors.dark
 					: getColor(state.selectProps.isError)
 			}`,
-			borderRadius: '15px',
-			paddingLeft: '5px',
+			backgroundColor: '#FCFCFC',
+			borderRadius: 0,
+			paddingLeft: '0px',
 			maxWidth: '100%',
-			height: '41px',
+			height: '26px',
 			cursor: 'pointer',
 			boxShadow: 'none',
 			'&:hover': {}
@@ -30,11 +33,7 @@ export const customStyles = {
 	indicatorSeparator: (provided: any, state: any) => {
 		return {
 			...provided,
-			backgroundColor: `${
-				state.isFocused
-					? colors.dark
-					: getColor(state.selectProps.isError)
-			}`
+			backgroundColor: 'transparent'
 		};
 	},
 	dropdownIndicator: (provided: any, state: any) => {
@@ -51,14 +50,7 @@ export const customStyles = {
 		...provided,
 		fontSize: '13px'
 	}),
-	placeholder: (provided: any) => ({
-		...provided,
-		fontStyle: 'italic',
-		opacity: '0.6',
-		color: colors.gray,
-		fontSize: '13px',
-		padding: '5px 0 5px 5px'
-	}),
+
 	menuList: (base: any) => ({
 		...base,
 		'::-webkit-scrollbar': {
@@ -74,5 +66,23 @@ export const customStyles = {
 		'::-webkit-scrollbar-thumb:hover': {
 			background: '#555'
 		}
+	}),
+	container: (provided: any) => ({
+		...provided
+	}),
+	valueContainer: (provided: any) => ({
+		...provided,
+		overflow: 'visible',
+		padding: '2px 5px'
+	}),
+	placeholder: (provided: any, state: any) => ({
+		...provided,
+		color: '#707070',
+		transform:
+			state.hasValue || state.selectProps.inputValue
+				? 'translate(0px, -20px)'
+				: 'translate(0px, -5px)',
+		transition: '0.3s ease',
+		fontSize: '12px'
 	})
 };
