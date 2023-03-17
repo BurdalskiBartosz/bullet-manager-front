@@ -1,5 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 import { useGetUserTasksQuery } from 'store/api/userTask';
+import { LabelButton } from './EntityInput.style';
 import EntityModal from './_components/EntityModal';
 
 type tProps = {
@@ -19,13 +20,12 @@ type tProps = {
 const EntityInput: FC<tProps> = ({ id, register, label }) => {
 	const [isDataModalOpen, setIsDataModalOpen] = useState<boolean>(false);
 	const data = 'useGetSmth';
-	console.log(isDataModalOpen);
 
 	return (
 		<div>
-			<button type="button" onClick={() => setIsDataModalOpen(true)}>
+			<LabelButton type="button" onClick={() => setIsDataModalOpen(true)}>
 				{label}
-			</button>
+			</LabelButton>
 			<input id={id} {...(register ? register(id) : {})} hidden />
 			{isDataModalOpen && (
 				<EntityModal useGetFunction={useGetUserTasksQuery} />
