@@ -19,6 +19,10 @@ import { ReactComponent as navigate_before } from './icons/navigate_before.svg';
 import { ReactComponent as double_navigate_next } from './icons/double_navigate_next.svg';
 import { ReactComponent as double_navigate_before } from './icons/double_navigate_before.svg';
 import { ReactComponent as navigate_next } from './icons/navigate_next.svg';
+import { ReactComponent as filters } from './icons/filters.svg';
+import { ReactComponent as edit } from './icons/edit.svg';
+import { ReactComponent as deleteItem } from './icons/delete.svg';
+import { ReactComponent as showMore } from './icons/showMore.svg';
 
 const icons = {
 	password,
@@ -41,6 +45,10 @@ const icons = {
 	navigate_before,
 	double_navigate_next,
 	close,
-	navigate_next
+	navigate_next,
+	filters,
+	edit,
+	deleteItem,
+	showMore
 };
 export default icons;
