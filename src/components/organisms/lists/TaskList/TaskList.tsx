@@ -1,23 +1,35 @@
 import Font from 'components/atoms/Font';
 import TaskListItem from 'components/molecules/TaskListItem';
 import { FC } from 'react';
+import { tGetUserTasksResponse } from 'store/api/userTask';
 import { Box } from 'view/Tasks/shared/styles';
+import { List, Wrapper } from './TaskList.style';
 
-type TaskListProps = {};
+type TaskListProps = {
+	tasks: tGetUserTasksResponse[];
+};
 
-const TaskList: FC<TaskListProps> = () => {
+const TaskList: FC<TaskListProps> = ({ tasks }) => {
 	return (
 		<Box>
-			<Font variant="midHeader">Dzisiejsze zadania</Font>
-			<div>
-				<TaskListItem
-					title="Lorem ipsum nazwa zadania"
-					description="Lorem ipsum opis zadania pod nazwą zadania z zbyt długim tekstem bla bla bla"
-					state={false}
-					category="notatki"
-					priority="3"
-				/>
-			</div>
+			<Wrapper>
+				<Font variant="midHeader">Dzisiejsze zadania</Font>
+				<List>
+					{tasks.map(
+						({ id, title, description, category, priority }) => {
+							return (
+								<TaskListItem
+									key={id}
+									title={title}
+									description={description}
+									category={category}
+									priority={priority}
+								/>
+							);
+						}
+					)}
+				</List>
+			</Wrapper>
 		</Box>
 	);
 };

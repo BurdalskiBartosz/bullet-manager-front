@@ -38,3 +38,8 @@ export const TopWrapper = styled.div`
 	align-items: center;
 	cursor: pointer;
 `;
+
+export const IconsWrapper = styled.div`
+	display: flex;
+	gap: 8px;
+`;
