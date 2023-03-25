@@ -6,6 +6,7 @@ export type tGetUserTasksResponse = {
 	title: string;
 	plannedFinishDate: string;
 	description: string;
+	priority: string;
 	category?: {
 		id: number;
 		name: string;
@@ -27,11 +28,22 @@ export const userTaskApi = createApi({
 			query: (id) => `user-task/${id}`,
 			providesTags: ['UserTask']
 		}),
+		getGroupedByDateTasks: builder.query<any, void>({
+			query: () => `user-task/grouped-by-date`,
+			providesTags: ['UserTask']
+		}),
 		addUserTask: builder.mutation({
 			query: (body) => ({
 				url: 'user-task',
 				method: 'POST',
 				body
+			}),
+			invalidatesTags: ['UserTask']
+		}),
+		deleteUserTask: builder.mutation({
+			query: (id) => ({
+				url: `user-task/${id}`,
+				method: 'DELETE'
 			}),
 			invalidatesTags: ['UserTask']
 		})
@@ -41,5 +53,7 @@ export const userTaskApi = createApi({
 export const {
 	useGetUserTasksQuery,
 	useGetOneUserTaskQuery,
-	useAddUserTaskMutation
+	useGetGroupedByDateTasksQuery,
+	useAddUserTaskMutation,
+	useDeleteUserTaskMutation
 } = userTaskApi;
