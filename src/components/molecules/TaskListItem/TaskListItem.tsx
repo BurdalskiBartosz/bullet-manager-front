@@ -1,6 +1,6 @@
 import Font from 'components/atoms/Font';
 import IconButton from 'components/atoms/IconButton';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { tGetUserTasksResponse } from 'store/api/userTask';
 import CheckboxInput from '../inputs/CheckboxInput/CheckboxInput';
 import {
@@ -9,7 +9,6 @@ import {
 	IconsWrapper,
 	InsideWrapper,
 	Priority,
-	Title,
 	TopWrapper,
 	Wrapper
 } from './TaskListItem.style';
@@ -22,7 +21,7 @@ export type TaskListItemProps = Omit<
 const TaskListItem: FC<TaskListItemProps> = ({
 	title,
 	description,
-	category,
+	categories,
 	priority
 }) => {
 	const shortDescription =
@@ -37,7 +36,7 @@ const TaskListItem: FC<TaskListItemProps> = ({
 					<CheckboxInput checked={false} />
 					<Font
 						style={{
-							fontSize: '1.3rem',
+							fontSize: '1.5rem',
 							lineHeight: '1.5rem',
 							fontWeight: 'bold',
 							marginLeft: '7px'
@@ -59,7 +58,10 @@ const TaskListItem: FC<TaskListItemProps> = ({
 			<Description>{shortDescription}</Description>
 			<InsideWrapper>
 				<Priority>{priority}</Priority>
-				{category && <Category>{category.name}</Category>}
+				{!!categories?.length &&
+					categories.map((category) => (
+						<Category>{category.name}</Category>
+					))}
 			</InsideWrapper>
 		</Wrapper>
 	);

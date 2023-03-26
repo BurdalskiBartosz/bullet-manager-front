@@ -6,14 +6,8 @@ export const Wrapper = styled.div`
 	padding: 10px 10px 5px;
 `;
 
-export const Title = styled.p`
-	font-size: 1.3rem;
-	line-height: 1.5rem;
-	font-weight: bold;
-	margin-left: 7px;
-`;
 export const Description = styled.p`
-	font-size: 1rem;
+	font-size: 1.3rem;
 	line-height: 1.5rem;
 `;
 export const Priority = styled.p`

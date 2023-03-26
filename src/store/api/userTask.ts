@@ -7,11 +7,16 @@ export type tGetUserTasksResponse = {
 	plannedFinishDate: string;
 	description: string;
 	priority: string;
-	category?: {
+	categories?: {
 		id: number;
 		name: string;
-	};
+	}[];
 };
+
+export type tGetUserTasksGroupedByDateResponse = [
+	string,
+	tGetUserTasksResponse[]
+];
 
 export const userTaskApi = createApi({
 	reducerPath: 'userTaskApi',
@@ -28,7 +33,10 @@ export const userTaskApi = createApi({
 			query: (id) => `user-task/${id}`,
 			providesTags: ['UserTask']
 		}),
-		getGroupedByDateTasks: builder.query<any, void>({
+		getGroupedByDateTasks: builder.query<
+			tGetUserTasksGroupedByDateResponse[],
+			void
+		>({
 			query: () => `user-task/grouped-by-date`,
 			providesTags: ['UserTask']
 		}),

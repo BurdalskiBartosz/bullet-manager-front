@@ -9,3 +9,9 @@ export const List = styled.div`
 	display: grid;
 	gap: 10px 0;
 `;
+
+export const TasksGroup = styled.div`
+	display: grid;
+	gap: 10px 0;
+	margin-bottom: 3rem;
+`;

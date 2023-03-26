@@ -5,7 +5,6 @@ import {
 	useGetGroupedByDateTasksQuery,
 	useGetUserTasksQuery
 } from 'store/api/userTask';
-import { Box } from './shared/styles';
 import { Wrapper } from './Tasks.styles';
 
 export type UserTaskProps = {};
@@ -16,8 +15,8 @@ const UserTasks: FC<UserTaskProps> = () => {
 	return (
 		<Wrapper>
 			<AddUserTaskForm />
-			{!!data?.length && <TaskList tasks={data} />}
-			<Box />
+			<TaskList tasks={data} />
+			<TaskList tasks={groupedData} type="upcoming" />
 		</Wrapper>
 	);
 };
