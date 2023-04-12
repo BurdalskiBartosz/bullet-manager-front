@@ -7,33 +7,20 @@ import {
 } from 'store/api/userTask';
 import { Box } from 'view/Tasks/shared/styles';
 import { List, TasksGroup, Wrapper } from './TaskList.style';
+import Loader from 'components/atoms/Loader';
+
+type TasksTypes =
+	| tGetUserTasksResponse[]
+	| tGetUserTasksGroupedByDateResponse[];
 
 type TaskListProps = {
-	tasks:
-		| tGetUserTasksResponse[]
-		| tGetUserTasksGroupedByDateResponse[]
-		| undefined;
+	tasks: TasksTypes | undefined;
 	type?: 'today' | 'upcoming';
+	isLoading: boolean;
 };
 
-const TaskList: FC<TaskListProps> = ({ tasks, type = 'today' }) => {
-	const getTasks = (tasks: tGetUserTasksResponse[]) => {
-		return (
-			tasks?.length &&
-			tasks.map(({ id, title, description, categories, priority }) => {
-				return (
-					<TaskListItem
-						key={id}
-						title={title}
-						description={description}
-						categories={categories}
-						priority={priority}
-					/>
-				);
-			})
-		);
-	};
-	const getList = () => {
+const TaskList: FC<TaskListProps> = ({ tasks, type = 'today', isLoading }) => {
+	const getList = (tasks: TasksTypes) => {
 		return tasks?.map((el, i) => {
 			let item;
 			if (Array.isArray(el)) {
@@ -43,7 +30,7 @@ const TaskList: FC<TaskListProps> = ({ tasks, type = 'today' }) => {
 						<Font variant="midHeader">
 							{i === 0 ? 'Jutrzejsze' : title}
 						</Font>
-						{getTasks(elements)}
+						{getList(elements)}
 					</TasksGroup>
 				);
 			} else {
@@ -60,14 +47,16 @@ const TaskList: FC<TaskListProps> = ({ tasks, type = 'today' }) => {
 			return item;
 		});
 	};
-	getList();
+
 	return (
 		<Box>
+			{isLoading && <Loader />}
+
 			<Wrapper>
 				<Font variant="midHeader">
 					{type === 'today' ? 'Dzisiejsze zadania' : 'Nadchodzace'}
 				</Font>
-				<List>{getList()}</List>
+				{tasks?.length && <List>{getList(tasks)}</List>}
 			</Wrapper>
 		</Box>
 	);

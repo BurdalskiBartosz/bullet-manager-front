@@ -4,6 +4,10 @@ export const Wrapper = styled.div`
 	border-radius: ${({ theme }) => theme.sizes.borderRadius};
 	border: 1px solid ${({ theme }) => theme.colors.gray};
 	padding: 10px 10px 5px;
+	min-height: 65px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `;
 
 export const Description = styled.p`

@@ -10,13 +10,19 @@ import { Wrapper } from './Tasks.styles';
 export type UserTaskProps = {};
 
 const UserTasks: FC<UserTaskProps> = () => {
-	const { data } = useGetUserTasksQuery();
-	const { data: groupedData } = useGetGroupedByDateTasksQuery();
+	const { data, isLoading } = useGetUserTasksQuery();
+	const { data: groupedData, isLoading: isGroupedDataLoading } =
+		useGetGroupedByDateTasksQuery();
+
 	return (
 		<Wrapper>
 			<AddUserTaskForm />
-			<TaskList tasks={data} />
-			<TaskList tasks={groupedData} type="upcoming" />
+			<TaskList tasks={data} isLoading={isLoading} />
+			<TaskList
+				tasks={groupedData}
+				type="upcoming"
+				isLoading={isGroupedDataLoading}
+			/>
 		</Wrapper>
 	);
 };
