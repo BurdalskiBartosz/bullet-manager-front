@@ -15,25 +15,39 @@ import {
 
 export type TaskListItemProps = Omit<
 	tGetUserTasksResponse,
-	'id' | 'plannedFinishDate'
->;
+	'plannedFinishDate'
+> & {
+	editTask: any;
+};
 
 const TaskListItem: FC<TaskListItemProps> = ({
+	id,
 	title,
 	description,
 	categories,
-	priority
+	priority,
+	isDone,
+	editTask
 }) => {
 	const shortDescription =
 		description.length >= 15
 			? `${description.slice(0, 55)}...`
 			: description;
 
+	const onChange = () => {
+		editTask({
+			id,
+			body: {
+				isDone: !isDone
+			}
+		});
+	};
+
 	return (
 		<Wrapper>
 			<InsideWrapper>
 				<TopWrapper>
-					<CheckboxInput checked={false} />
+					<CheckboxInput checked={isDone} onChange={onChange} />
 					<Font
 						style={{
 							fontSize: '1.5rem',
@@ -59,8 +73,8 @@ const TaskListItem: FC<TaskListItemProps> = ({
 			<InsideWrapper>
 				<Priority>{priority}</Priority>
 				{!!categories?.length &&
-					categories.map((category) => (
-						<Category>{category.name}</Category>
+					categories.map(({ name }) => (
+						<Category key={name}>{name}</Category>
 					))}
 			</InsideWrapper>
 		</Wrapper>

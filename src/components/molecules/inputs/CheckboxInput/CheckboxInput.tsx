@@ -3,12 +3,13 @@ import { Wrapper } from './CheckboxInput.style';
 
 type CheckboxInputProps = {
 	checked: boolean;
+	onChange: () => void;
 };
 
-const CheckboxInput: FC<CheckboxInputProps> = ({ checked }) => {
+const CheckboxInput: FC<CheckboxInputProps> = ({ checked, onChange }) => {
 	return (
 		<Wrapper>
-			<input type="checkbox" checked={checked} />
+			<input type="checkbox" checked={checked} onChange={onChange} />
 			<svg viewBox="0 0 35.6 35.6">
 				<circle
 					className="background"

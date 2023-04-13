@@ -11,6 +11,7 @@ export type tGetUserTasksResponse = {
 		id: number;
 		name: string;
 	}[];
+	isDone: boolean;
 };
 
 export type tGetUserTasksGroupedByDateResponse = [
@@ -48,6 +49,14 @@ export const userTaskApi = createApi({
 			}),
 			invalidatesTags: ['UserTask']
 		}),
+		editUserTask: builder.mutation({
+			query: ({ id, body }) => ({
+				url: `user-task/${id}`,
+				method: 'PATCH',
+				body
+			}),
+			invalidatesTags: ['UserTask']
+		}),
 		deleteUserTask: builder.mutation({
 			query: (id) => ({
 				url: `user-task/${id}`,
@@ -63,5 +72,6 @@ export const {
 	useGetOneUserTaskQuery,
 	useGetGroupedByDateTasksQuery,
 	useAddUserTaskMutation,
+	useEditUserTaskMutation,
 	useDeleteUserTaskMutation
 } = userTaskApi;

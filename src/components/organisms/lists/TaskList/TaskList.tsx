@@ -3,7 +3,8 @@ import TaskListItem from 'components/molecules/TaskListItem';
 import { FC } from 'react';
 import {
 	tGetUserTasksGroupedByDateResponse,
-	tGetUserTasksResponse
+	tGetUserTasksResponse,
+	useEditUserTaskMutation
 } from 'store/api/userTask';
 import { Box } from 'view/Tasks/shared/styles';
 import { List, TasksGroup, Wrapper } from './TaskList.style';
@@ -20,14 +21,19 @@ type TaskListProps = {
 };
 
 const TaskList: FC<TaskListProps> = ({ tasks, type = 'today', isLoading }) => {
+	const [editTask] = useEditUserTaskMutation();
+
 	const getList = (tasks: TasksTypes) => {
 		return tasks?.map((el, i) => {
 			let item;
 			if (Array.isArray(el)) {
 				const [title, elements] = el;
 				item = (
-					<TasksGroup>
-						<Font variant="midHeader">
+					<TasksGroup key={title}>
+						<Font
+							variant="midHeader"
+							style={{ marginBottom: '20px' }}
+						>
 							{i === 0 ? 'Jutrzejsze' : title}
 						</Font>
 						{getList(elements)}
@@ -37,10 +43,13 @@ const TaskList: FC<TaskListProps> = ({ tasks, type = 'today', isLoading }) => {
 				item = (
 					<TaskListItem
 						key={el.id}
+						id={el.id}
 						title={el.title}
 						description={el.description}
 						categories={el.categories}
 						priority={el.priority}
+						isDone={el.isDone}
+						editTask={editTask}
 					/>
 				);
 			}
@@ -51,7 +60,6 @@ const TaskList: FC<TaskListProps> = ({ tasks, type = 'today', isLoading }) => {
 	return (
 		<Box>
 			{isLoading && <Loader />}
-
 			<Wrapper>
 				<Font variant="midHeader">
 					{type === 'today' ? 'Dzisiejsze zadania' : 'Nadchodzace'}
