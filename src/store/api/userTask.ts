@@ -6,11 +6,18 @@ export type tGetUserTasksResponse = {
 	title: string;
 	plannedFinishDate: string;
 	description: string;
-	category?: {
+	priority: string;
+	categories?: {
 		id: number;
 		name: string;
-	};
+	}[];
+	isDone: boolean;
 };
+
+export type tGetUserTasksGroupedByDateResponse = [
+	string,
+	tGetUserTasksResponse[]
+];
 
 export const userTaskApi = createApi({
 	reducerPath: 'userTaskApi',
@@ -27,11 +34,33 @@ export const userTaskApi = createApi({
 			query: (id) => `user-task/${id}`,
 			providesTags: ['UserTask']
 		}),
+		getGroupedByDateTasks: builder.query<
+			tGetUserTasksGroupedByDateResponse[],
+			void
+		>({
+			query: () => `user-task/grouped-by-date`,
+			providesTags: ['UserTask']
+		}),
 		addUserTask: builder.mutation({
 			query: (body) => ({
 				url: 'user-task',
 				method: 'POST',
 				body
+			}),
+			invalidatesTags: ['UserTask']
+		}),
+		editUserTask: builder.mutation({
+			query: ({ id, body }) => ({
+				url: `user-task/${id}`,
+				method: 'PATCH',
+				body
+			}),
+			invalidatesTags: ['UserTask']
+		}),
+		deleteUserTask: builder.mutation({
+			query: (id) => ({
+				url: `user-task/${id}`,
+				method: 'DELETE'
 			}),
 			invalidatesTags: ['UserTask']
 		})
@@ -41,5 +70,8 @@ export const userTaskApi = createApi({
 export const {
 	useGetUserTasksQuery,
 	useGetOneUserTaskQuery,
-	useAddUserTaskMutation
+	useGetGroupedByDateTasksQuery,
+	useAddUserTaskMutation,
+	useEditUserTaskMutation,
+	useDeleteUserTaskMutation
 } = userTaskApi;

@@ -21,7 +21,11 @@ export type tIconNames =
 	| 'double_navigate_before'
 	| 'navigate_before'
 	| 'navigate_next'
-	| 'double_navigate_next';
+	| 'double_navigate_next'
+	| 'filters'
+	| 'edit'
+	| 'deleteItem'
+	| 'showMore';
 
 export type tIcon = {
 	iconName: tIconNames;
