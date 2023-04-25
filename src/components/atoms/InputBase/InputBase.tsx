@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import Font from '../Font';
-import { tIconNames } from '../Icon/Icon';
+import { tIconNames } from '../Icon';
 import {
 	StyledIconButton,
 	StyledInnerWrapper,

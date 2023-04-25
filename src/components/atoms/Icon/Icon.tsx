@@ -1,31 +1,7 @@
 import { FC } from 'react';
 import icons from 'assets/svgs';
 
-export type tIconNames =
-	| 'password'
-	| 'show_password'
-	| 'magnifier'
-	| 'calendar'
-	| 'arrow_right'
-	| 'add'
-	| 'goal'
-	| 'note'
-	| 'project'
-	| 'schedule'
-	| 'list'
-	| 'account'
-	| 'settings'
-	| 'logout'
-	| 'task'
-	| 'close'
-	| 'double_navigate_before'
-	| 'navigate_before'
-	| 'navigate_next'
-	| 'double_navigate_next'
-	| 'filters'
-	| 'edit'
-	| 'deleteItem'
-	| 'showMore';
+export type tIconNames = keyof typeof icons;
 
 export type tIcon = {
 	iconName: tIconNames;

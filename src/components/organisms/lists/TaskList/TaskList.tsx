@@ -64,7 +64,7 @@ const TaskList: FC<TaskListProps> = ({ tasks, type = 'today', isLoading }) => {
 				<Font variant="midHeader">
 					{type === 'today' ? 'Dzisiejsze zadania' : 'Nadchodzace'}
 				</Font>
-				{tasks?.length && <List>{getList(tasks)}</List>}
+				{!!tasks?.length && <List>{getList(tasks)}</List>}
 			</Wrapper>
 		</Box>
 	);
