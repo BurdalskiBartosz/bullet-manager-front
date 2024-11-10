@@ -2,7 +2,7 @@ import { useAuth } from 'providers/AuthProvider';
 import { Font } from 'components';
 
 const Dashboard = () => {
-	const auth = useAuth();
+	// const auth = useAuth();
 
 	return (
 		<div>
@@ -14,7 +14,7 @@ const Dashboard = () => {
 					textAlign: 'center'
 				}}
 			>
-				Witaj, {auth.user!.login}
+				Witaj, {}
 			</Font>
 			<h1>Dashboard</h1>
 		</div>

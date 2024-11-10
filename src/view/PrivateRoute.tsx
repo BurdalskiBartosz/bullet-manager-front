@@ -9,9 +9,9 @@ const PrivateRoute: React.FC<tPrivateRoute> = ({ children }) => {
 	let auth = useAuth();
 	let location = useLocation();
 
-	if (!auth.user) {
-		return <Navigate to="/login" state={{ from: location }} replace />;
-	}
+	// if (!auth.user) {
+	// 	return <Navigate to="/login" state={{ from: location }} replace />;
+	// }
 
 	return children;
 };
